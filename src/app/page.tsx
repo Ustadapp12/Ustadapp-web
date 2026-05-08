@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { AnimatedSection, FadeInStaggerGroup, FloatingBlob, PulseRing } from "@/components/animations";
 import LandingFeatureTabs from "@/components/landing-feature-tabs";
 import { createPageMetadata } from "@/lib/site";
 
@@ -55,30 +56,43 @@ const comingSoon = [
 export default function HomePage() {
   return (
     <>
-      <section className="section-animate px-6 pt-8 md:px-16 md:pt-12">
+      <AnimatedSection className="px-6 pt-8 md:px-16 md:pt-12">
         <div className="mx-auto grid w-full max-w-6xl gap-6 overflow-hidden rounded-3xl bg-[#004a36] p-5 text-white md:grid-cols-2 md:p-8">
-          <article className="isolate rounded-2xl border border-[#0a6c4d] bg-[#004a36] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.2)] hover-lift">
-            <h1 className="fade-in-stagger text-4xl font-extrabold leading-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] md:text-6xl">
-              The fun, smart, and effective way to memorize Quran.
-            </h1>
-            <p
-              className="fade-in-stagger mt-4 max-w-xl text-sm text-[#e8fff7] [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]"
-              style={{ animationDelay: "90ms" }}
-            >
-              Learn Quran step by step with AI recitation feedback, beginner lessons, XP rewards, streaks, and smart revision.
-              Built for children and adults learning at any level.
-            </p>
-            <div className="fade-in-stagger mt-5 flex flex-wrap gap-3" style={{ animationDelay: "170ms" }}>
-              <Link href="#waitlist" className="gradient-btn cta-sheen rounded-full px-5 py-3 text-sm font-semibold text-white">
-                Join Waiting List
-              </Link>
-              <Link
-                href="#how-it-works"
-                className="rounded-full border border-white/55 bg-white/12 px-5 py-3 text-sm font-semibold text-white"
-              >
-                See How It Works
-              </Link>
-            </div>
+          <article className="relative isolate overflow-visible rounded-2xl border border-[#0a6c4d] bg-[#004a36] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.2)] hover-lift">
+            <FloatingBlob
+              className="right-0 top-0 h-40 w-40 -translate-y-4 translate-x-6 md:h-48 md:w-48"
+              variant="mint"
+            />
+            <FloatingBlob
+              className="bottom-6 left-2 h-32 w-32 opacity-70 [animation-delay:0.6s] md:bottom-10 md:left-6"
+              variant="gold"
+            />
+            <FadeInStaggerGroup>
+              <h1 className="hero-gradient-text text-4xl font-extrabold leading-tight md:text-6xl">
+                The fun, smart, and effective way to memorize Quran.
+              </h1>
+              <p className="mt-4 max-w-xl text-sm text-[#e8fff7] [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
+                Learn Quran step by step with AI recitation feedback, beginner lessons, XP rewards, streaks, and smart revision.
+                Built for children and adults learning at any level.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <span className="relative inline-flex overflow-visible">
+                  <PulseRing />
+                  <Link
+                    href="#waitlist"
+                    className="relative z-[1] gradient-btn cta-sheen rounded-full px-5 py-3 text-sm font-semibold text-white"
+                  >
+                    Join Waiting List
+                  </Link>
+                </span>
+                <Link
+                  href="#how-it-works"
+                  className="rounded-full border border-white/55 bg-white/12 px-5 py-3 text-sm font-semibold text-white"
+                >
+                  See How It Works
+                </Link>
+              </div>
+            </FadeInStaggerGroup>
           </article>
           <article className="premium-card hover-zoom-img relative min-h-[360px] overflow-hidden rounded-2xl border border-[#5a79ff] bg-[#083729] md:min-h-[520px]">
             <Image
@@ -90,9 +104,9 @@ export default function HomePage() {
             />
           </article>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate px-6 md:px-16">
+      <AnimatedSection className="px-6 md:px-16">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-5 rounded-xl border border-[#d8e0eb] bg-white px-3 py-4 text-center text-xs font-semibold text-[#0d1b2a] shadow-[0_10px_26px_rgba(13,27,42,0.06)]">
           <span>Arabic</span>
           <span>Urdu</span>
@@ -100,9 +114,9 @@ export default function HomePage() {
           <span>Fast progress</span>
           <span>Join thousands</span>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
+      <AnimatedSection className="bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
           <article className="flex items-center">
             <div>
@@ -116,9 +130,9 @@ export default function HomePage() {
             <div className="h-64 rounded-xl bg-white/50 ring-1 ring-white/50" />
           </article>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
+      <AnimatedSection className="bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
           <article className="premium-card hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm md:order-1">
             <div className="relative h-64 overflow-hidden rounded-xl">
@@ -139,9 +153,9 @@ export default function HomePage() {
             </div>
           </article>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate bg-[#e4e4e4] px-6 py-16 md:px-16 md:py-24">
+      <AnimatedSection className="bg-[#e4e4e4] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
           <article className="flex items-center">
             <div>
@@ -163,9 +177,9 @@ export default function HomePage() {
             </div>
           </article>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
+      <AnimatedSection className="bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
           <article className="premium-card hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm md:order-1">
             <div className="relative h-64 overflow-hidden rounded-xl">
@@ -187,14 +201,14 @@ export default function HomePage() {
             </div>
           </article>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate bg-[#f3f3f0] px-6 pb-10 text-center md:px-16">
+      <AnimatedSection className="bg-[#f3f3f0] px-6 pb-10 text-center md:px-16">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#5a5a5a]">Personalized learning</p>
         <h3 className="mt-2 text-2xl font-semibold text-[#151515] md:text-3xl">Memorise anytime anywhere</h3>
-      </section>
+      </AnimatedSection>
 
-      <section id="waitlist" className="section-animate bg-[#0D3D26] px-6 py-20 text-center md:px-16">
+      <AnimatedSection id="waitlist" className="bg-[#0D3D26] px-6 py-20 text-center md:px-16">
         <div className="mx-auto w-full max-w-xl">
           <h2 className="text-4xl font-black text-white">Join the early waiting list</h2>
           <p className="mt-4 text-sm leading-relaxed text-white/75">
@@ -216,9 +230,9 @@ export default function HomePage() {
           </div>
           <p className="mt-4 text-xs text-white/50">We respect your privacy. Unsubscribe at any time.</p>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section id="how-it-works" className="section-animate bg-[#f3f3f0] px-6 py-20 md:px-16 md:py-24">
+      <AnimatedSection id="how-it-works" className="bg-[#f3f3f0] px-6 py-20 md:px-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl">
           <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#4d4d4d]">Step two</p>
           <h2 className="mt-2 text-center text-5xl font-semibold text-[#161616]">How UstadhApp works</h2>
@@ -247,11 +261,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       <LandingFeatureTabs />
 
-      <section id="coming-soon" className="section-animate bg-[#f3f3f0] px-6 py-20 md:px-16 md:py-24">
+      <AnimatedSection id="coming-soon" className="bg-[#f3f3f0] px-6 py-20 md:px-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl">
           <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#4d4d4d]">Coming</p>
           <h2 className="mt-2 text-center text-5xl font-semibold text-[#161616]">Coming soon</h2>
@@ -280,9 +294,9 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
-      <section className="section-animate bg-[#f3f3f0] px-6 pb-20 md:px-16 md:pb-24">
+      <AnimatedSection className="bg-[#f3f3f0] px-6 pb-20 md:px-16 md:pb-24">
         <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-3xl bg-gradient-to-br from-[#5a5a5a] to-[#7a7a7a] p-10 text-center text-white">
           <h2 className="text-5xl font-semibold">Begin memorizing Quran today</h2>
           <p className="mt-2 text-sm text-white/80">
@@ -297,7 +311,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
     </>
   );
 }

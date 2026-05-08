@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Amiri } from "next/font/google";
+import { CursorFollower } from "@/components/cursor-follower";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { siteConfig } from "@/lib/site";
@@ -55,6 +56,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${amiri.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#faf8f2] text-[#1f2f28]">
+        <CursorFollower />
         <Navbar />
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />

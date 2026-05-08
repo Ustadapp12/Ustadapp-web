@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { NavbarMobileMenu } from "@/components/navbar-mobile-menu";
 import { siteConfig } from "@/lib/site";
 
 const links = [
@@ -48,29 +49,7 @@ export function Navbar() {
           Menu
         </button>
       </div>
-      {isOpen ? (
-        <div className="border-t border-[#e8dec1] bg-white px-4 py-4 md:hidden">
-          <nav className="flex flex-col gap-3">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-[#0d1b2a] transition hover:bg-[#edf7f3] hover:text-[#05966a]"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="#waitlist"
-              onClick={() => setIsOpen(false)}
-              className="gradient-btn mt-2 rounded-full px-4 py-2 text-center text-sm font-semibold text-white"
-            >
-              Signup
-            </Link>
-          </nav>
-        </div>
-      ) : null}
+      {isOpen ? <NavbarMobileMenu links={links} onNavigate={() => setIsOpen(false)} /> : null}
     </header>
   );
 }
