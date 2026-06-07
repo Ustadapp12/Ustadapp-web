@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FooterSubscribeForm } from "@/components/footer-subscribe-form";
 import { IslamicStar } from "@/components/islamic-star";
 import { siteConfig } from "@/lib/site";
 
@@ -27,16 +28,7 @@ export function Footer() {
 
             <div className="flex flex-col gap-2.5">
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Stay updated</p>
-              <div className="flex gap-2">
-                <input
-                  placeholder="Your email"
-                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-[#0d1b2a] outline-none placeholder:text-gray-400 focus:border-[#05966a] focus:ring-1 focus:ring-[#05966a]/30"
-                />
-                <button type="button" className="gradient-btn cta-sheen rounded-lg px-4 py-2.5 text-sm font-bold text-white active:scale-[0.97]">
-                  Subscribe
-                </button>
-              </div>
-              <p className="text-[10px] text-gray-400">By subscribing you agree to our Privacy Policy.</p>
+              <FooterSubscribeForm />
             </div>
           </div>
         </div>
