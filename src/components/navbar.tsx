@@ -20,7 +20,7 @@ export function Navbar() {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3.5 md:px-12">
         {/* Arabic logo — just text, no icon box */}
         <Link href="/" className="flex flex-col justify-center leading-none">
-          <span className="arabic text-xl font-black text-[#004a36]">
+          <span lang="ar" className="arabic text-xl font-black text-[#004a36]">
             {siteConfig.arabicName}
           </span>
           <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-400">

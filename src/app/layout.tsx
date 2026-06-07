@@ -3,6 +3,7 @@ import { DM_Sans, Amiri } from "next/font/google";
 import { CursorFollower } from "@/components/cursor-follower";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { SectionDots } from "@/components/section-dots";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -58,6 +59,7 @@ export default function RootLayout({
       <body className="min-h-full bg-[#faf8f2] text-[#1f2f28]">
         <CursorFollower />
         <Navbar />
+        <SectionDots />
         <main className="flex flex-1 flex-col">{children}</main>
         <Footer />
       </body>

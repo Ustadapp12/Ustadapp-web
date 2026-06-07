@@ -17,7 +17,7 @@ export function Footer() {
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="flex items-baseline gap-2.5">
-                <span className="arabic text-4xl font-black text-[#004a36]">{siteConfig.arabicName}</span>
+                <span lang="ar" className="arabic text-4xl font-black text-[#004a36]">{siteConfig.arabicName}</span>
                 <span className="text-sm font-medium text-gray-400">{siteConfig.name}</span>
               </div>
               <p className="mt-2 max-w-xs text-sm leading-relaxed text-gray-500">
@@ -32,8 +32,8 @@ export function Footer() {
                   placeholder="Your email"
                   className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-[#0d1b2a] outline-none placeholder:text-gray-400 focus:border-[#05966a] focus:ring-1 focus:ring-[#05966a]/30"
                 />
-                <button type="button" className="gradient-btn rounded-lg px-4 py-2.5 text-sm font-bold text-white">
-                  Go
+                <button type="button" className="gradient-btn cta-sheen rounded-lg px-4 py-2.5 text-sm font-bold text-white active:scale-[0.97]">
+                  Subscribe
                 </button>
               </div>
               <p className="text-[10px] text-gray-400">By subscribing you agree to our Privacy Policy.</p>
