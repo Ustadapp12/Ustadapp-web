@@ -1,13 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { AnimatedSection, FadeInStaggerGroup, FloatingBlob, PulseRing } from "@/components/animations";
+import {
+  AnimatedSection,
+  FadeInStaggerGroup,
+  FloatingBlob,
+  PulseRing,
+  SlidingReveal,
+} from "@/components/animations";
 import LandingFeatureTabs from "@/components/landing-feature-tabs";
+import { IslamicStar } from "@/components/islamic-star";
 import { createPageMetadata } from "@/lib/site";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "UstadhApp Landing Page",
-  description: "A conversion-focused landing page for UstadhApp.",
+  title: "Ustad — Quran Memorization",
+  description: "The fun, smart, and effective way to memorize Quran. Gamified lessons, AI recitation feedback, streaks, and smart revision — built for children and adults.",
   path: "/",
 });
 
@@ -15,20 +22,20 @@ const steps = [
   {
     title: "Choose your Surah & start your journey",
     copy: "Pick the Surah you want to learn and begin a guided path with bite-sized levels.",
-    image:
-      "https://images.unsplash.com/photo-1487546331507-fcf8a5d27ab3?auto=format&fit=crop&w=1200&q=80",
+    // open Quran (confirmed)
+    image: "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Learn through smart levels",
     copy: "Complete fun interactive levels with ayah memorization and word pronunciation practice.",
-    image:
-      "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=80",
+    // Quran pages on mat (confirmed)
+    image: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Revise, recite & master",
     copy: "Get smart revision prompts and build long-term memorization confidence.",
-    image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+    // man reading Quran (confirmed from unsplash.com/photos/ocEpT2tKX5c)
+    image: "https://images.unsplash.com/photo-1573483883644-d0b4b55eb25d?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
@@ -36,37 +43,50 @@ const comingSoon = [
   {
     title: "Surah storytelling for deeper understanding",
     label: "Feature one",
-    image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80",
+    // Quran on green prayer mat (confirmed from unsplash.com/photos/2HgHr60mWVo)
+    image: "https://images.unsplash.com/photo-1616422840391-fa670d4b2ae7?auto=format&fit=crop&w=1400&q=80",
   },
   {
     title: "Qari certification for every Juz completed",
     label: "Feature two",
-    image:
-      "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&w=1400&q=80",
+    // open Quran (confirmed)
+    image: "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1400&q=80",
   },
   {
     title: "AI correction with visual guidance in real time",
     label: "Feature three",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1400&q=80",
+    // person holding Quran with rosary (confirmed from unsplash.com/photos/Dby_80zzmNc)
+    image: "https://images.unsplash.com/photo-1720873160840-d5934323bb23?auto=format&fit=crop&w=1400&q=80",
   },
 ];
+
+const arabicAlphabets = ["ا", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"];
+
+function IslamicPatternBg() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden" style={{ opacity: 0.055 }}>
+      <IslamicStar className="absolute -right-12 -top-10 h-56 w-56 text-white spin-slow" />
+      <IslamicStar className="absolute -bottom-8 -left-10 h-44 w-44 text-white spin-slow [animation-direction:reverse] [animation-delay:8s]" />
+      <IslamicStar className="absolute right-1/3 top-1/2 h-28 w-28 text-yellow-200 spin-slow [animation-delay:4s]" />
+    </div>
+  );
+}
 
 export default function HomePage() {
   return (
     <>
+      {/* ── Hero ─────────────────────────────────────────── */}
       <AnimatedSection className="px-6 pt-8 md:px-16 md:pt-12">
         <div className="mx-auto grid w-full max-w-6xl gap-6 overflow-hidden rounded-3xl bg-[#004a36] p-5 text-white md:grid-cols-2 md:p-8">
-          <article className="relative isolate overflow-visible rounded-2xl border border-[#0a6c4d] bg-[#004a36] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.2)] hover-lift">
-            <FloatingBlob
-              className="right-0 top-0 h-40 w-40 -translate-y-4 translate-x-6 md:h-48 md:w-48"
-              variant="mint"
-            />
-            <FloatingBlob
-              className="bottom-6 left-2 h-32 w-32 opacity-70 [animation-delay:0.6s] md:bottom-10 md:left-6"
-              variant="gold"
-            />
+
+          {/* Left: copy */}
+          <article className="relative isolate overflow-hidden rounded-2xl border border-[#0a6c4d] bg-[#004a36] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.2)] hover-lift">
+            <IslamicPatternBg />
+            <FloatingBlob className="right-0 top-0 h-40 w-40 -translate-y-4 translate-x-6 md:h-48 md:w-48" variant="mint" />
+            <FloatingBlob className="bottom-6 left-2 h-32 w-32 opacity-70 [animation-delay:0.6s] md:bottom-10 md:left-6" variant="gold" />
+            <div aria-hidden className="beam-sweep pointer-events-none absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div aria-hidden className="arabic pointer-events-none absolute right-5 top-5 select-none text-4xl font-bold text-white/10">القرآن</div>
+
             <FadeInStaggerGroup>
               <h1 className="hero-gradient-text text-4xl font-extrabold leading-tight md:text-6xl">
                 The fun, smart, and effective way to memorize Quran.
@@ -78,120 +98,148 @@ export default function HomePage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <span className="relative inline-flex overflow-visible">
                   <PulseRing />
-                  <Link
-                    href="#waitlist"
-                    className="relative z-[1] gradient-btn cta-sheen rounded-full px-5 py-3 text-sm font-semibold text-white"
-                  >
+                  <Link href="#waitlist" className="relative z-[1] gradient-btn cta-sheen rounded-full px-5 py-3 text-sm font-semibold text-white">
                     Join Waiting List
                   </Link>
                 </span>
-                <Link
-                  href="#how-it-works"
-                  className="rounded-full border border-white/55 bg-white/12 px-5 py-3 text-sm font-semibold text-white"
-                >
+                <Link href="#how-it-works" className="rounded-full border border-white/55 bg-white/12 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/20">
                   See How It Works
                 </Link>
               </div>
             </FadeInStaggerGroup>
           </article>
-          <article className="premium-card hover-zoom-img relative min-h-[360px] overflow-hidden rounded-2xl border border-[#5a79ff] bg-[#083729] md:min-h-[520px]">
+
+          {/* Right: Quran image — NO premium-card so absolute children work correctly */}
+          <article className="hover-zoom-img relative min-h-[360px] overflow-hidden rounded-2xl border border-[#0a6c4d] bg-[#083729] transition-transform duration-300 hover:-translate-y-1 md:min-h-[520px]">
             <Image
-              src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80"
-              alt="Students learning together"
+              src="https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1400&q=80"
+              alt="Open Quran ready for learning"
               fill
               className="object-cover"
               priority
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#004a36]/70 via-transparent to-transparent" />
+            {/* Badge — now correctly positioned after CSS fix */}
+            <div className="absolute bottom-5 left-5 z-10 flex items-center gap-2.5 rounded-xl border border-white/20 bg-black/50 px-3.5 py-2 backdrop-blur-sm">
+              <span className="arabic text-sm font-bold leading-none text-emerald-300">اقرأ</span>
+              <span className="h-3 w-px shrink-0 rounded-full bg-white/30" aria-hidden />
+              <span className="text-xs font-semibold leading-none text-white/90">Start reading today</span>
+            </div>
           </article>
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="px-6 md:px-16">
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-5 rounded-xl border border-[#d8e0eb] bg-white px-3 py-4 text-center text-xs font-semibold text-[#0d1b2a] shadow-[0_10px_26px_rgba(13,27,42,0.06)]">
-          <span>Arabic</span>
-          <span>Urdu</span>
-          <span>English</span>
-          <span>Fast progress</span>
-          <span>Join thousands</span>
+      {/* ── Trust bar — extra top padding for spacing from hero ── */}
+      <AnimatedSection className="px-6 pt-8 md:px-16 md:pt-10">
+        <div className="mx-auto w-full max-w-6xl rounded-xl border border-[#d8e0eb] bg-white px-3 py-5 shadow-[0_10px_26px_rgba(13,27,42,0.06)]">
+          <div className="grid grid-cols-5 text-center text-xs font-semibold text-[#0d1b2a]">
+            {[
+              { icon: <span className="arabic text-lg font-bold text-[#05966a]">ع</span>, label: "Arabic", delay: "0s" },
+              { icon: <span className="arabic text-base font-bold text-[#05966a]">اردو</span>, label: "Urdu", delay: "0.3s" },
+              { icon: <span className="text-lg font-bold text-[#05966a]">A</span>, label: "English", delay: "0.6s" },
+              {
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-amber-500" aria-hidden>
+                    <path d="M13 2L4.09 12.26 11 12l-3 10 9.91-10.26L11 12l2-10z" />
+                  </svg>
+                ),
+                label: "Fast progress",
+                delay: "0.9s",
+              },
+              {
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-[#05966a]" aria-hidden>
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ),
+                label: "Join thousands",
+                delay: "1.2s",
+              },
+            ].map(({ icon, label, delay }) => (
+              <div key={label} className="flex flex-col items-center gap-1.5">
+                <div className="icon-bounce flex h-7 w-7 items-center justify-center" style={{ animationDelay: delay }}>
+                  {icon}
+                </div>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </AnimatedSection>
 
+      {/* ── Free. Fun & Effective ─────────────────────────── */}
       <AnimatedSection className="bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
-          <article className="flex items-center">
+          <SlidingReveal direction="left" className="flex items-center">
             <div>
               <h2 className="section-title font-semibold text-[#161616]">Free. Fun & Effective</h2>
               <p className="mt-3 max-w-sm text-sm text-[#424242]">
-                Learning with UstadhApp is engaging, structured, and built to help you truly memorize the Quran.
+                Learning with Ustad is engaging, structured, and built to help you truly memorize the Quran.
               </p>
             </div>
-          </article>
-          <article className="premium-card hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm">
-            <div className="h-64 rounded-xl bg-white/50 ring-1 ring-white/50" />
-          </article>
+          </SlidingReveal>
+          <SlidingReveal direction="right" className="premium-card card-glow hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm">
+            <div className="relative h-64 overflow-hidden rounded-xl">
+              <Image src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?auto=format&fit=crop&w=1200&q=80" alt="Quran pages for learning" fill className="object-cover" />
+            </div>
+          </SlidingReveal>
         </div>
       </AnimatedSection>
 
+      {/* ── Gamified — image LEFT ─────────────────────────── */}
       <AnimatedSection className="bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
-          <article className="premium-card hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm md:order-1">
+          {/* Image FIRST in DOM = LEFT on desktop */}
+          <SlidingReveal direction="left" className="premium-card card-glow hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm">
             <div className="relative h-64 overflow-hidden rounded-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80"
-                alt="Gamified learning on UstadhApp"
-                fill
-                className="object-cover"
-              />
+              {/* boys studying Quran in Islamic school (confirmed from unsplash.com/photos/e9tCOGG40mw) */}
+              <Image src="https://images.unsplash.com/photo-1629273229664-11fabc0becc0?auto=format&fit=crop&w=1200&q=80" alt="Students learning Quran" fill className="object-cover" />
             </div>
-          </article>
-          <article className="flex items-center md:order-2">
+          </SlidingReveal>
+          <SlidingReveal direction="right" className="flex items-center">
             <div>
               <h2 className="section-title font-semibold text-[#161616]">Gamified backed by structured learning</h2>
               <p className="mt-3 max-w-sm text-sm text-[#424242]">
                 Daily streaks, XP points, levels, and leaderboards make learning a habit. Friendly reminders keep you on track.
               </p>
             </div>
-          </article>
+          </SlidingReveal>
         </div>
       </AnimatedSection>
 
+      {/* ── Stay motivated — image RIGHT ─────────────────── */}
       <AnimatedSection className="bg-[#e4e4e4] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
-          <article className="flex items-center">
+          {/* Text FIRST = LEFT; Image SECOND = RIGHT */}
+          <SlidingReveal direction="left" className="flex items-center">
             <div>
               <h2 className="section-title font-semibold text-[#161616]">Stay motivated</h2>
               <p className="mt-3 max-w-sm text-sm text-[#424242]">
-                UstadhApp rewards your consistency with daily streaks, achievement badges, and level-based milestones.
+                Ustad rewards your consistency with daily streaks, achievement badges, and level-based milestones.
                 We combine Islamic education with modern UX to keep the learning experience focused and joyful.
               </p>
             </div>
-          </article>
-          <article className="premium-card hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm">
+          </SlidingReveal>
+          <SlidingReveal direction="right" className="premium-card card-glow hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm">
             <div className="relative h-64 overflow-hidden rounded-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1598257006458-087169a1f08d?auto=format&fit=crop&w=1200&q=80"
-                alt="Motivated learner using UstadhApp"
-                fill
-                className="object-cover"
-              />
+              {/* Kaaba, Masjid al-Haram (confirmed from unsplash.com/photos/IAwnp88Fz8Y) */}
+              <Image src="https://images.unsplash.com/photo-1553755088-ef1973c7b4a1?auto=format&fit=crop&w=1200&q=80" alt="Kaaba and Masjid al-Haram" fill className="object-cover" />
             </div>
-          </article>
+          </SlidingReveal>
         </div>
       </AnimatedSection>
 
+      {/* ── AI-powered — image LEFT ───────────────────────── */}
       <AnimatedSection className="bg-[#f3f3f0] px-6 py-16 md:px-16 md:py-24">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-2">
-          <article className="premium-card hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm md:order-1">
+          {/* Image FIRST = LEFT */}
+          <SlidingReveal direction="left" className="premium-card card-glow hover-zoom-img rounded-2xl bg-gradient-to-br from-[#d9e3ef] to-[#c9d5de] p-3 shadow-sm">
             <div className="relative h-64 overflow-hidden rounded-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
-                alt="AI-powered learning assistance"
-                fill
-                className="object-cover"
-              />
+              {/* Quran with tasbeeh on black background (confirmed from unsplash.com/photos/AKFHzzr20eQ) */}
+              <Image src="https://images.unsplash.com/photo-1624862300786-fcdbd20ba0c3?auto=format&fit=crop&w=1200&q=80" alt="Quran and prayer beads for focused study" fill className="object-cover" />
             </div>
-          </article>
-          <article className="flex items-center md:order-2">
+          </SlidingReveal>
+          <SlidingReveal direction="right" className="flex items-center">
             <div>
               <h2 className="section-title font-semibold text-[#161616]">AI-powered learning</h2>
               <p className="mt-3 max-w-sm text-sm text-[#424242]">
@@ -199,32 +247,59 @@ export default function HomePage() {
                 pronunciation corrections in real time so you retain each ayah with confidence.
               </p>
             </div>
-          </article>
+          </SlidingReveal>
         </div>
       </AnimatedSection>
 
+      {/* ── Tagline bridge ───────────────────────────────── */}
       <AnimatedSection className="bg-[#f3f3f0] px-6 pb-10 text-center md:px-16">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#5a5a5a]">Personalized learning</p>
         <h3 className="mt-2 text-2xl font-semibold text-[#151515] md:text-3xl">Memorise anytime anywhere</h3>
       </AnimatedSection>
 
-      <AnimatedSection id="waitlist" className="bg-[#0D3D26] px-6 py-20 text-center md:px-16">
-        <div className="mx-auto w-full max-w-xl">
+      {/* ── Waitlist — with star + Arabic alphabet background ── */}
+      <AnimatedSection id="waitlist" className="relative overflow-hidden bg-[#0D3D26] px-6 py-20 text-center md:px-16">
+        {/* Islamic stars */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <IslamicStar className="absolute right-12 top-10 h-28 w-28 text-white/10 spin-slow" />
+          <IslamicStar className="absolute left-10 bottom-10 h-20 w-20 text-white/10 spin-slow [animation-direction:reverse]" />
+          <IslamicStar className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 text-white/5 spin-slow [animation-delay:3s]" />
+          <IslamicStar className="absolute right-1/4 bottom-8 h-16 w-16 text-yellow-300/15 spin-slow [animation-delay:6s]" />
+          <IslamicStar className="absolute left-1/4 top-8 h-14 w-14 text-emerald-300/15 spin-slow [animation-delay:9s]" />
+          {/* Floating Arabic alphabets */}
+          {arabicAlphabets.slice(0, 14).map((letter, i) => (
+            <span
+              key={letter}
+              aria-hidden
+              className="arabic pointer-events-none absolute select-none text-xl font-bold text-white/[0.07]"
+              style={{
+                left: `${(i * 7.3 + 3) % 95}%`,
+                top: `${((i * 13.7 + 8) % 80) + 10}%`,
+                transform: `rotate(${i % 2 === 0 ? i * 8 : -(i * 8)}deg)`,
+                animationDelay: `${i * 0.4}s`,
+              }}
+            >
+              {letter}
+            </span>
+          ))}
+        </div>
+        {/* Floating blobs */}
+        <FloatingBlob className="pointer-events-none absolute -left-10 top-0 h-48 w-48 blur-3xl opacity-30" variant="mint" />
+        <FloatingBlob className="pointer-events-none absolute -right-10 bottom-0 h-40 w-40 blur-3xl opacity-25 [animation-delay:2s]" variant="gold" />
+
+        <div className="relative z-10 mx-auto w-full max-w-xl">
           <h2 className="text-4xl font-black text-white">Join the early waiting list</h2>
           <p className="mt-4 text-sm leading-relaxed text-white/75">
-            Be first to access UstadhApp at launch and help shape the future of Quran learning.
+            Be first to access Ustad at launch and help shape the future of Quran learning.
             Limited early access spots available.
           </p>
-          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <input
               type="text"
               placeholder="Enter your name"
               className="w-full max-w-xs rounded-lg bg-white px-4 py-3 text-sm text-[#0d1b2a] outline-none ring-2 ring-transparent focus:ring-[#05966A]"
             />
-            <Link
-              href="#waitlist"
-              className="gradient-btn cta-sheen rounded-lg bg-[#05966A] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#047857]"
-            >
+            <Link href="#waitlist" className="gradient-btn cta-sheen rounded-lg px-6 py-3 text-sm font-bold text-white">
               Reserve my spot
             </Link>
           </div>
@@ -232,31 +307,31 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
+      {/* ── How it works ─────────────────────────────────── */}
       <AnimatedSection id="how-it-works" className="bg-[#f3f3f0] px-6 py-20 md:px-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl">
-          <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#4d4d4d]">Step two</p>
-          <h2 className="mt-2 text-center text-5xl font-semibold text-[#161616]">How UstadhApp works</h2>
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#4d4d4d]">Step by step</p>
+          <h2 className="mt-2 text-center text-5xl font-semibold text-[#161616]">How Ustad works</h2>
           <p className="mt-2 text-center text-sm text-[#4d4d4d]">Three simple steps to start memorizing Quran today</p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {steps.map((step, i) => (
               <article
                 key={step.title}
-                className="premium-card card-animate hover-zoom-img relative flex min-h-[320px] flex-col rounded-2xl border border-[#d2d2d2] bg-white p-6 text-left shadow-sm"
-                style={{ animationDelay: `${i * 90}ms` }}
+                className="card-glow pop-in group relative flex min-h-[340px] flex-col overflow-hidden rounded-2xl border border-[#d2d2d2] shadow-sm"
+                style={{ animationDelay: `${i * 110}ms` }}
               >
-                <Image
-                  src={step.image}
-                  alt={step.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-black/35" />
-                <div className="mb-4 flex h-8 w-8 items-center justify-center rounded-md border border-white/70 bg-black/25 text-sm font-bold text-white">
-                  {i + 1}
+                <Image src={step.image} alt={step.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+                <div className="relative z-10 flex h-full flex-col p-6">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-md border border-white/60 bg-white/15 text-sm font-bold text-white backdrop-blur-sm">
+                    {i + 1}
+                  </div>
+                  <div className="mt-auto">
+                    <h3 className="text-xl font-semibold leading-snug text-white">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/80">{step.copy}</p>
+                    <p className="interactive-link mt-4 text-xs font-semibold text-emerald-300">{`Step ${i + 1} →`}</p>
+                  </div>
                 </div>
-                <h3 className="text-3xl font-semibold leading-tight text-white">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/90">{step.copy}</p>
-                <p className="interactive-link mt-auto pt-6 text-xs font-semibold text-white">{`step ${i + 1} >`}</p>
               </article>
             ))}
           </div>
@@ -265,50 +340,61 @@ export default function HomePage() {
 
       <LandingFeatureTabs />
 
+      {/* ── Coming soon ───────────────────────────────────── */}
       <AnimatedSection id="coming-soon" className="bg-[#f3f3f0] px-6 py-20 md:px-16 md:py-24">
         <div className="mx-auto w-full max-w-6xl">
           <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#4d4d4d]">Coming</p>
           <h2 className="mt-2 text-center text-5xl font-semibold text-[#161616]">Coming soon</h2>
           <p className="mt-2 text-center text-sm text-[#4d4d4d]">More features launching soon to enhance your learning journey</p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {comingSoon.map((feature) => (
+            {comingSoon.map((feature, i) => (
               <article
                 key={feature.title}
-                className="premium-card group hover-zoom-img relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-2xl border border-[#d3d8dd] bg-gradient-to-br from-[#f7f8fa] to-[#eceff3] p-5 text-left"
+                className="card-glow pop-in group relative flex min-h-[380px] flex-col justify-end overflow-hidden rounded-2xl border border-[#d3d8dd] p-5"
+                style={{ animationDelay: `${i * 110}ms` }}
               >
-                <Image
-                  src={feature.image}
-                  alt={feature.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/45 to-black/20 transition-opacity group-hover:opacity-90" />
-                <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-white/20 blur-2xl transition-transform group-hover:scale-125" />
-                <p className="text-xs font-semibold text-white/80">{feature.label}</p>
-                <h3 className="mt-2 text-4xl font-semibold leading-tight text-white">{feature.title}</h3>
-                <p className="mt-3 text-xs text-white/90">
-                  Learn the meaning and context behind every Surah through engaging narratives.
-                </p>
-                <p className="interactive-link mt-4 text-xs font-semibold text-white">Explore {">"}</p>
+                <Image src={feature.image} alt={feature.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/10 transition-opacity group-hover:opacity-95" />
+                <div className="pointer-events-none absolute -right-8 -top-8 opacity-10">
+                  <IslamicStar className="h-28 w-28 text-white spin-slow" />
+                </div>
+                <div className="relative z-10">
+                  <span className="inline-block rounded-full border border-white/30 bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/80 backdrop-blur-sm">
+                    {feature.label}
+                  </span>
+                  <h3 className="mt-3 text-2xl font-semibold leading-snug text-white">{feature.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-white/75">
+                    Learn the meaning and context behind every Surah through engaging narratives.
+                  </p>
+                  <p className="interactive-link mt-4 text-xs font-semibold text-emerald-300">Explore →</p>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </AnimatedSection>
 
+      {/* ── Bottom CTA ────────────────────────────────────── */}
       <AnimatedSection className="bg-[#f3f3f0] px-6 pb-20 md:px-16 md:pb-24">
-        <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-3xl bg-gradient-to-br from-[#5a5a5a] to-[#7a7a7a] p-10 text-center text-white">
-          <h2 className="text-5xl font-semibold">Begin memorizing Quran today</h2>
-          <p className="mt-2 text-sm text-white/80">
-            Thousands are waiting to transform how they learn. Don&apos;t miss your chance to join them.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link href="#waitlist" className="premium-card hover-grow rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#1f1f1f]">
-              Join the waiting list
-            </Link>
-            <Link href="#how-it-works" className="rounded-full border border-white/50 px-5 py-3 text-sm font-semibold text-white">
-              Learn more
-            </Link>
+        <div className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-3xl bg-[#004a36] p-10 text-center text-white shadow-[0_20px_60px_rgba(0,74,54,0.35)]">
+          <IslamicPatternBg />
+          <FloatingBlob className="right-0 top-0 h-52 w-52 -translate-y-10 translate-x-10" variant="mint" />
+          <FloatingBlob className="bottom-0 left-0 h-44 w-44 translate-y-8 -translate-x-8 [animation-delay:1.2s]" variant="gold" />
+          <div aria-hidden className="beam-sweep pointer-events-none absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-white/8 to-transparent [animation-delay:1s]" />
+          <div className="relative z-10">
+            <IslamicStar className="mx-auto mb-4 h-10 w-10 text-white/30" />
+            <h2 className="text-4xl font-semibold md:text-5xl">Begin memorizing Quran today</h2>
+            <p className="mt-3 text-sm text-white/75">
+              Thousands are waiting to transform how they learn. Don&apos;t miss your chance to join them.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link href="#waitlist" className="hover-grow rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#004a36] shadow-sm">
+                Join the waiting list
+              </Link>
+              <Link href="#how-it-works" className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+                Learn more
+              </Link>
+            </div>
           </div>
         </div>
       </AnimatedSection>

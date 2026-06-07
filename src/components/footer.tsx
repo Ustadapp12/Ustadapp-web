@@ -1,92 +1,111 @@
 import Link from "next/link";
+import { IslamicStar } from "@/components/islamic-star";
+import { siteConfig } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-100 bg-white px-6 pb-8 pt-16 md:px-16">
-      <div className="mx-auto mb-12 grid w-full max-w-6xl grid-cols-2 gap-10 md:grid-cols-4">
-        <div>
-          <p className="font-display text-2xl font-bold italic text-[#0d1b2a]">Ustad</p>
-          <p className="mt-3 text-xs leading-relaxed text-gray-600">
-            Get updates on new features and launch news.
-          </p>
-          <div className="mt-4 flex gap-2">
-            <input
-              placeholder="Your email"
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-[#05966a]"
-            />
-            <button className="rounded-lg bg-[#0d1b2a] px-4 py-2 text-xs font-bold text-white">Subscribe</button>
-          </div>
-          <p className="mt-2 text-[10px] text-gray-500">
-            By subscribing you agree to our Privacy Policy and consent to receive updates.
-          </p>
-        </div>
-        <div className="space-y-3 text-sm">
-          <p className="text-xs font-black uppercase tracking-widest text-[#0d1b2a]">Product</p>
-          <Link href="#feature-tabs" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Features
-          </Link>
-          <Link href="#how-it-works" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            How it works
-          </Link>
-          <Link href="#waitlist" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Waitlist
-          </Link>
-          <Link href="#coming-soon" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Coming Soon
-          </Link>
-        </div>
-        <div className="space-y-3 text-sm">
-          <p className="text-xs font-black uppercase tracking-widest text-[#0d1b2a]">About</p>
-          <Link href="#waitlist" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Contact
-          </Link>
-          <Link href="#feature-tabs" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Feature List
-          </Link>
-          <Link href="#how-it-works" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Step by step
-          </Link>
-        </div>
-        <div className="space-y-3 text-sm">
-          <p className="text-xs font-black uppercase tracking-widest text-[#0d1b2a]">Feedback</p>
-          <a href="https://instagram.com/ustadapp" target="_blank" rel="noreferrer" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            Instagram
-          </a>
-          <a href="https://x.com/ustadapp" target="_blank" rel="noreferrer" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            X
-          </a>
-          <a href="https://linkedin.com/company/ustadapp" target="_blank" rel="noreferrer" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            LinkedIn
-          </a>
-          <a href="https://youtube.com/@ustadapp" target="_blank" rel="noreferrer" className="interactive-link block text-gray-700 hover:text-[#05966a]">
-            YouTube
-          </a>
-          <p className="pt-2 text-xs text-gray-600">© 2026 UstadhApp. All rights reserved.</p>
-        </div>
+    <footer className="relative overflow-hidden border-t border-gray-100 bg-[#faf8f2] px-6 pb-10 pt-16 md:px-16">
+      {/* Very subtle Islamic star decorations */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <IslamicStar className="absolute -right-14 top-8 h-56 w-56 text-[#05966a]/6 spin-slow" />
+        <IslamicStar className="absolute -left-14 bottom-8 h-48 w-48 text-[#05966a]/5 spin-slow [animation-direction:reverse] [animation-delay:8s]" />
       </div>
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 border-t border-gray-100 pt-6">
-        <div className="flex flex-wrap gap-6">
-          <Link href="#" className="text-xs text-gray-600 hover:text-[#05966a]">
-            Privacy Policy
-          </Link>
-          <Link href="#" className="text-xs text-gray-600 hover:text-[#05966a]">
-            Terms of Service
-          </Link>
-          <a href="#" className="text-xs text-gray-600 hover:text-[#05966a]">
-            Cookies Settings
-          </a>
-          <a href="#" className="text-xs text-gray-600 hover:text-[#05966a]">
-            Cookies Policy
-          </a>
+
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        {/* Brand header */}
+        <div className="mb-10 border-b border-gray-200 pb-10">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+            <div>
+              <div className="flex items-baseline gap-2.5">
+                <span className="arabic text-4xl font-black text-[#004a36]">{siteConfig.arabicName}</span>
+                <span className="text-sm font-medium text-gray-400">{siteConfig.name}</span>
+              </div>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-gray-500">
+                The fun, smart, and effective way to memorize Quran. Built for children and adults.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2.5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Stay updated</p>
+              <div className="flex gap-2">
+                <input
+                  placeholder="Your email"
+                  className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-[#0d1b2a] outline-none placeholder:text-gray-400 focus:border-[#05966a] focus:ring-1 focus:ring-[#05966a]/30"
+                />
+                <button type="button" className="gradient-btn rounded-lg px-4 py-2.5 text-sm font-bold text-white">
+                  Go
+                </button>
+              </div>
+              <p className="text-[10px] text-gray-400">By subscribing you agree to our Privacy Policy.</p>
+            </div>
+          </div>
         </div>
-        <a
-          className="text-xs text-gray-600 hover:text-[#05966a]"
-          href="https://maps.google.com/?q=National+Science+and+Technology+Park+NSTP+NUST+H-12+Islamabad+Pakistan+44000"
-          target="_blank"
-          rel="noreferrer"
-        >
-          NSTP, NUST, H-12 Islamabad
-        </a>
+
+        {/* Links grid */}
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
+          <div className="space-y-3 text-sm">
+            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Product</p>
+            {[
+              { href: "#feature-tabs", label: "Features" },
+              { href: "#how-it-works", label: "How it works" },
+              { href: "#waitlist", label: "Waitlist" },
+              { href: "#coming-soon", label: "Coming Soon" },
+            ].map(({ href, label }) => (
+              <Link key={label} href={href} className="interactive-link block text-gray-600 hover:text-[#05966a]">
+                {label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="space-y-3 text-sm">
+            <p className="text-xs font-black uppercase tracking-widest text-gray-400">About</p>
+            {[
+              { href: "#waitlist", label: "Contact" },
+              { href: "#feature-tabs", label: "Feature List" },
+              { href: "#how-it-works", label: "Step by step" },
+            ].map(({ href, label }) => (
+              <Link key={label} href={href} className="interactive-link block text-gray-600 hover:text-[#05966a]">
+                {label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="space-y-3 text-sm">
+            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Connect</p>
+            {[
+              { href: "https://instagram.com/ustadapp", label: "Instagram" },
+              { href: "https://x.com/ustadapp", label: "X (Twitter)" },
+              { href: "https://linkedin.com/company/ustadapp", label: "LinkedIn" },
+              { href: "https://youtube.com/@ustadapp", label: "YouTube" },
+            ].map(({ href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noreferrer" className="interactive-link block text-gray-600 hover:text-[#05966a]">
+                {label}
+              </a>
+            ))}
+          </div>
+
+          <div className="space-y-3 text-sm">
+            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Legal</p>
+            {["Privacy Policy", "Terms of Service", "Cookies Settings"].map((item) => (
+              <Link key={item} href="#" className="interactive-link block text-gray-600 hover:text-[#05966a]">
+                {item}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-gray-200 pt-6">
+          <a
+            href="https://maps.google.com/?q=National+Science+and+Technology+Park+NSTP+NUST+H-12+Islamabad+Pakistan+44000"
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs text-gray-400 hover:text-[#05966a]"
+          >
+            NSTP, NUST, H-12 Islamabad
+          </a>
+          <p className="text-xs text-gray-400">© 2026 Ustad. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );

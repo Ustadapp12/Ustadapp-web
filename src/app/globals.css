@@ -113,6 +113,14 @@ h3 {
   background: radial-gradient(circle, rgba(255, 217, 0, 0.32), transparent 72%);
 }
 
+.floating-blob-amber {
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.28), transparent 70%);
+}
+
+.floating-blob-sapphire {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
+}
+
 .pulse-ring {
   box-shadow: 0 0 0 0 rgba(5, 150, 106, 0.45);
   animation: pulse-ring 2.4s ease-out infinite;
@@ -174,18 +182,13 @@ h3 {
   border-radius: 999px;
   background: radial-gradient(circle, rgba(5, 150, 106, 0.12), transparent 70%);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 .premium-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 44px rgba(13, 27, 42, 0.14);
   border-color: #b7d8cb;
-}
-
-.premium-card > * {
-  position: relative;
-  z-index: 1;
 }
 
 .card-animate {
@@ -364,6 +367,22 @@ h3 {
   }
 }
 
+/* ── Feature tab directional slide ──────────────────── */
+@keyframes feat-slide-from-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes feat-slide-from-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.feature-slide-right {
+  animation: feat-slide-from-right 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.feature-slide-left {
+  animation: feat-slide-from-left 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 
 @keyframes float-gentle {
   0%,
@@ -419,6 +438,130 @@ h3 {
   }
 }
 
+/* ── Slide animations ─────────────────────────────────── */
+.slide-left-pending {
+  opacity: 0;
+  transform: translateX(-32px);
+}
+.slide-left-visible {
+  animation: slide-in-left 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.slide-right-pending {
+  opacity: 0;
+  transform: translateX(32px);
+}
+.slide-right-visible {
+  animation: slide-in-right 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Card glow ───────────────────────────────────────── */
+.card-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.card-glow:hover {
+  box-shadow: 0 0 0 2px rgba(5, 150, 106, 0.28), 0 20px 44px rgba(13, 27, 42, 0.14);
+  border-color: rgba(5, 150, 106, 0.38) !important;
+}
+
+/* ── Slow decorative rotation ────────────────────────── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.spin-slow { animation: spin-slow 45s linear infinite; }
+
+/* ── Beam sweep for hero ─────────────────────────────── */
+@keyframes beam-sweep {
+  0%   { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(300%) skewX(-20deg); }
+}
+.beam-sweep {
+  animation: beam-sweep 5s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+/* ── Liquid Glass feature section ───────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.065);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-pill-active {
+  background: rgba(255, 255, 255, 0.96);
+  color: #002e1e;
+  font-weight: 700;
+  box-shadow:
+    0 2px 20px rgba(255, 255, 255, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.glass-pill-inactive {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-pill-inactive:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes tab-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.tab-panel-animate {
+  animation: tab-slide-in 0.48s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Staggered pop-in for grids ──────────────────────── */
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.93) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.pop-in { animation: pop-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ── Glowing text accent ─────────────────────────────── */
+@keyframes glow-text {
+  0%, 100% { text-shadow: 0 0 12px rgba(5, 200, 120, 0.0); }
+  50%       { text-shadow: 0 0 18px rgba(5, 200, 120, 0.45), 0 0 32px rgba(5, 200, 120, 0.18); }
+}
+.glow-text { animation: glow-text 4s ease-in-out infinite; }
+
+/* ── Floating icon bounce ────────────────────────────── */
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+.icon-bounce { animation: icon-bounce 2.8s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-pending {
     opacity: 1;
@@ -445,13 +588,36 @@ h3 {
 
   .section-animate,
   .card-animate,
-  .fade-in-stagger {
+  .fade-in-stagger,
+  .pop-in {
     animation: none;
     opacity: 1;
     transform: none;
   }
 
-  .tab-panel-animate {
+  .tab-panel-animate,
+  .feature-slide-right,
+  .feature-slide-left {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .slide-left-pending,
+  .slide-right-pending {
+    opacity: 1;
+    transform: none;
+  }
+
+  .slide-left-visible,
+  .slide-right-visible {
+    animation: none;
+  }
+
+  .spin-slow,
+  .beam-sweep,
+  .glow-text,
+  .icon-bounce {
     animation: none;
   }
 

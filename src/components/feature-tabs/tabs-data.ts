@@ -8,8 +8,9 @@ export const FEATURE_TABS: FeatureTab[] = [
     heading: "Start from Arabic letters and symbols",
     body: "Build accuracy with structured progression through letters, diacritics, and common letter combinations before moving to words and phrases.",
     imageClass: "from-[#d7dee8] to-[#c5d0dd]",
+    // Quran page on black textile — clear Arabic script for typography focus
     image:
-      "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1589462135796-2b46e4bdd7fe?auto=format&fit=crop&w=1400&q=80",
   },
   {
     id: "surah",
@@ -28,8 +29,9 @@ export const FEATURE_TABS: FeatureTab[] = [
     heading: "Spaced repetition tailored to you",
     body: "Review prompts are timed to reinforce recall without overload, so memorization stays durable across weeks and months.",
     imageClass: "from-[#e4d9ef] to-[#d2c5e4]",
+    // Quran on green prayer mat (confirmed from unsplash.com/photos/2HgHr60mWVo)
     image:
-      "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1616422840391-fa670d4b2ae7?auto=format&fit=crop&w=1400&q=80",
   },
   {
     id: "alphabets",
@@ -38,8 +40,9 @@ export const FEATURE_TABS: FeatureTab[] = [
     heading: "Learn each letter with correct form and sound",
     body: "Cover all Arabic letters and their contextual shapes, with pronunciation guidance suitable for beginners and refreshers alike.",
     imageClass: "from-[#f0e0d2] to-[#e7d0bc]",
+    // Open Quran pages — verified renders correctly
     image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=1400&q=80",
   },
   {
     id: "symbols",
@@ -48,8 +51,9 @@ export const FEATURE_TABS: FeatureTab[] = [
     heading: "Understand Quranic symbols and pause marks",
     body: "Study tajweed notation and waqf rules systematically so recitation stays precise and respectful of meaning.",
     imageClass: "from-[#d8e6e7] to-[#c1d7d9]",
+    // Black and gold Quran — ornate tajweed notation (confirmed from unsplash.com/photos/pEHjWZFhyN8)
     image:
-      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1624345690118-d303350f7445?auto=format&fit=crop&w=1400&q=80",
   },
   {
     id: "duas",
@@ -58,7 +62,8 @@ export const FEATURE_TABS: FeatureTab[] = [
     heading: "Memorize essential duas with support",
     body: "Practice morning, evening, and prayer supplications with clear text, translation, and audio where available.",
     imageClass: "from-[#e7e2d6] to-[#d8d2c1]",
+    // Person holding Quran with rosary — supplication/dua (confirmed from unsplash.com/photos/Dby_80zzmNc)
     image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1720873160840-d5934323bb23?auto=format&fit=crop&w=1400&q=80",
   },
 ];
