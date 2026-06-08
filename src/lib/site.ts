@@ -13,6 +13,15 @@ export const siteConfig = {
     "duolingo for quran",
     "tajweed app for beginners",
     "surah memorisation app",
+    "quran app for kids",
+    "quran learning app",
+    "memorize quran online",
+    "islamic learning app",
+    "quran recitation feedback",
+    "quran memorization with ai",
+    "quran for beginners",
+    "quran app free",
+    "gamified quran learning",
   ],
 };
 

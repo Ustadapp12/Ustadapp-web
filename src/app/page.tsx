@@ -11,11 +11,11 @@ import {
 import LandingFeatureTabs from "@/components/landing-feature-tabs";
 import { IslamicStar } from "@/components/islamic-star";
 import { WaitlistForm } from "@/components/waitlist-form";
-import { createPageMetadata } from "@/lib/site";
+import { createPageMetadata, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Ustad — Quran Memorization",
-  description: "The fun, smart, and effective way to memorize Quran. Gamified lessons, AI recitation feedback, streaks, and smart revision — built for children and adults.",
+  title: "Ustad – Learn Quran with AI | Free Gamified Quran App",
+  description: "Learn and memorize Quran step by step with AI recitation feedback, gamified lessons, streaks, and smart revision. Free Quran app for children and adults.",
   path: "/",
 });
 
@@ -70,9 +70,50 @@ function IslamicPatternBg() {
   );
 }
 
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: siteConfig.url,
+    name: siteConfig.name,
+    description: siteConfig.description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    sameAs: [
+      "https://instagram.com/ustadapp",
+      "https://x.com/ustadapp",
+      "https://linkedin.com/company/ustadapp",
+      "https://youtube.com/@ustadapp",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    name: "Ustad – Quran Memorization App",
+    applicationCategory: "EducationalApplication",
+    description:
+      "Learn and memorize Quran step by step with AI recitation feedback, gamified lessons, streaks, and smart revision. Free for children and adults.",
+    url: siteConfig.url,
+    operatingSystem: "iOS, Android",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  },
+];
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── Hero ─────────────────────────────────────────── */}
       <AnimatedSection id="hero" className="px-6 pt-8 md:px-16 md:pt-12">
         <div className="mx-auto grid w-full max-w-6xl gap-6 overflow-hidden rounded-3xl bg-[#004a36] p-5 text-white md:grid-cols-2 md:p-8">
