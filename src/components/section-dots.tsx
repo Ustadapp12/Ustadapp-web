@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 
 const SECTIONS = [
-  { id: "hero",         label: "Home" },
-  { id: "waitlist",     label: "Waitlist" },
-  { id: "how-it-works", label: "How it works" },
-  { id: "feature-tabs", label: "Features" },
-  { id: "coming-soon",  label: "Coming soon" },
+  { id: "hero",     label: "Home" },
+  { id: "features", label: "Features" },
+  { id: "journey",  label: "Journey" },
+  { id: "waitlist", label: "Waitlist" },
 ];
 
 export function SectionDots() {
@@ -46,15 +45,15 @@ export function SectionDots() {
             className="group flex items-center justify-end gap-2"
           >
             {/* Label — slides in on hover */}
-            <span className="translate-x-1 whitespace-nowrap text-[10px] font-semibold text-[#004a36] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+            <span className="translate-x-1 whitespace-nowrap text-[10px] font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
               {label}
             </span>
             {/* Dot */}
             <span
               className={`flex items-center justify-center rounded-full border transition-all duration-300 ${
                 isActive
-                  ? "h-3 w-3 border-[#05966a] bg-[#05966a] shadow-[0_0_8px_rgba(5,150,106,0.55)]"
-                  : "h-2.5 w-2.5 border-[#004a36]/30 bg-white/70 shadow-sm group-hover:border-[#004a36]/60"
+                  ? "h-3 w-3 border-[#2fd88f] bg-[#2fd88f] shadow-[0_0_8px_rgba(47,216,143,0.65)]"
+                  : "h-2.5 w-2.5 border-white/30 bg-white/20 shadow-sm group-hover:border-white/60"
               }`}
             />
           </a>

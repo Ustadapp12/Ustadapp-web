@@ -1,102 +1,114 @@
+import Image from "next/image";
 import Link from "next/link";
-import { FooterSubscribeForm } from "@/components/footer-subscribe-form";
+import appstore from "@/assets/appstore-trimmed.png";
+import dp from "@/assets/dp.png";
+import playstore from "@/assets/playstore-trimmed.png";
 import { IslamicStar } from "@/components/islamic-star";
+import { StoreBadge } from "@/components/store-badge";
 import { siteConfig } from "@/lib/site";
+
+const columns = [
+  {
+    title: "Socials",
+    links: [
+      { href: "https://x.com/ustadapp", label: "X" },
+      { href: "https://www.instagram.com/ustadapp_official/", label: "Instagram" },
+      { href: "https://www.linkedin.com/company/ustadapp/posts/?feedView=all", label: "LinkedIn" },
+      { href: "https://facebook.com/ustadapp", label: "Facebook" },
+    ],
+  },
+  {
+    title: "Product",
+    links: [
+      { href: "#features", label: "Features" },
+      { href: "#journey", label: "How it Works" },
+      { href: "#", label: "Hiring" },
+      { href: "#", label: "Roadmap" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "#", label: "About" },
+      { href: "#", label: "Contact" },
+      { href: "#", label: "Privacy" },
+      { href: "#", label: "Terms" },
+    ],
+  },
+];
+
+const socialGlyphs = [
+  { href: "https://x.com/ustadapp", label: "X" },
+  { href: "https://www.instagram.com/ustadapp_official/", label: "IG" },
+  { href: "https://www.linkedin.com/company/ustadapp/posts/?feedView=all", label: "in" },
+  { href: "https://facebook.com/ustadapp", label: "FB" },
+];
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-gray-100 bg-[#faf8f2] px-6 pb-10 pt-16 md:px-16">
-      {/* Very subtle Islamic star decorations */}
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0B1E33] px-6 pb-8 pt-14 text-white md:px-16">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <IslamicStar className="absolute -right-14 top-8 h-56 w-56 text-[#05966a]/6 spin-slow" />
-        <IslamicStar className="absolute -left-14 bottom-8 h-48 w-48 text-[#05966a]/5 spin-slow [animation-direction:reverse] [animation-delay:8s]" />
+        <IslamicStar className="absolute -right-14 top-8 h-56 w-56 text-white/5 spin-slow" />
+        <IslamicStar className="absolute -left-14 bottom-8 h-48 w-48 text-white/5 spin-slow [animation-direction:reverse] [animation-delay:8s]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        {/* Brand header */}
-        <div className="mb-10 border-b border-gray-200 pb-10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <div>
-              <div className="flex items-baseline gap-2.5">
-                <span lang="ar" className="arabic text-4xl font-black text-[#004a36]">{siteConfig.arabicName}</span>
-                <span className="text-sm font-medium text-gray-400">{siteConfig.name}</span>
-              </div>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-gray-500">
-                The fun, smart, and effective way to memorize Quran. Built for children and adults.
-              </p>
+        <div className="mb-10 flex flex-col gap-6 border-b border-white/10 pb-10 md:flex-row md:items-start md:justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <Image src={dp} alt={siteConfig.name} className="h-8 w-8 rounded-full" />
+              <span className="text-sm font-bold text-white">{siteConfig.name}app</span>
             </div>
+            <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/50">
+              Making Quran Learning Accessible, engaging, and effective for every Quran learner.
+            </p>
+          </div>
 
-            <div className="flex flex-col gap-2.5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Stay updated</p>
-              <FooterSubscribeForm />
-            </div>
+          <div className="flex flex-col gap-2">
+            <StoreBadge src={playstore} alt="Coming soon on Google Play" />
+            <StoreBadge src={appstore} alt="Coming soon on the App Store" />
           </div>
         </div>
 
-        {/* Links grid */}
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
-          <div className="space-y-3 text-sm">
-            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Product</p>
-            {[
-              { href: "#feature-tabs", label: "Features" },
-              { href: "#how-it-works", label: "How it works" },
-              { href: "#waitlist", label: "Waitlist" },
-              { href: "#coming-soon", label: "Coming Soon" },
-            ].map(({ href, label }) => (
-              <Link key={label} href={href} className="interactive-link block text-gray-600 hover:text-[#05966a]">
-                {label}
-              </Link>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-3">
+          {columns.map((column) => (
+            <div key={column.title} className="space-y-3 text-sm">
+              <p className="text-xs font-black uppercase tracking-widest text-white/40">{column.title}</p>
+              {column.links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                  className="interactive-link block text-white/70 hover:text-[#2fd88f]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
 
-          <div className="space-y-3 text-sm">
-            <p className="text-xs font-black uppercase tracking-widest text-gray-400">About</p>
-            {[
-              { href: "#waitlist", label: "Contact" },
-              { href: "#feature-tabs", label: "Feature List" },
-              { href: "#how-it-works", label: "Step by step" },
-            ].map(({ href, label }) => (
-              <Link key={label} href={href} className="interactive-link block text-gray-600 hover:text-[#05966a]">
-                {label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="space-y-3 text-sm">
-            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Connect</p>
-            {[
-              { href: "https://instagram.com/ustadapp", label: "Instagram" },
-              { href: "https://x.com/ustadapp", label: "X (Twitter)" },
-              { href: "https://linkedin.com/company/ustadapp", label: "LinkedIn" },
-              { href: "https://youtube.com/@ustadapp", label: "YouTube" },
-            ].map(({ href, label }) => (
-              <a key={label} href={href} target="_blank" rel="noreferrer" className="interactive-link block text-gray-600 hover:text-[#05966a]">
-                {label}
+        <div className="mt-12 flex flex-col items-center gap-4 border-t border-white/10 pt-8 text-center">
+          <div className="flex gap-3">
+            {socialGlyphs.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={social.label}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-xs font-bold text-white/70 hover:border-[#2fd88f] hover:text-[#2fd88f]"
+              >
+                {social.label}
               </a>
             ))}
           </div>
-
-          <div className="space-y-3 text-sm">
-            <p className="text-xs font-black uppercase tracking-widest text-gray-400">Legal</p>
-            {["Privacy Policy", "Terms of Service", "Cookies Settings"].map((item) => (
-              <Link key={item} href="#" className="interactive-link block text-gray-600 hover:text-[#05966a]">
-                {item}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-gray-200 pt-6">
-          <a
-            href="https://maps.google.com/?q=National+Science+and+Technology+Park+NSTP+NUST+H-12+Islamabad+Pakistan+44000"
-            target="_blank"
-            rel="noreferrer"
-            className="text-xs text-gray-400 hover:text-[#05966a]"
-          >
-            NSTP, NUST, H-12 Islamabad
-          </a>
-          <p className="text-xs text-gray-400">© 2026 Ustad. All rights reserved.</p>
+          <p lang="ar" className="arabic max-w-md text-sm italic text-white/60">
+            &ldquo;Read in the name of your Lord who created&rdquo; — Surah Al-Alaq 96:1
+          </p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/40">Located at Hatch 8, NSTP H-12</p>
+          <p className="text-xs text-white/40">© 2026 UstadApp. Built with love for every Quran learner.</p>
         </div>
       </div>
     </footer>

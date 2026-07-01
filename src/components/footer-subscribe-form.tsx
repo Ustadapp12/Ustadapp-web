@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const WAITLIST_URL = "https://ustad-app-backend.vercel.app/api/v1/waitlist";
+const WAITLIST_URL = "https://ustad-app-backend-git-main-ustadapp.vercel.app/api/v1/waitlist";
 
 type Status = "idle" | "loading" | "success" | "duplicate" | "invalid_email" | "error";
 
