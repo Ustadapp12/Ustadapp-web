@@ -1,13 +1,17 @@
-import { AnimatedSection, FloatingBlob } from "@/components/animations";
+import Image from "next/image";
+import bell from "@/assets/circles/bell.svg";
+import bell2 from "@/assets/circles/bell2.svg";
+import bell3 from "@/assets/circles/bell3.svg";
+import { AnimatedSection } from "@/components/animations";
 import { Mascot } from "@/components/mascot";
-import { TrustBadges } from "@/components/trust-badges";
 import { WaitlistForm } from "@/components/waitlist-form";
 
 export function FinalCta() {
   return (
-    <AnimatedSection id="waitlist" className="relative overflow-hidden bg-gradient-to-b from-[#3E8E54] to-[#2C7A48] px-6 py-14 text-center md:px-16 md:py-20">
-      <FloatingBlob className="pointer-events-none absolute -left-10 top-0 h-48 w-48 blur-3xl opacity-15" variant="mint" />
-      <FloatingBlob className="pointer-events-none absolute -right-10 bottom-0 h-40 w-40 blur-3xl opacity-12 [animation-delay:2s]" variant="gold" />
+    <AnimatedSection id="waitlist" className="relative overflow-hidden bg-gradient-to-b from-[#0F1B2A] via-[#05966A] to-[#0B1E18] px-6 py-14 text-center md:px-16 md:py-20">
+      <Image src={bell2} alt="" aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2" />
+      <Image src={bell} alt="" aria-hidden className="pointer-events-none absolute -right-16 bottom-0 h-[420px] w-[420px]" />
+      <Image src={bell3} alt="" aria-hidden className="pointer-events-none absolute -left-16 top-0 h-72 w-72" />
 
       <div className="relative z-10 mx-auto flex w-full max-w-xl flex-col items-center">
         <Mascot size={140} />
@@ -18,7 +22,6 @@ export function FinalCta() {
         <div className="w-full">
           <WaitlistForm />
         </div>
-        <TrustBadges />
       </div>
     </AnimatedSection>
   );

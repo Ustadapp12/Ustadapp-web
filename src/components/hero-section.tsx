@@ -1,5 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
-import { AnimatedSection, FadeInStaggerGroup, FloatingBlob, PulseRing } from "@/components/animations";
+import bell from "@/assets/circles/bell.svg";
+import bell2 from "@/assets/circles/bell2.svg";
+import bell3 from "@/assets/circles/bell3.svg";
+import ellipseBlob from "@/assets/circles/Ellipse (1).svg";
+import ellipseRing from "@/assets/circles/Ellipse (2).svg";
+import { AnimatedSection, FadeInStaggerGroup, PulseRing } from "@/components/animations";
 import { AppMockupCard } from "@/components/app-mockup-card";
 import { Mascot } from "@/components/mascot";
 
@@ -21,10 +27,13 @@ const floatingBadges = [
 
 export function HeroSection() {
   return (
-    <AnimatedSection id="hero" className="relative overflow-hidden bg-gradient-to-b from-[#3E8E54] to-[#2C7A48] px-6 pb-14 pt-8 md:px-16 md:pb-16 md:pt-10">
+    <AnimatedSection id="hero" className="relative px-6 pb-14 pt-8 md:px-16 md:pb-16 md:pt-10">
       <div aria-hidden className="grain pointer-events-none absolute inset-0" style={{ opacity: 0.12 }} />
-      <FloatingBlob className="right-0 top-0 h-64 w-64 -translate-y-10 translate-x-10 opacity-20" variant="mint" />
-      <FloatingBlob className="bottom-0 left-0 h-52 w-52 translate-y-10 -translate-x-10 opacity-15 [animation-delay:1.2s]" variant="gold" />
+      <Image src={bell} alt="" aria-hidden className="pointer-events-none absolute -right-16 top-0 h-[440px] w-[440px]" />
+      <Image src={bell2} alt="" aria-hidden className="pointer-events-none absolute -left-20 top-10 h-80 w-80" />
+      <Image src={bell3} alt="" aria-hidden className="pointer-events-none absolute bottom-0 left-1/3 h-72 w-72" />
+      <Image src={ellipseBlob} alt="" aria-hidden className="pointer-events-none absolute -bottom-56 -left-56 h-[620px] w-[620px] opacity-70 blur-xl" />
+      <Image src={ellipseRing} alt="" aria-hidden className="pointer-events-none absolute -bottom-16 right-0 h-72 w-72 opacity-50" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-2">
         {/* Left: copy */}
@@ -49,13 +58,6 @@ export function HeroSection() {
             >
               See how it works
             </Link>
-          </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-2.5 lg:justify-start">
-            {["100% Free", "5 min/day", "AI Feedback"].map((item) => (
-              <span key={item} className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-white/80">
-                {item}
-              </span>
-            ))}
           </div>
         </FadeInStaggerGroup>
 

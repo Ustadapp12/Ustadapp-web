@@ -9,18 +9,27 @@ import dumbbellIcon from "@/assets/PhotoshopExtension_Image_6.png";
 import { AnimatedSection, PulseRing } from "@/components/animations";
 import { Mascot } from "@/components/mascot";
 
+const ORBIT_RADIUS = 50; // % of the container box — matches the inset-0 dashed circle exactly
+
 const orbitIcons = [
-  { key: "achievements", src: trophyIcon, label: "Achievements", bg: "bg-[#C6A153]", position: "top-0 left-1/2 -translate-x-1/2" },
-  { key: "sync", src: syncIcon, label: "Daily sync", bg: "bg-[#3E8E54]", position: "top-[18%] right-0" },
-  { key: "streaks", src: flameIcon, label: "Streaks", bg: "bg-[#059669]", position: "bottom-[18%] right-0" },
-  { key: "practice", src: dumbbellIcon, label: "Practice", bg: "bg-[#5C5C66]", position: "bottom-0 left-1/2 -translate-x-1/2" },
-  { key: "progress", src: chartIcon, label: "Progress", bg: "bg-[#93A5C4]", position: "bottom-[18%] left-0" },
-  { key: "ai-ustad", src: robotIcon, label: "AI Ustad", bg: "bg-[#C6A153]", position: "top-[18%] left-0" },
-] as const;
+  { key: "achievements", src: trophyIcon, label: "Achievements", bg: "bg-[#C6A153]/60 border-2 border-[#9c7a3f]", angle: 90 },
+  { key: "sync", src: syncIcon, label: "Daily sync", bg: "bg-[#3E8E54]/60 border-2 border-[#2C7A48]", angle: 30 },
+  { key: "streaks", src: flameIcon, label: "Streaks", bg: "bg-[#FAC71A]/60 border-2 border-[#fcbb00]", angle: -30 },
+  { key: "practice", src: dumbbellIcon, label: "Practice", bg: "bg-[#5C5C66]/60 border-2 border-[#3f3f47]", angle: -90 },
+  { key: "progress", src: chartIcon, label: "Progress", bg: "bg-[#93A5C4]/60 border-2 border-[#7385A4]", angle: -150 },
+  { key: "ai-ustad", src: robotIcon, label: "AI Ustad", bg: "bg-[#C6A153]/60 border-2 border-[#9c7a3f]", angle: 150 },
+].map((icon) => {
+  const rad = (icon.angle * Math.PI) / 180;
+  return {
+    ...icon,
+    left: 50 + ORBIT_RADIUS * Math.cos(rad),
+    top: 50 - ORBIT_RADIUS * Math.sin(rad),
+  };
+});
 
 export function FeatureOrbit() {
   return (
-    <AnimatedSection id="features" className="relative overflow-hidden bg-[#0B1E33] px-6 py-14 text-center md:px-16 md:py-20">
+    <AnimatedSection id="features" className="relative overflow-hidden px-6 py-14 text-center md:px-16 md:py-20">
       <div className="relative z-10 mx-auto w-full max-w-3xl">
         <h2 className="text-3xl font-black text-white md:text-4xl">
           Everything you need to <span className="text-[#2fd88f]">memorize Quran</span>
@@ -36,7 +45,11 @@ export function FeatureOrbit() {
             <Mascot size={190} />
           </div>
           {orbitIcons.map((icon) => (
-            <div key={icon.key} className={`absolute flex h-20 w-20 items-center justify-center rounded-full ring-4 ring-[#0B1E33] ${icon.bg} ${icon.position}`}>
+            <div
+              key={icon.key}
+              className={`absolute flex h-20 w-20 items-center justify-center rounded-full ring-4 ring-[#0B1E33] ${icon.bg}`}
+              style={{ left: `${icon.left}%`, top: `${icon.top}%`, transform: "translate(-50%, -50%)" }}
+            >
               <Image src={icon.src} alt={icon.label} className="h-12 w-12 object-contain" />
             </div>
           ))}

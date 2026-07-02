@@ -56,7 +56,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} ${amiri.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#031611] text-white">
+      <body className="min-h-full bg-[#0F1B2A] text-white">
         <CursorFollower />
         <Navbar />
         <SectionDots />
