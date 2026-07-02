@@ -24,15 +24,18 @@ const clouds = [
 export function JourneyBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      {clouds.map((cloud, i) => (
-        <div
-          key={i}
-          className="absolute overflow-hidden rounded-full blur-[2px]"
-          style={{ left: cloud.left, top: cloud.top, width: cloud.width, height: cloud.width * 0.5, opacity: cloud.opacity, mixBlendMode: "screen" }}
-        >
-          <Image src={cloudsImg} alt="" fill className="scale-150 object-cover" style={{ objectPosition: "30% 60%" }} />
-        </div>
-      ))}
+      {clouds.map((cloud, i) => {
+        const width = `clamp(${Math.round(cloud.width * 0.4)}px, 32vw, ${cloud.width}px)`;
+        return (
+          <div
+            key={i}
+            className="absolute overflow-hidden rounded-full blur-[2px]"
+            style={{ left: cloud.left, top: cloud.top, width, height: `calc(${width} * 0.5)`, opacity: cloud.opacity, mixBlendMode: "screen" }}
+          >
+            <Image src={cloudsImg} alt="" fill className="scale-150 object-cover" style={{ objectPosition: "30% 60%" }} />
+          </div>
+        );
+      })}
       {stars.map((star, i) => (
         <Image
           key={i}

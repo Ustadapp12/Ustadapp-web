@@ -5,12 +5,13 @@ import bell2 from "@/assets/circles/bell2.svg";
 import bell3 from "@/assets/circles/bell3.svg";
 import ellipseBlob from "@/assets/circles/Ellipse (1).svg";
 import ellipseRing from "@/assets/circles/Ellipse (2).svg";
+import ellipseRingBottom from "@/assets/circles/Ellipse(2) bott.svg";
 import { AnimatedSection, FadeInStaggerGroup, PulseRing } from "@/components/animations";
 import { AppMockupCard } from "@/components/app-mockup-card";
 import { Mascot } from "@/components/mascot";
 
 const MASCOT_SIZE = 260;
-const BADGE_RING = 68; // % radius of the anchor box the badges sit on
+const BADGE_RING = 80; // % radius of the anchor box the badges sit on — mascot art fills ~85-100% of the box, so this must clear 100%
 
 const floatingBadges = [
   { key: "xp", icon: "⭐", title: "+50 XP", subtitle: "Earned today", angle: 165 },
@@ -32,12 +33,15 @@ export function HeroSection() {
       <Image src={bell} alt="" aria-hidden className="pointer-events-none absolute -right-16 top-0 h-[440px] w-[440px]" />
       <Image src={bell2} alt="" aria-hidden className="pointer-events-none absolute -left-20 top-10 h-80 w-80" />
       <Image src={bell3} alt="" aria-hidden className="pointer-events-none absolute bottom-0 left-1/3 h-72 w-72" />
-      <Image src={ellipseBlob} alt="" aria-hidden className="pointer-events-none absolute -bottom-56 -left-56 h-[620px] w-[620px] opacity-70 blur-xl" />
-      <Image src={ellipseRing} alt="" aria-hidden className="pointer-events-none absolute -bottom-16 right-0 h-72 w-72 opacity-50" />
+      <Image src={ellipseBlob} alt="" aria-hidden className="pointer-events-none absolute -top-56 -left-56 h-[620px] w-[620px] opacity-70 blur-xl" />
+      <div className="pointer-events-none absolute -bottom-16 right-0 w-72 opacity-50">
+        <Image src={ellipseRing} alt="" aria-hidden className="h-auto w-full" />
+        <Image src={ellipseRingBottom} alt="" aria-hidden className="h-auto w-full" />
+      </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-start gap-10 lg:grid-cols-2">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_auto]">
         {/* Left: copy */}
-        <FadeInStaggerGroup className="text-center lg:text-left" displayContents={false}>
+        <FadeInStaggerGroup className="text-center lg:max-w-sm lg:text-left xl:max-w-xl" displayContents={false}>
           <h1 className="text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
             Fun and effective way to memorise Quran
           </h1>
@@ -61,42 +65,44 @@ export function HeroSection() {
           </div>
         </FadeInStaggerGroup>
 
-        {/* Right: mascot + floating badges + app mockup */}
-        <div className="relative mx-auto flex w-full max-w-sm flex-col items-center lg:mx-0 lg:min-h-[600px]">
-          {/* Anchor box: mascot centered, badges computed around its ring */}
-          <div className="relative lg:absolute lg:left-1/2 lg:top-0 lg:z-20 lg:-translate-x-1/2" style={{ width: MASCOT_SIZE, height: MASCOT_SIZE }}>
-            <Mascot size={MASCOT_SIZE} priority />
+        {/* Right: mascot + floating badges + app mockup, grouped as one unit */}
+        <div className="relative mx-auto flex w-full max-w-sm flex-col items-center lg:mx-0 lg:w-[24rem] lg:min-h-[600px]">
+          <div>
+            {/* Anchor box: mascot centered, badges computed around its ring */}
+            <div className="relative lg:absolute lg:left-1/2 lg:top-0 lg:z-20 lg:-translate-x-1/2" style={{ width: MASCOT_SIZE, height: MASCOT_SIZE }}>
+              <Mascot size={MASCOT_SIZE} priority />
 
-            {floatingBadges.map((badge) => (
-              <div
-                key={badge.key}
-                className="glass-panel absolute z-20 hidden items-center gap-2 whitespace-nowrap rounded-2xl px-3.5 py-2.5 text-white lg:flex"
-                style={{ left: `${badge.left}%`, top: `${badge.top}%`, transform: "translate(-50%, -50%)" }}
-              >
-                <span aria-hidden className="text-base">{badge.icon}</span>
-                <span className="text-left leading-tight">
-                  <span className="block text-xs font-bold">{badge.title}</span>
-                  {badge.subtitle ? <span className="block text-[10px] text-white/60">{badge.subtitle}</span> : null}
-                </span>
-              </div>
-            ))}
-          </div>
+              {floatingBadges.map((badge) => (
+                <div
+                  key={badge.key}
+                  className="glass-panel absolute z-20 hidden items-center gap-2 whitespace-nowrap rounded-2xl px-3.5 py-2.5 text-white lg:flex"
+                  style={{ left: `${badge.left}%`, top: `${badge.top}%`, transform: "translate(-50%, -50%)" }}
+                >
+                  <span aria-hidden className="text-base">{badge.icon}</span>
+                  <span className="text-left leading-tight">
+                    <span className="block text-xs font-bold">{badge.title}</span>
+                    {badge.subtitle ? <span className="block text-[10px] text-white/60">{badge.subtitle}</span> : null}
+                  </span>
+                </div>
+              ))}
+            </div>
 
-          {/* Mobile: badges wrap in a simple row below the mascot */}
-          <div className="mt-4 flex flex-wrap justify-center gap-2 lg:hidden">
-            {floatingBadges.map((badge) => (
-              <div key={badge.key} className="glass-panel flex items-center gap-2 rounded-2xl px-3.5 py-2.5 text-white">
-                <span aria-hidden className="text-base">{badge.icon}</span>
-                <span className="text-left leading-tight">
-                  <span className="block text-xs font-bold">{badge.title}</span>
-                  {badge.subtitle ? <span className="block text-[10px] text-white/60">{badge.subtitle}</span> : null}
-                </span>
-              </div>
-            ))}
-          </div>
+            {/* Mobile: badges wrap in a simple row below the mascot */}
+            <div className="mt-4 flex flex-wrap justify-center gap-2 lg:hidden">
+              {floatingBadges.map((badge) => (
+                <div key={badge.key} className="glass-panel flex items-center gap-2 rounded-2xl px-3.5 py-2.5 text-white">
+                  <span aria-hidden className="text-base">{badge.icon}</span>
+                  <span className="text-left leading-tight">
+                    <span className="block text-xs font-bold">{badge.title}</span>
+                    {badge.subtitle ? <span className="block text-[10px] text-white/60">{badge.subtitle}</span> : null}
+                  </span>
+                </div>
+              ))}
+            </div>
 
-          <div className="mt-8 w-full lg:absolute lg:right-0 lg:top-[280px] lg:mt-0 lg:w-[22rem]">
-            <AppMockupCard />
+            <div className="mt-8 w-full lg:absolute lg:right-0 lg:top-[280px] lg:mt-0 lg:w-[22rem]">
+              <AppMockupCard />
+            </div>
           </div>
         </div>
       </div>
