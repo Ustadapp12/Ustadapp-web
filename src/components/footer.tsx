@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import appstore from "@/assets/appstore-trimmed.png";
+import appstore from "@/assets/circles/appstore.svg";
 import dp from "@/assets/dp.png";
-import playstore from "@/assets/playstore-trimmed.png";
+import playstore from "@/assets/circles/playstore.svg";
 import { IslamicStar } from "@/components/islamic-star";
-import { StoreBadge } from "@/components/store-badge";
+import { StoreButton } from "@/components/store-button";
 import { siteConfig } from "@/lib/site";
 
 const columns = [
@@ -46,7 +46,7 @@ const socialGlyphs = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0B1E33] px-6 pb-8 pt-14 text-white md:px-16">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0B1E18] px-6 pb-8 pt-14 text-white md:px-16">
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <IslamicStar className="absolute -right-14 top-8 h-56 w-56 text-white/5 spin-slow" />
         <IslamicStar className="absolute -left-14 bottom-8 h-48 w-48 text-white/5 spin-slow [animation-direction:reverse] [animation-delay:8s]" />
@@ -65,8 +65,8 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <StoreBadge src={playstore} alt="Coming soon on Google Play" />
-            <StoreBadge src={appstore} alt="Coming soon on the App Store" />
+            <StoreButton icon={playstore} store="Google Play" />
+            <StoreButton icon={appstore} store="App store" />
           </div>
         </div>
 

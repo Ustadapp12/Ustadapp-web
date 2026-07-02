@@ -55,8 +55,10 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroSection />
-      <FeatureOrbit />
+      <div className="overflow-hidden bg-gradient-to-b from-[#05966A] via-[#0F1B2A] via-45% to-[#0F1B2A]">
+        <HeroSection />
+        <FeatureOrbit />
+      </div>
       <LearningJourney />
       <FinalCta />
     </>

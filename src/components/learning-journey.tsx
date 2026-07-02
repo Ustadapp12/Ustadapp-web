@@ -30,7 +30,9 @@ const stops: Stop[] = [
 ];
 
 const ROCKET_POINT = { x: stops[0].x, y: 3 };
-const TROPHY_POINT = { x: stops[stops.length - 1].x, y: 97 };
+// Virtual point only — draws the path curving off the last node toward the trophy below, which
+// renders in normal flow (centered) right under this container, never on the coordinate grid.
+const PATH_END_POINT = { x: 50, y: 100 };
 
 function buildCurvePath(points: { x: number; y: number }[]) {
   let d = `M ${points[0].x} ${points[0].y}`;
@@ -43,7 +45,7 @@ function buildCurvePath(points: { x: number; y: number }[]) {
   return d;
 }
 
-const pathD = buildCurvePath([ROCKET_POINT, ...stops.map((s) => ({ x: s.x, y: s.y })), TROPHY_POINT]);
+const pathD = buildCurvePath([ROCKET_POINT, ...stops.map((s) => ({ x: s.x, y: s.y })), PATH_END_POINT]);
 
 function StopContent({ stop }: { stop: Stop }) {
   return (
@@ -65,7 +67,7 @@ function StopContent({ stop }: { stop: Stop }) {
 
 export function LearningJourney() {
   return (
-    <AnimatedSection id="journey" className="relative overflow-hidden bg-[#0B1E33] px-6 py-14 md:px-10 md:py-20">
+    <AnimatedSection id="journey" className="relative overflow-hidden bg-[#0F1B2A] px-6 py-14 md:px-10 md:py-20">
       <JourneyBackground />
 
       <div className="relative z-10 mx-auto w-full max-w-4xl">
@@ -73,7 +75,7 @@ export function LearningJourney() {
           Your Learning <span className="block text-[#2fd88f]">Journey</span>
         </h2>
 
-        <div className="relative mt-10 min-h-[1000px] sm:min-h-[1150px] md:min-h-[1300px]">
+        <div className="relative mt-10 min-h-[950px] overflow-hidden sm:min-h-[1050px] md:min-h-[1200px]">
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d={pathD} stroke="#F4C752" strokeWidth="0.5" strokeDasharray="2 1.6" strokeLinecap="round" fill="none" vectorEffect="non-scaling-stroke" />
           </svg>
@@ -103,15 +105,12 @@ export function LearningJourney() {
               </div>
             </div>
           ))}
+        </div>
 
-          <div
-            className="absolute z-10 flex flex-col items-center text-center"
-            style={{ left: `${TROPHY_POINT.x}%`, top: `${TROPHY_POINT.y}%`, transform: "translate(-50%, -20%)" }}
-          >
-            <span aria-hidden className="text-5xl">🏆</span>
-            <h3 className="mt-3 text-2xl font-black text-white">Journey Complete</h3>
-            <p className="mt-1 text-sm text-white/60">Become a Confident Quran Learner</p>
-          </div>
+        <div className="relative z-10 -mt-6 flex flex-col items-center text-center">
+          <span aria-hidden className="text-5xl">🏆</span>
+          <h3 className="mt-3 text-2xl font-black text-white">Journey Complete</h3>
+          <p className="mt-1 text-sm text-white/60">Become a Confident Quran Learner</p>
         </div>
       </div>
     </AnimatedSection>
