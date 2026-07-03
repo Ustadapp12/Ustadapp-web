@@ -69,7 +69,7 @@ export function HeroSection() {
         <div className="relative mx-auto flex w-full max-w-sm flex-col items-center lg:mx-0 lg:w-[24rem] lg:min-h-[600px]">
           <div>
             {/* Anchor box: mascot centered, badges computed around its ring */}
-            <div className="relative lg:absolute lg:left-1/2 lg:top-0 lg:z-20 lg:-translate-x-1/2" style={{ width: MASCOT_SIZE, height: MASCOT_SIZE }}>
+            <div className="relative mx-auto lg:absolute lg:left-1/2 lg:top-0 lg:z-20 lg:-translate-x-1/2" style={{ width: MASCOT_SIZE, height: MASCOT_SIZE }}>
               <Mascot size={MASCOT_SIZE} priority />
 
               {floatingBadges.map((badge) => (
@@ -100,7 +100,7 @@ export function HeroSection() {
               ))}
             </div>
 
-            <div className="mt-8 w-full lg:absolute lg:right-0 lg:top-[280px] lg:mt-0 lg:w-[22rem]">
+            <div className="mt-8 w-full lg:absolute lg:left-1/2 lg:top-[280px] lg:mt-0 lg:w-[22rem] lg:-translate-x-1/2">
               <AppMockupCard />
             </div>
           </div>

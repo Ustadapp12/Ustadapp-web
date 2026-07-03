@@ -83,7 +83,7 @@ export default function OpengraphImage() {
             boxShadow: "0 16px 0 rgba(22, 80, 5, 0.5)",
           }}
         >
-          <div style={{ fontSize: 42, fontWeight: 700, opacity: 0.96 }}>Ustad أُستَاذ</div>
+          <div style={{ fontSize: 42, fontWeight: 700, opacity: 0.96 }}>UstadApp أُستَاذ</div>
           <div style={{ fontSize: 78, fontWeight: 800, marginTop: 20, lineHeight: 1.05 }}>
             Learn. Recite. Remember.
           </div>

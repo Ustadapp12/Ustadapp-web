@@ -49,20 +49,32 @@ const pathD = buildCurvePath([ROCKET_POINT, ...stops.map((s) => ({ x: s.x, y: s.
 function StopContent({ stop }: { stop: Stop }) {
   return (
     <div
-      className={`flex flex-col items-center gap-[0.45rem] text-center sm:flex-row sm:gap-[0.9rem] sm:text-left md:gap-[1.2rem] ${
-        stop.side === "left" ? "sm:flex-row-reverse sm:text-right" : ""
+      className={`flex flex-row items-center gap-[clamp(0.3rem,1.2vw,1.2rem)] text-left ${
+        stop.side === "left" ? "flex-row-reverse text-right" : ""
       }`}
     >
-      <div className="relative h-[4.2rem] w-[4.2rem] shrink-0 sm:h-[10.08rem] sm:w-[10.08rem] md:h-[13.44rem] md:w-[13.44rem] lg:h-[15.12rem] lg:w-[15.12rem]">
+      <div className="relative h-[clamp(3rem,9vw,15.12rem)] w-[clamp(3rem,9vw,15.12rem)] shrink-0">
         <Image src={stop.character} alt="" fill className="object-contain object-bottom drop-shadow-[0_14px_20px_rgba(0,0,0,0.5)]" />
       </div>
-      <div className={`flex flex-col items-center gap-[0.3rem] sm:gap-[0.6rem] ${stop.side === "left" ? "sm:items-end" : "sm:items-start"}`}>
+      <div
+        className={`flex min-w-0 flex-row items-center gap-[clamp(0.25rem,1vw,0.6rem)] ${
+          stop.side === "left" ? "justify-end" : "justify-start"
+        }`}
+      >
         {stop.icon ? (
-          <Image src={stop.icon} alt="" className="h-[2.1rem] w-[2.1rem] object-contain sm:h-[3.36rem] sm:w-[3.36rem] md:h-[4.2rem] md:w-[4.2rem]" />
+          <Image
+            src={stop.icon}
+            alt=""
+            className="h-[clamp(0.9rem,2.8vw,4.2rem)] w-[clamp(0.9rem,2.8vw,4.2rem)] shrink-0 object-contain"
+          />
         ) : (
-          <span aria-hidden className="text-[1.8rem] sm:text-[3.12rem] md:text-[3.6rem]">📖</span>
+          <span aria-hidden className="shrink-0 text-[clamp(0.9rem,2.8vw,3.6rem)]">
+            📖
+          </span>
         )}
-        <span className="text-lg font-bold text-[#2fd88f] sm:text-xl md:text-2xl">{stop.label}</span>
+        <span className="min-w-0 whitespace-normal text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
+          {stop.label}
+        </span>
       </div>
     </div>
   );
@@ -101,8 +113,8 @@ export function LearningJourney() {
                 {stop.number}
               </div>
               <div
-                className={`absolute left-1/2 top-full z-10 mt-[0.6rem] w-max max-w-[15.6rem] -translate-x-1/2 sm:left-auto sm:top-1/2 sm:mt-0 sm:max-w-none sm:-translate-y-1/2 sm:translate-x-0 ${
-                  stop.side === "right" ? "sm:left-full sm:ml-[0.9rem]" : "sm:right-full sm:mr-[0.9rem]"
+                className={`absolute top-1/2 z-10 w-max max-w-[clamp(10.5rem,32vw,20rem)] -translate-y-1/2 ${
+                  stop.side === "right" ? "left-full ml-[clamp(0.5rem,1.5vw,0.9rem)]" : "right-full mr-[clamp(0.5rem,1.5vw,0.9rem)]"
                 }`}
               >
                 <StopContent stop={stop} />

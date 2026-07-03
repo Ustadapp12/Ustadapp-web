@@ -61,7 +61,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2">
               <Image src={dp} alt={siteConfig.name} className="h-8 w-8 rounded-full" />
-              <span className="text-sm font-bold text-white">{siteConfig.name}app</span>
+              <span className="text-sm font-bold text-white">{siteConfig.name}</span>
             </div>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/50">
               Making Quran Learning Accessible, engaging, and effective for every Quran learner.
@@ -76,7 +76,10 @@ export function Footer() {
 
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3">
           {columns.map((column) => (
-            <div key={column.title} className="space-y-3 text-sm">
+            <div
+              key={column.title}
+              className={`space-y-3 text-sm ${column.title === "Company" ? "hidden md:block" : ""}`.trim()}
+            >
               <p className="text-xs font-black uppercase tracking-widest text-white/40">{column.title}</p>
               {column.links.map((link) => (
                 <Link
