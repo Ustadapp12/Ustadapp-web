@@ -62,7 +62,7 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <div className="mb-6 flex flex-col items-center gap-10 text-center sm:flex-row sm:flex-wrap sm:items-start sm:justify-between sm:text-left">
+        <div className="mb-6 flex flex-col items-center gap-10 text-center sm:flex-row sm:flex-wrap sm:items-stretch sm:justify-between sm:text-left">
           <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-[#2fd88f]/30 px-3 py-1.5">
@@ -80,7 +80,7 @@ export function Footer() {
             </div>
 
             <p className="mt-4 text-xs text-white/40">Launching soon — join on the waitlist</p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-white/40">Located at Hatch 8, NSTP H-12</p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-white/40 sm:mt-auto">Located at Hatch 8, NSTP H-12</p>
           </div>
 
           <div className="flex flex-col items-center sm:items-stretch">
@@ -103,7 +103,7 @@ export function Footer() {
               ))}
             </div>
 
-            <div className="mt-4 flex w-full justify-center gap-3 sm:justify-end">
+            <div className="mt-4 flex w-full justify-center gap-3 sm:mt-auto sm:justify-end">
               {socialGlyphs.map((social) => (
                 <a
                   key={social.label}

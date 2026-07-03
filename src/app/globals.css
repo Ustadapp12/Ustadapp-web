@@ -489,6 +489,13 @@ h3 {
 }
 .icon-bounce { animation: icon-bounce 2.8s ease-in-out infinite; }
 
+/* ── Orbit icon glow ──────────────────────────────────── */
+@keyframes orbit-glow {
+  0%, 100% { box-shadow: 0 0 4px 0 var(--glow-color, rgba(47, 216, 143, 0.5)); }
+  50%       { box-shadow: 0 0 20px 6px var(--glow-color, rgba(47, 216, 143, 0.5)); }
+}
+.orbit-glow { animation: orbit-glow 3s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-pending {
     opacity: 1;
@@ -544,8 +551,10 @@ h3 {
   .spin-slow,
   .beam-sweep,
   .glow-text,
-  .icon-bounce {
+  .icon-bounce,
+  .orbit-glow {
     animation: none;
+    box-shadow: none;
   }
 
   .hero-gradient-text {

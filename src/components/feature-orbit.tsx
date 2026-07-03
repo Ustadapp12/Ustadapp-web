@@ -12,12 +12,12 @@ import { Mascot } from "@/components/mascot";
 const ORBIT_RADIUS = 50; // % of the container box — matches the inset-0 dashed circle exactly
 
 const orbitIcons = [
-  { key: "achievements", src: trophyIcon, label: "Achievements", bg: "bg-[#C6A153]/60 border-2 border-[#9c7a3f]", angle: 90 },
-  { key: "sync", src: syncIcon, label: "Daily sync", bg: "bg-[#3E8E54]/60 border-2 border-[#2C7A48]", angle: 30 },
-  { key: "streaks", src: flameIcon, label: "Streaks", bg: "bg-[#FAC71A]/60 border-2 border-[#fcbb00]", angle: -30 },
-  { key: "practice", src: dumbbellIcon, label: "Practice", bg: "bg-[#5C5C66]/60 border-2 border-[#3f3f47]", angle: -90 },
-  { key: "progress", src: chartIcon, label: "Progress", bg: "bg-[#93A5C4]/60 border-2 border-[#7385A4]", angle: -150 },
-  { key: "ai-ustad", src: robotIcon, label: "AI Ustad", bg: "bg-[#C6A153]/60 border-2 border-[#9c7a3f]", angle: 150 },
+  { key: "achievements", src: trophyIcon, label: "Achievements", bg: "bg-[#C6A153]/60 border-2 border-[#9c7a3f]", glow: "rgba(198,161,83,0.65)", angle: 90 },
+  { key: "sync", src: syncIcon, label: "Daily sync", bg: "bg-[#3E8E54]/60 border-2 border-[#2C7A48]", glow: "rgba(62,142,84,0.65)", angle: 30 },
+  { key: "streaks", src: flameIcon, label: "Streaks", bg: "bg-[#FAC71A]/60 border-2 border-[#fcbb00]", glow: "rgba(250,199,26,0.65)", angle: -30 },
+  { key: "practice", src: dumbbellIcon, label: "Practice", bg: "bg-[#5C5C66]/60 border-2 border-[#3f3f47]", glow: "rgba(140,140,150,0.55)", angle: -90 },
+  { key: "progress", src: chartIcon, label: "Progress", bg: "bg-[#93A5C4]/60 border-2 border-[#7385A4]", glow: "rgba(147,165,196,0.6)", angle: -150 },
+  { key: "ai-ustad", src: robotIcon, label: "AI Ustad", bg: "bg-[#C6A153]/60 border-2 border-[#9c7a3f]", glow: "rgba(198,161,83,0.65)", angle: 150 },
 ].map((icon) => {
   const rad = (icon.angle * Math.PI) / 180;
   return {
@@ -44,13 +44,18 @@ export function FeatureOrbit() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <Mascot size={133} />
           </div>
-          {orbitIcons.map((icon) => (
+          {orbitIcons.map((icon, index) => (
             <div
               key={icon.key}
-              className={`absolute flex h-14 w-14 items-center justify-center rounded-full ring-2 ring-[#0B1E33] ${icon.bg}`}
-              style={{ left: `${icon.left}%`, top: `${icon.top}%`, transform: "translate(-50%, -50%)" }}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${icon.left}%`, top: `${icon.top}%` }}
             >
-              <Image src={icon.src} alt={icon.label} className="h-[2.1rem] w-[2.1rem] object-contain" />
+              <div
+                className={`orbit-glow icon-bounce flex h-14 w-14 items-center justify-center rounded-full ring-2 ring-[#0B1E33] ${icon.bg}`}
+                style={{ "--glow-color": icon.glow, animationDelay: `${index * 0.3}s` } as React.CSSProperties}
+              >
+                <Image src={icon.src} alt={icon.label} className="h-[2.1rem] w-[2.1rem] object-contain" />
+              </div>
             </div>
           ))}
         </div>
@@ -59,9 +64,12 @@ export function FeatureOrbit() {
         <div className="mt-7 flex flex-col items-center gap-6 md:hidden">
           <Mascot size={112} />
           <div className="grid w-full grid-cols-3 gap-3">
-            {orbitIcons.map((icon) => (
+            {orbitIcons.map((icon, index) => (
               <div key={icon.key} className="flex flex-col items-center gap-1.5">
-                <div className={`flex h-11 w-11 items-center justify-center rounded-full ${icon.bg}`}>
+                <div
+                  className={`orbit-glow icon-bounce flex h-11 w-11 items-center justify-center rounded-full ${icon.bg}`}
+                  style={{ "--glow-color": icon.glow, animationDelay: `${index * 0.3}s` } as React.CSSProperties}
+                >
                   <Image src={icon.src} alt={icon.label} className="h-6 w-6 object-contain" />
                 </div>
                 <span className="text-[8px] font-medium text-white/70">{icon.label}</span>
