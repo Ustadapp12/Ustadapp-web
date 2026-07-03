@@ -8,7 +8,6 @@ import iconStarsBars from "@/assets/PhotoshopExtension_Image_3.png";
 import iconHeadGears from "@/assets/PhotoshopExtension_Image_4.png";
 import iconBrain from "@/assets/PhotoshopExtension_Image_2.png";
 import iconCheck from "@/assets/PhotoshopExtension_Image_1.png";
-import { AnimatedSection } from "@/components/animations";
 import { JourneyBackground } from "@/components/journey-background";
 
 type Stop = {
@@ -71,7 +70,7 @@ function StopContent({ stop }: { stop: Stop }) {
 
 export function LearningJourney() {
   return (
-    <AnimatedSection id="journey" className="relative overflow-hidden bg-[#0F1B2A] px-6 py-14 md:px-10 md:py-20">
+    <section id="journey" className="relative overflow-hidden bg-[#0F1B2A] px-6 py-14 md:px-10 md:py-20">
       <JourneyBackground />
 
       <div className="relative z-10 mx-auto w-full max-w-[67.2rem]">
@@ -118,6 +117,6 @@ export function LearningJourney() {
           <p className="mt-1 text-lg text-white/60 md:text-xl">Become a Confident Quran Learner</p>
         </div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

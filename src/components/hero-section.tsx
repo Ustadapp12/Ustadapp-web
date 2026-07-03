@@ -6,7 +6,7 @@ import bell3 from "@/assets/circles/bell3.svg";
 import ellipseBlob from "@/assets/circles/Ellipse (1).svg";
 import ellipseRing from "@/assets/circles/Ellipse (2).svg";
 import ellipseRingBottom from "@/assets/circles/Ellipse(2) bott.svg";
-import { AnimatedSection, FadeInStaggerGroup, PulseRing } from "@/components/animations";
+import { PulseRing } from "@/components/animations";
 import { AppMockupCard } from "@/components/app-mockup-card";
 import { Mascot } from "@/components/mascot";
 
@@ -28,7 +28,7 @@ const floatingBadges = [
 
 export function HeroSection() {
   return (
-    <AnimatedSection id="hero" className="relative px-6 pb-14 pt-8 md:px-16 md:pb-16 md:pt-10">
+    <section id="hero" className="relative px-6 pb-14 pt-8 md:px-16 md:pb-16 md:pt-10">
       <div aria-hidden className="grain pointer-events-none absolute inset-0" style={{ opacity: 0.12 }} />
       <Image src={bell} alt="" aria-hidden className="pointer-events-none absolute -right-16 top-0 h-[440px] w-[440px]" />
       <Image src={bell2} alt="" aria-hidden className="pointer-events-none absolute -left-20 top-10 h-80 w-80" />
@@ -41,7 +41,7 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_auto]">
         {/* Left: copy */}
-        <FadeInStaggerGroup className="text-center lg:max-w-sm lg:text-left xl:max-w-xl" displayContents={false}>
+        <div className="text-center lg:max-w-sm lg:text-left xl:max-w-xl">
           <h1 className="text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
             Fun and effective way to memorise Quran
           </h1>
@@ -63,7 +63,7 @@ export function HeroSection() {
               See how it works
             </Link>
           </div>
-        </FadeInStaggerGroup>
+        </div>
 
         {/* Right: mascot + floating badges + app mockup, grouped as one unit */}
         <div className="relative mx-auto flex w-full max-w-sm flex-col items-center lg:mx-0 lg:w-[24rem] lg:min-h-[600px]">
@@ -106,6 +106,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

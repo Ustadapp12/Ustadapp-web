@@ -6,7 +6,7 @@ import syncIcon from "@/assets/PhotoshopExtension_Image_10.png";
 import chartIcon from "@/assets/PhotoshopExtension_Image_8.png";
 import flameIcon from "@/assets/PhotoshopExtension_Image_5.png";
 import dumbbellIcon from "@/assets/PhotoshopExtension_Image_6.png";
-import { AnimatedSection, PulseRing } from "@/components/animations";
+import { PulseRing } from "@/components/animations";
 import { Mascot } from "@/components/mascot";
 
 const ORBIT_RADIUS = 50; // % of the container box — matches the inset-0 dashed circle exactly
@@ -29,7 +29,7 @@ const orbitIcons = [
 
 export function FeatureOrbit() {
   return (
-    <AnimatedSection id="features" className="relative overflow-hidden px-6 py-14 text-center md:px-16 md:py-20">
+    <section id="features" className="relative overflow-hidden px-6 py-14 text-center md:px-16 md:py-20">
       <div className="relative z-10 mx-auto w-full max-w-3xl">
         <h2 className="text-[1.575rem] font-black text-white md:text-[1.93rem]">
           Everything you need to <span className="text-[#2fd88f]">memorize Quran</span>
@@ -77,6 +77,6 @@ export function FeatureOrbit() {
           </Link>
         </span>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }
