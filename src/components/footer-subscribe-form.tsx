@@ -42,7 +42,7 @@ export function FooterSubscribeForm() {
         </div>
         <div>
           <p className="text-sm font-semibold text-[#0d1b2a]">You&apos;re on the list!</p>
-          <p className="text-xs text-gray-400">We&apos;ll be in touch when Ustad launches.</p>
+          <p className="text-xs text-gray-400">We&apos;ll be in touch when UstadApp launches.</p>
         </div>
       </div>
     );
@@ -59,7 +59,7 @@ export function FooterSubscribeForm() {
         </div>
         <div>
           <p className="text-sm font-semibold text-[#0d1b2a]">Already subscribed!</p>
-          <p className="text-xs text-gray-400">We&apos;ll reach out when Ustad launches.</p>
+          <p className="text-xs text-gray-400">We&apos;ll reach out when UstadApp launches.</p>
         </div>
       </div>
     );

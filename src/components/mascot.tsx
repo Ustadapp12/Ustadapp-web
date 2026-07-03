@@ -15,7 +15,7 @@ export function Mascot({ size = 220, className = "", withGlow = true, priority =
       {withGlow ? <FloatingBlob variant="mint" className="inset-0 opacity-70" /> : null}
       <Image
         src={lumo}
-        alt="Lumo, the Ustad mascot"
+        alt="Lumo, the UstadApp mascot"
         fill
         sizes={`${size}px`}
         className="relative object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.25)]"

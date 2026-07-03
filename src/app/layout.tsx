@@ -21,18 +21,22 @@ const amiri = Amiri({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Ustad - Gamified Quran Learning App",
-    template: "%s | Ustad",
+    default: "UstadApp - Gamified Quran Learning App",
+    template: "%s | UstadApp",
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   applicationName: siteConfig.name,
-  authors: [{ name: "Ustad Team" }],
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
+  authors: [{ name: "UstadApp Team" }],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Ustad - Learn Quran One Ayah at a Time",
+    title: "UstadApp - Learn Quran One Ayah at a Time",
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
@@ -41,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ustad - Learn Quran One Ayah at a Time",
+    title: "UstadApp - Learn Quran One Ayah at a Time",
     description: siteConfig.description,
   },
 };

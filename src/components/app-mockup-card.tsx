@@ -10,7 +10,7 @@ export function AppMockupCard({ className = "" }: { className?: string }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#05966a] text-xs font-bold text-white">1</span>
-          <span className="text-sm font-bold">Ustad</span>
+          <span className="text-sm font-bold">UstadApp</span>
         </div>
         <span className="flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-600">
           🔥 7 day streak

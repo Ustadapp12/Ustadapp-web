@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  name: "Ustad",
+  name: "UstadApp",
   arabicName: "أُستَاذ",
   description:
     "Gamified Quranic learning from Alif to full Surahs. Learn, recite, and remember with daily lessons, streaks, and AI-powered pronunciation coaching.",

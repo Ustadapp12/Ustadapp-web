@@ -6,7 +6,7 @@ import { LearningJourney } from "@/components/learning-journey";
 import { createPageMetadata, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Ustad – Learn Quran with AI | Free Gamified Quran App",
+  title: "UstadApp – Learn Quran with AI | Free Gamified Quran App",
   description: "Learn and memorize Quran step by step with AI recitation feedback, gamified lessons, streaks, and smart revision. Free Quran app for children and adults.",
   path: "/",
 });
@@ -34,7 +34,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "MobileApplication",
-    name: "Ustad – Quran Memorization App",
+    name: "UstadApp – Quran Memorization App",
     applicationCategory: "EducationalApplication",
     description:
       "Learn and memorize Quran step by step with AI recitation feedback, gamified lessons, streaks, and smart revision. Free for children and adults.",

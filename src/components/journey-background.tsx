@@ -3,13 +3,19 @@ import cloudsImg from "@/assets/clouds.png";
 import moonImg from "@/assets/moon1.png";
 import starImg from "@/assets/star.png";
 
-const stars = Array.from({ length: 30 }, (_, i) => ({
-  left: `${(i * 11.3 + 3) % 97}%`,
-  top: `${(i * 17.9 + 4) % 100}%`,
-  size: i % 4 === 0 ? 22 : 12,
-  delay: `${(i % 5) * 0.6}s`,
-  opacity: i % 3 === 0 ? 0.9 : 0.5,
-}));
+const STAR_COUNT = 65;
+
+const stars = Array.from({ length: STAR_COUNT }, (_, i) => {
+  const sizeRoll = i % 9;
+  const size = sizeRoll === 0 ? 30 : sizeRoll <= 2 ? 20 : sizeRoll <= 5 ? 13 : 8;
+  return {
+    left: `${(i * 13.7 + i * i * 0.37 + 3) % 96}%`,
+    top: `${(i * 23.1 + i * i * 0.19 + 4) % 100}%`,
+    size,
+    delay: `${(i % 6) * 0.5}s`,
+    opacity: sizeRoll === 0 ? 1 : sizeRoll <= 2 ? 0.85 : i % 3 === 0 ? 0.75 : 0.4,
+  };
+});
 
 const clouds = [
   { left: "2%", top: "14%", width: 240, opacity: 0.26 },
@@ -24,15 +30,18 @@ const clouds = [
 export function JourneyBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      {clouds.map((cloud, i) => (
-        <div
-          key={i}
-          className="absolute overflow-hidden rounded-full blur-[2px]"
-          style={{ left: cloud.left, top: cloud.top, width: cloud.width, height: cloud.width * 0.5, opacity: cloud.opacity, mixBlendMode: "screen" }}
-        >
-          <Image src={cloudsImg} alt="" fill className="scale-150 object-cover" style={{ objectPosition: "30% 60%" }} />
-        </div>
-      ))}
+      {clouds.map((cloud, i) => {
+        const width = `clamp(${Math.round(cloud.width * 0.4)}px, 32vw, ${cloud.width}px)`;
+        return (
+          <div
+            key={i}
+            className="absolute overflow-hidden rounded-full blur-[2px]"
+            style={{ left: cloud.left, top: cloud.top, width, height: `calc(${width} * 0.5)`, opacity: cloud.opacity, mixBlendMode: "screen" }}
+          >
+            <Image src={cloudsImg} alt="" fill className="scale-150 object-cover" style={{ objectPosition: "30% 60%" }} />
+          </div>
+        );
+      })}
       {stars.map((star, i) => (
         <Image
           key={i}

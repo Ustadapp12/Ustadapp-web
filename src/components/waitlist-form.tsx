@@ -47,7 +47,7 @@ export function WaitlistForm() {
           </svg>
         </div>
         <p className="text-base font-semibold text-white">You&apos;re on the list!</p>
-        <p className="text-sm text-white/60">We&apos;ll be in touch when Ustad launches.</p>
+        <p className="text-sm text-white/60">We&apos;ll be in touch when UstadApp launches.</p>
       </div>
     );
   }
@@ -63,7 +63,7 @@ export function WaitlistForm() {
           </svg>
         </div>
         <p className="text-base font-semibold text-white">You&apos;re already on the list!</p>
-        <p className="text-sm text-white/60">We&apos;ll reach out when Ustad launches.</p>
+        <p className="text-sm text-white/60">We&apos;ll reach out when UstadApp launches.</p>
       </div>
     );
   }

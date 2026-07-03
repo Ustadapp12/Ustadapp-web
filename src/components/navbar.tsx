@@ -31,8 +31,9 @@ export function Navbar() {
     >
       <div className="flex w-full items-center justify-between gap-2 px-4 py-3.5 sm:gap-4 md:px-10 lg:px-12">
         <Link href="/" className="flex items-center gap-2">
-          <Image src={dp} alt={siteConfig.name} className="h-9 w-9 rounded-full" priority />
-          <span className="text-lg font-black text-white">{siteConfig.name}</span>
+          <Image src={dp} alt={siteConfig.name} className="h-11 w-11 rounded-full md:h-9 md:w-9" priority />
+          <span className="text-lg font-black text-white md:hidden">Ustad</span>
+          <span className="hidden text-lg font-black text-white md:inline">{siteConfig.name}</span>
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">

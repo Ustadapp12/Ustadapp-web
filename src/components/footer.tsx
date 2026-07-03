@@ -3,6 +3,10 @@ import Link from "next/link";
 import appstore from "@/assets/circles/appstore.svg";
 import dp from "@/assets/dp.png";
 import playstore from "@/assets/circles/playstore.svg";
+import faceIcon from "@/assets/circles/socials/face.png";
+import instaIcon from "@/assets/circles/socials/insta.png";
+import linkIcon from "@/assets/circles/socials/link.png";
+import xIcon from "@/assets/circles/socials/x.png";
 import { IslamicStar } from "@/components/islamic-star";
 import { StoreButton } from "@/components/store-button";
 import { siteConfig } from "@/lib/site";
@@ -38,10 +42,10 @@ const columns = [
 ];
 
 const socialGlyphs = [
-  { href: "https://x.com/ustadapp", label: "X" },
-  { href: "https://www.instagram.com/ustadapp_official/", label: "IG" },
-  { href: "https://www.linkedin.com/company/ustadapp/posts/?feedView=all", label: "in" },
-  { href: "https://facebook.com/ustadapp", label: "FB" },
+  { href: "https://x.com/ustadapp", label: "X", icon: xIcon },
+  { href: "https://www.instagram.com/ustadapp_official/", label: "Instagram", icon: instaIcon },
+  { href: "https://www.linkedin.com/company/ustadapp/posts/?feedView=all", label: "LinkedIn", icon: linkIcon },
+  { href: "https://facebook.com/ustadapp", label: "Facebook", icon: faceIcon },
 ];
 
 export function Footer() {
@@ -57,7 +61,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2">
               <Image src={dp} alt={siteConfig.name} className="h-8 w-8 rounded-full" />
-              <span className="text-sm font-bold text-white">{siteConfig.name}app</span>
+              <span className="text-sm font-bold text-white">{siteConfig.name}</span>
             </div>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/50">
               Making Quran Learning Accessible, engaging, and effective for every Quran learner.
@@ -72,7 +76,10 @@ export function Footer() {
 
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3">
           {columns.map((column) => (
-            <div key={column.title} className="space-y-3 text-sm">
+            <div
+              key={column.title}
+              className={`space-y-3 text-sm ${column.title === "Company" ? "hidden md:block" : ""}`.trim()}
+            >
               <p className="text-xs font-black uppercase tracking-widest text-white/40">{column.title}</p>
               {column.links.map((link) => (
                 <Link
@@ -98,9 +105,9 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.label}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-xs font-bold text-white/70 hover:border-[#2fd88f] hover:text-[#2fd88f]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 p-2 hover:border-[#2fd88f]"
               >
-                {social.label}
+                <Image src={social.icon} alt="" aria-hidden className="h-full w-full object-contain" />
               </a>
             ))}
           </div>

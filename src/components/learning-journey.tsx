@@ -8,7 +8,6 @@ import iconStarsBars from "@/assets/PhotoshopExtension_Image_3.png";
 import iconHeadGears from "@/assets/PhotoshopExtension_Image_4.png";
 import iconBrain from "@/assets/PhotoshopExtension_Image_2.png";
 import iconCheck from "@/assets/PhotoshopExtension_Image_1.png";
-import { AnimatedSection } from "@/components/animations";
 import { JourneyBackground } from "@/components/journey-background";
 
 type Stop = {
@@ -49,17 +48,33 @@ const pathD = buildCurvePath([ROCKET_POINT, ...stops.map((s) => ({ x: s.x, y: s.
 
 function StopContent({ stop }: { stop: Stop }) {
   return (
-    <div className={`flex items-center gap-1.5 sm:gap-3 md:gap-5 ${stop.side === "left" ? "flex-row-reverse text-right" : "text-left"}`}>
-      <div className="relative h-14 w-14 shrink-0 sm:h-24 sm:w-24 md:h-32 md:w-32 lg:h-36 lg:w-36">
+    <div
+      className={`flex flex-row items-center gap-[clamp(0.3rem,1.2vw,1.2rem)] text-left ${
+        stop.side === "left" ? "flex-row-reverse text-right" : ""
+      }`}
+    >
+      <div className="relative h-[clamp(3rem,9vw,15.12rem)] w-[clamp(3rem,9vw,15.12rem)] shrink-0">
         <Image src={stop.character} alt="" fill className="object-contain object-bottom drop-shadow-[0_14px_20px_rgba(0,0,0,0.5)]" />
       </div>
-      <div className={`flex flex-col gap-1 sm:gap-2 ${stop.side === "left" ? "items-end" : "items-start"}`}>
+      <div
+        className={`flex min-w-0 flex-row items-center gap-[clamp(0.25rem,1vw,0.6rem)] ${
+          stop.side === "left" ? "justify-end" : "justify-start"
+        }`}
+      >
         {stop.icon ? (
-          <Image src={stop.icon} alt="" className="h-7 w-7 object-contain sm:h-11 sm:w-11 md:h-14 md:w-14" />
+          <Image
+            src={stop.icon}
+            alt=""
+            className="h-[clamp(0.9rem,2.8vw,4.2rem)] w-[clamp(0.9rem,2.8vw,4.2rem)] shrink-0 object-contain"
+          />
         ) : (
-          <span aria-hidden className="text-2xl sm:text-4xl md:text-5xl">📖</span>
+          <span aria-hidden className="shrink-0 text-[clamp(0.9rem,2.8vw,3.6rem)]">
+            📖
+          </span>
         )}
-        <span className="text-xs font-bold text-[#2fd88f] sm:text-base md:text-lg">{stop.label}</span>
+        <span className="min-w-0 whitespace-normal text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
+          {stop.label}
+        </span>
       </div>
     </div>
   );
@@ -67,22 +82,22 @@ function StopContent({ stop }: { stop: Stop }) {
 
 export function LearningJourney() {
   return (
-    <AnimatedSection id="journey" className="relative overflow-hidden bg-[#0F1B2A] px-6 py-14 md:px-10 md:py-20">
+    <section id="journey" className="relative overflow-hidden bg-[#0F1B2A] px-6 py-14 md:px-10 md:py-20">
       <JourneyBackground />
 
-      <div className="relative z-10 mx-auto w-full max-w-4xl">
-        <h2 className="text-3xl font-black text-white md:text-4xl">
+      <div className="relative z-10 mx-auto w-full max-w-[67.2rem]">
+        <h2 className="text-3xl font-black text-white sm:text-4xl md:text-5xl">
           Your Learning <span className="block text-[#2fd88f]">Journey</span>
         </h2>
 
-        <div className="relative mt-10 min-h-[950px] overflow-hidden sm:min-h-[1050px] md:min-h-[1200px]">
+        <div className="relative mt-10 min-h-[1380px] overflow-hidden sm:min-h-[1500px] md:min-h-[1740px]">
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d={pathD} stroke="#F4C752" strokeWidth="0.5" strokeDasharray="2 1.6" strokeLinecap="round" fill="none" vectorEffect="non-scaling-stroke" />
           </svg>
 
           <div
             aria-hidden
-            className="absolute z-10 text-4xl sm:text-5xl"
+            className="absolute z-10 text-[2.7rem] sm:text-[3.6rem]"
             style={{ left: `${ROCKET_POINT.x}%`, top: `${ROCKET_POINT.y}%`, transform: "translate(-50%, -60%)" }}
           >
             🚀
@@ -91,15 +106,16 @@ export function LearningJourney() {
           {stops.map((stop) => (
             <div key={stop.number} className="absolute" style={{ left: `${stop.x}%`, top: `${stop.y}%`, transform: "translate(-50%, -50%)" }}>
               <div
-                className={`relative z-20 flex h-12 w-12 items-center justify-center rounded-full text-base font-bold text-white shadow-[0_0_0_4px_#0B1E33] sm:h-14 sm:w-14 ${
+                className={`relative z-20 flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full text-xl font-bold text-white shadow-[0_0_0_4px_#0B1E33] sm:h-[4.6rem] sm:w-[4.6rem] ${
                   stop.number === stops.length ? "bg-[#C6A153]" : "bg-[#05966a]"
                 }`}
               >
                 {stop.number}
               </div>
               <div
-                className="absolute top-1/2 z-10 w-max max-w-[15rem] -translate-y-1/2 sm:max-w-none"
-                style={stop.side === "right" ? { left: "calc(100% + 1rem)" } : { right: "calc(100% + 1rem)" }}
+                className={`absolute top-1/2 z-10 w-max max-w-[clamp(10.5rem,32vw,20rem)] -translate-y-1/2 ${
+                  stop.side === "right" ? "left-full ml-[clamp(0.5rem,1.5vw,0.9rem)]" : "right-full mr-[clamp(0.5rem,1.5vw,0.9rem)]"
+                }`}
               >
                 <StopContent stop={stop} />
               </div>
@@ -107,12 +123,12 @@ export function LearningJourney() {
           ))}
         </div>
 
-        <div className="relative z-10 -mt-6 flex flex-col items-center text-center">
-          <span aria-hidden className="text-5xl">🏆</span>
-          <h3 className="mt-3 text-2xl font-black text-white">Journey Complete</h3>
-          <p className="mt-1 text-sm text-white/60">Become a Confident Quran Learner</p>
+        <div className="relative z-10 -mt-[1.2rem] flex flex-col items-center text-center">
+          <span aria-hidden className="text-6xl sm:text-7xl">🏆</span>
+          <h3 className="mt-3 text-3xl font-black text-white sm:text-4xl md:text-5xl">Journey Complete</h3>
+          <p className="mt-1 text-lg text-white/60 md:text-xl">Become a Confident Quran Learner</p>
         </div>
       </div>
-    </AnimatedSection>
+    </section>
   );
 }
