@@ -49,15 +49,15 @@ const pathD = buildCurvePath([ROCKET_POINT, ...stops.map((s) => ({ x: s.x, y: s.
 function StopContent({ stop }: { stop: Stop }) {
   return (
     <div
-      className={`flex flex-row items-center gap-[clamp(0.3rem,1.2vw,1.2rem)] text-left ${
+      className={`flex flex-row items-center gap-[clamp(0.2rem,1.2vw,1.2rem)] text-left ${
         stop.side === "left" ? "flex-row-reverse text-right" : ""
       }`}
     >
-      <div className="relative h-[clamp(3rem,9vw,15.12rem)] w-[clamp(3rem,9vw,15.12rem)] shrink-0">
+      <div className="relative h-[clamp(3.3rem,9vw,15.12rem)] w-[clamp(3.3rem,9vw,15.12rem)] shrink-0">
         <Image src={stop.character} alt="" fill className="object-contain object-bottom drop-shadow-[0_14px_20px_rgba(0,0,0,0.5)]" />
       </div>
       <div
-        className={`flex min-w-0 flex-row items-center gap-[clamp(0.25rem,1vw,0.6rem)] ${
+        className={`flex min-w-0 flex-row items-center gap-[clamp(0.2rem,1vw,0.6rem)] ${
           stop.side === "left" ? "justify-end" : "justify-start"
         }`}
       >
@@ -113,7 +113,7 @@ export function LearningJourney() {
                 {stop.number}
               </div>
               <div
-                className={`absolute top-1/2 z-10 w-max max-w-[clamp(10.5rem,32vw,20rem)] -translate-y-1/2 ${
+                className={`absolute top-1/2 z-10 w-max max-w-[clamp(10.8rem,32vw,20rem)] -translate-y-1/2 ${
                   stop.side === "right" ? "left-full ml-[clamp(0.5rem,1.5vw,0.9rem)]" : "right-full mr-[clamp(0.5rem,1.5vw,0.9rem)]"
                 }`}
               >
