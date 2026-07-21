@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, Amiri, Baloo_2 } from "next/font/google";
+import { PageTransitionProvider } from "@/components/page-transition";
 import { SiteChrome } from "@/components/site-chrome";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -65,7 +66,9 @@ export default function RootLayout({
       className={`${nunito.variable} ${amiri.variable} ${baloo2.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#0F1B2A] text-white">
-        <SiteChrome>{children}</SiteChrome>
+        <PageTransitionProvider>
+          <SiteChrome>{children}</SiteChrome>
+        </PageTransitionProvider>
       </body>
     </html>
   );
