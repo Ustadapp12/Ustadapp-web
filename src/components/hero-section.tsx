@@ -42,10 +42,10 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-start gap-12 lg:grid-cols-[1fr_auto]">
         {/* Left: copy */}
         <div className="text-center lg:max-w-sm lg:text-left xl:max-w-xl">
-          <h1 className="text-4xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl font-bold uppercase leading-[1.3] tracking-normal text-white sm:text-5xl md:text-[56px]">
             Fun and effective way to memorise Quran
           </h1>
-          <p className="mx-auto mt-6 max-w-md text-base text-white/75 lg:mx-0">
+          <p className="mx-auto mt-6 max-w-md text-base font-normal leading-[1.3] tracking-normal text-white/75 lg:mx-0">
             We&apos;re building the smartest way to memorize Quran: AI recitation feedback, daily streaks, and
             lessons that take just 5 minutes a day.
           </p>
