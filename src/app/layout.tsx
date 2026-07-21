@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
-import { DM_Sans, Amiri } from "next/font/google";
-import { CursorFollower } from "@/components/cursor-follower";
-import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
-import { SectionDots } from "@/components/section-dots";
+import { Nunito, Amiri, Baloo_2 } from "next/font/google";
+import { SiteChrome } from "@/components/site-chrome";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const amiri = Amiri({
   variable: "--font-amiri",
   subsets: ["arabic", "latin"],
   weight: ["400", "700"],
+});
+
+const baloo2 = Baloo_2({
+  variable: "--font-baloo",
+  subsets: ["latin"],
+  weight: ["500", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -58,14 +62,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${amiri.variable} h-full antialiased`}
+      className={`${nunito.variable} ${amiri.variable} ${baloo2.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#0F1B2A] text-white">
-        <CursorFollower />
-        <Navbar />
-        <SectionDots />
-        <main className="flex flex-1 flex-col">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

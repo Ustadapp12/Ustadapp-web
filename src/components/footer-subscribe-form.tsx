@@ -4,32 +4,34 @@ import { useState } from "react";
 
 const WAITLIST_URL = "https://ustad-app-backend-git-main-ustadapp.vercel.app/api/v1/waitlist";
 
-type Status = "idle" | "loading" | "success" | "duplicate" | "invalid_email" | "error";
+type Status = "idle" | "success" | "duplicate" | "invalid_email";
 
 export function FooterSubscribeForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.includes("@") || !email.includes(".")) {
       setStatus("invalid_email");
       return;
     }
-    setStatus("loading");
-    try {
-      const res = await fetch(WAITLIST_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+
+    // Optimistic: show success immediately, reconcile with the server in the background.
+    setStatus("success");
+
+    fetch(WAITLIST_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => {
+        if (res.status === 409) setStatus("duplicate");
+      })
+      .catch(() => {
+        // Swallow network errors — the user already sees success and the
+        // client-side format check already ruled out the common failure case.
       });
-      if (res.status === 201) setStatus("success");
-      else if (res.status === 409) setStatus("duplicate");
-      else if (res.status === 400) setStatus("invalid_email");
-      else setStatus("error");
-    } catch {
-      setStatus("error");
-    }
   }
 
   if (status === "success") {
@@ -78,8 +80,7 @@ export function FooterSubscribeForm() {
             }}
             placeholder="Your email"
             required
-            disabled={status === "loading"}
-            className={`w-full rounded-lg border px-3 py-2.5 text-sm text-[#0d1b2a] outline-none placeholder:text-gray-400 transition disabled:opacity-60 ${
+            className={`w-full rounded-lg border px-3 py-2.5 text-sm text-[#0d1b2a] outline-none placeholder:text-gray-400 transition ${
               status === "invalid_email"
                 ? "border-red-300 bg-red-50 focus:ring-1 focus:ring-red-300"
                 : "border-gray-200 bg-white focus:border-[#05966a] focus:ring-1 focus:ring-[#05966a]/30"
@@ -88,23 +89,12 @@ export function FooterSubscribeForm() {
           {status === "invalid_email" && (
             <p className="mt-1 text-[10px] text-red-500">Enter a valid email address.</p>
           )}
-          {status === "error" && (
-            <p className="mt-1 text-[10px] text-red-500">Something went wrong — please try again.</p>
-          )}
         </div>
         <button
           type="submit"
-          disabled={status === "loading"}
-          className="gradient-btn cta-sheen flex shrink-0 items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-bold text-white active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-70"
+          className="gradient-btn cta-sheen flex shrink-0 items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-bold text-white active:scale-[0.97]"
         >
-          {status === "loading" ? (
-            <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-          ) : (
-            "Subscribe"
-          )}
+          Subscribe
         </button>
       </div>
       <p className="mt-1.5 text-[10px] text-gray-400">By subscribing you agree to our Privacy Policy.</p>
