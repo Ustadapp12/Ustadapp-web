@@ -5,7 +5,7 @@ import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 import celebrationAnimation from "@/components/celebration.json";
 import { DEFAULT_MOOD, MOODS, resolveMood, STAR_IMAGE, type Mood } from "@/lib/mood-config";
-import { siteConfig } from "@/lib/site";
+import { usePageTransition } from "@/components/page-transition";
 
 type Sparkle = { left: string; top: string; size: string; duration: string; delay: string };
 type ConfettiPiece = { left: string; size: string; radius: string; color: string; duration: string; delay: string };
@@ -70,13 +70,15 @@ export function HelloExperience() {
     return () => clearTimeout(confettiTimer);
   }, []);
 
+  const { revealTransition } = usePageTransition();
+
   function handleGo() {
     if (launching) return;
     setLaunching(true);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduceMotion) setConfetti(createConfetti(46));
     setTimeout(() => {
-      window.location.href = siteConfig.url;
+      revealTransition("/");
     }, 1300);
   }
 

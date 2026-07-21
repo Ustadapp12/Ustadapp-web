@@ -111,7 +111,7 @@ export function WaitlistForm() {
   // ── Success ──────────────────────────────────────────
   if (status === "success") {
     return (
-      <div className="mt-7 flex flex-col items-center gap-1 py-2">
+      <div className="reveal-split mt-7 flex w-full flex-col items-center gap-1 py-2">
         <WaitlistCelebration />
         <p className="text-base font-semibold text-white">You&apos;re on the list!</p>
         <p className="text-sm text-white/60">We&apos;ll be in touch when UstadApp launches.</p>

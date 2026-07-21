@@ -29,14 +29,14 @@ export const MOODS = {
   },
   giggle: {
     image: "/hello/giggle.png",
-    headline: "HEEHEE — sorry, sorry!",
+    headline: "HEEHEE! Sorry, sorry!",
     message: "You're in a good mood and it shows. Joy is a blessing worth naming out loud.",
     button: "Say Alhamdulillah",
   },
   curious: {
     image: "/hello/curious.png",
     headline: "caught me hiding behind books!",
-    message: "You're curious today — that's a gift. Let's feed it.",
+    message: "You're curious today, and that's a gift. Let's feed it.",
     button: "Learn something new",
   },
   sneaky: {
@@ -48,7 +48,7 @@ export const MOODS = {
   sleepy: {
     image: "/hello/sleepy.png",
     headline: "five more minutes...",
-    message: "You're low-energy today, and that's allowed. Rest is worship when the intention is right.",
+    message: "You're low on energy today, and that's allowed. Rest is worship when the intention is right.",
     button: "Something gentle",
   },
   stubborn: {
@@ -66,13 +66,13 @@ export const MOODS = {
   silly: {
     image: "/hello/silly.png",
     headline: "BLEHHH! ✨",
-    message: "You're feeling silly and light. Hold onto that — it's a mercy.",
+    message: "You're feeling silly and light. Hold onto that. It's a mercy.",
     button: "Keep the mood going",
   },
   suspicious: {
     image: "/hello/suspicious.png",
     headline: "I have questions.",
-    message: "Questions aren't a weakness in faith — they're how it grows.",
+    message: "Questions aren't a weakness in faith. They're how it grows.",
     button: "Ask away",
   },
   welcome: {
