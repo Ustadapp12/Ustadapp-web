@@ -72,7 +72,7 @@ function StopContent({ stop }: { stop: Stop }) {
             📖
           </span>
         )}
-        <span className="min-w-0 whitespace-normal text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
+        <span className="min-w-0 whitespace-normal break-words text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
           {stop.label}
         </span>
       </div>
@@ -113,7 +113,7 @@ export function LearningJourney() {
                 {stop.number}
               </div>
               <div
-                className={`absolute top-1/2 z-10 w-max max-w-[clamp(10.8rem,32vw,20rem)] -translate-y-1/2 ${
+                className={`absolute top-1/2 z-10 w-max max-w-[clamp(4rem,calc(60vw_-_42px),20rem)] -translate-y-1/2 ${
                   stop.side === "right" ? "left-full ml-[clamp(0.5rem,1.5vw,0.9rem)]" : "right-full mr-[clamp(0.5rem,1.5vw,0.9rem)]"
                 }`}
               >

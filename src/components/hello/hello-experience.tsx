@@ -8,7 +8,7 @@ import { DEFAULT_MOOD, MOODS, resolveMood, STAR_IMAGE, type Mood } from "@/lib/m
 import { usePageTransition } from "@/components/page-transition";
 
 type Sparkle = { left: string; top: string; size: string; duration: string; delay: string };
-type ConfettiPiece = { left: string; size: string; radius: string; color: string; duration: string; delay: string };
+export type ConfettiPiece = { left: string; size: string; radius: string; color: string; duration: string; delay: string };
 
 const CONFETTI_COLORS = ["#ffcf4d", "#ff8a65", "#4fd1a5", "#ffffff", "#7ec8ff"];
 const STAR_COUNT = 16;
@@ -76,10 +76,19 @@ export function HelloExperience() {
     if (launching) return;
     setLaunching(true);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduceMotion) setConfetti(createConfetti(46));
-    setTimeout(() => {
-      revealTransition("/");
-    }, 1300);
+    const confettiPieces = reduceMotion ? [] : createConfetti(46);
+    setConfetti(confettiPieces);
+    // Confetti fall and the curtain-split reveal fire together, no wait between
+    // them — the same piece configuration rides along in the snapshot so the
+    // confetti keeps falling as the curtain splits apart, instead of getting
+    // hidden the instant the curtain covers the live page.
+    revealTransition("/", {
+      image: MOODS[mood].image,
+      headline: MOODS[mood].headline,
+      message: MOODS[mood].message,
+      button: MOODS[mood].button,
+      confetti: confettiPieces,
+    });
   }
 
   return (
