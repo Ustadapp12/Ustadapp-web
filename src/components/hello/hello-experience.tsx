@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import Lottie from "lottie-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import celebrationAnimation from "@/components/celebration.json";
 import { DEFAULT_MOOD, MOODS, resolveMood, STAR_IMAGE, type Mood } from "@/lib/mood-config";
-import { usePageTransition } from "@/components/page-transition";
 
 type Sparkle = { left: string; top: string; size: string; duration: string; delay: string };
 type ConfettiPiece = { left: string; size: string; radius: string; color: string; duration: string; delay: string };
@@ -20,6 +20,8 @@ const CONFETTI_HOLD_MS = 1100;
 // Shared by the confetti fade-out (inline style below) and the .hello-zoom-in
 // keyframe duration in globals.css — keep both in sync with this value.
 const INTRO_TRANSITION_MS = 380;
+// How long the click-confetti gets to play before navigating to the homepage.
+const GO_HOLD_MS = 1300;
 
 function randomBetween(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -70,7 +72,7 @@ export function HelloExperience() {
     return () => clearTimeout(confettiTimer);
   }, []);
 
-  const { revealTransition } = usePageTransition();
+  const router = useRouter();
 
   function handleGo() {
     if (launching) return;
@@ -78,8 +80,8 @@ export function HelloExperience() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduceMotion) setConfetti(createConfetti(46));
     setTimeout(() => {
-      revealTransition("/");
-    }, 1300);
+      router.push("/");
+    }, GO_HOLD_MS);
   }
 
   return (
