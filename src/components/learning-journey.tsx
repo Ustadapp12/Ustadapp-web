@@ -57,7 +57,7 @@ function StopContent({ stop }: { stop: Stop }) {
         <Image src={stop.character} alt="" fill className="object-contain object-bottom drop-shadow-[0_14px_20px_rgba(0,0,0,0.5)]" />
       </div>
       <div
-        className={`flex min-w-0 flex-row items-center gap-[clamp(0.2rem,1vw,0.6rem)] ${
+        className={`flex flex-row items-center gap-[clamp(0.2rem,1vw,0.6rem)] ${
           stop.side === "left" ? "justify-end" : "justify-start"
         }`}
       >
@@ -72,7 +72,7 @@ function StopContent({ stop }: { stop: Stop }) {
             📖
           </span>
         )}
-        <span className="min-w-0 whitespace-normal break-words text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
+        <span className="whitespace-normal text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
           {stop.label}
         </span>
       </div>
