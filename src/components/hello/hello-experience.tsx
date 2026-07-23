@@ -97,6 +97,7 @@ export function HelloExperience() {
           aria-hidden
           width={22}
           height={22}
+          loading="eager"
           className="hello-twinkle pointer-events-none absolute drop-shadow-[0_0_6px_rgba(255,255,255,0.7)]"
           style={{
             left: sparkle.left,

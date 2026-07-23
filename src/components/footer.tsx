@@ -79,7 +79,7 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="mt-4 text-xs text-white/40">Launching soon — join on the waitlist</p>
+            <p className="mt-4 text-xs text-white/40">Launching soon, join on the waitlist</p>
             <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-white/40 sm:mt-auto">Located at Hatch 8, NSTP H-12</p>
           </div>
 

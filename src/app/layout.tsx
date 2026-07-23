@@ -62,6 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${nunito.variable} ${amiri.variable} ${baloo2.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#0F1B2A] text-white">
