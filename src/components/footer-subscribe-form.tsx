@@ -80,6 +80,7 @@ export function FooterSubscribeForm() {
             }}
             placeholder="Your email"
             required
+            suppressHydrationWarning
             className={`w-full rounded-lg border px-3 py-2.5 text-sm text-[#0d1b2a] outline-none placeholder:text-gray-400 transition ${
               status === "invalid_email"
                 ? "border-red-300 bg-red-50 focus:ring-1 focus:ring-red-300"
@@ -92,6 +93,7 @@ export function FooterSubscribeForm() {
         </div>
         <button
           type="submit"
+          suppressHydrationWarning
           className="gradient-btn cta-sheen flex shrink-0 items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-bold text-white active:scale-[0.97]"
         >
           Subscribe

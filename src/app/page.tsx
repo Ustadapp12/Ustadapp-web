@@ -25,8 +25,9 @@ const jsonLd = [
     name: siteConfig.name,
     url: siteConfig.url,
     sameAs: [
-      "https://instagram.com/ustadapp",
-      "https://x.com/ustadapp",
+      "https://www.instagram.com/ustadapp_official/",
+      "https://x.com/ustadappHQ",
+      "https://www.facebook.com/profile.php?id=61592137671498",
       "https://linkedin.com/company/ustadapp",
       "https://youtube.com/@ustadapp",
     ],

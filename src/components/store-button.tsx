@@ -24,6 +24,7 @@ export function StoreButton({
       <button
         type="button"
         onClick={handleClick}
+        suppressHydrationWarning
         className={
           compact
             ? "flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-black active:scale-[0.97]"
