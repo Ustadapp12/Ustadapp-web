@@ -44,6 +44,7 @@ function PlatformChip({
     <button
       type="button"
       onClick={onClick}
+      suppressHydrationWarning
       className="orbit-glow flex items-center gap-[9px] rounded-full px-[22px] py-3 font-nunito text-[14.5px] font-bold transition-all duration-[180ms] ease-out hover:-translate-y-0.5"
       style={{
         border: selected ? `2px solid ${SELECTED_BORDER}` : "2px solid rgba(255,255,255,.2)",
@@ -172,6 +173,7 @@ export function WaitlistForm() {
             }}
             placeholder="Enter your email"
             required
+            suppressHydrationWarning
             className={`w-full rounded-lg bg-white px-4 py-3 text-sm text-[#0d1b2a] outline-none ring-2 transition-all placeholder:text-gray-400 ${
               status === "invalid_email" || status === "missing_email" ? "ring-red-400" : "ring-transparent focus:ring-[#05966A]"
             }`}
@@ -186,6 +188,7 @@ export function WaitlistForm() {
 
         <button
           type="submit"
+          suppressHydrationWarning
           className="gradient-btn cta-sheen flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold text-white active:scale-[0.97] transition-all"
         >
           Join the waitlist

@@ -15,10 +15,10 @@ const columns = [
   {
     title: "Socials",
     links: [
-      { href: "https://x.com/ustadapp", label: "X" },
+      { href: "https://x.com/ustadappHQ", label: "X" },
       { href: "https://www.instagram.com/ustadapp_official/", label: "Instagram" },
       { href: "https://www.linkedin.com/company/ustadapp/posts/?feedView=all", label: "LinkedIn" },
-      { href: "https://facebook.com/ustadapp", label: "Facebook" },
+      { href: "https://www.facebook.com/profile.php?id=61592137671498", label: "Facebook" },
     ],
   },
   {
@@ -42,10 +42,10 @@ const columns = [
 ];
 
 const socialGlyphs = [
-  { href: "https://x.com/ustadapp", label: "X", icon: xIcon },
+  { href: "https://x.com/ustadappHQ", label: "X", icon: xIcon },
   { href: "https://www.instagram.com/ustadapp_official/", label: "Instagram", icon: instaIcon },
   { href: "https://www.linkedin.com/company/ustadapp/posts/?feedView=all", label: "LinkedIn", icon: linkIcon },
-  { href: "https://facebook.com/ustadapp", label: "Facebook", icon: faceIcon },
+  { href: "https://www.facebook.com/profile.php?id=61592137671498", label: "Facebook", icon: faceIcon },
 ];
 
 export function Footer() {
