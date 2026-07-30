@@ -72,7 +72,7 @@ function StopContent({ stop }: { stop: Stop }) {
             📖
           </span>
         )}
-        <span className="whitespace-normal text-[clamp(0.9rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
+        <span className="whitespace-normal text-[clamp(0.78rem,2.2vw,1.5rem)] font-bold text-[#2fd88f]">
           {stop.label}
         </span>
       </div>
@@ -90,7 +90,7 @@ export function LearningJourney() {
           Your Learning <span className="block text-[#2fd88f]">Journey</span>
         </h2>
 
-        <div className="relative mt-10 min-h-[1380px] overflow-hidden sm:min-h-[1500px] md:min-h-[1740px]">
+        <div className="relative mt-10 min-h-[1380px] sm:min-h-[1500px] md:min-h-[1740px]">
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d={pathD} stroke="#F4C752" strokeWidth="0.5" strokeDasharray="2 1.6" strokeLinecap="round" fill="none" vectorEffect="non-scaling-stroke" />
           </svg>
@@ -113,7 +113,7 @@ export function LearningJourney() {
                 {stop.number}
               </div>
               <div
-                className={`absolute top-1/2 z-10 w-max max-w-[clamp(4rem,calc(60vw_-_42px),20rem)] -translate-y-1/2 ${
+                className={`absolute top-1/2 z-10 w-max max-w-[clamp(4rem,calc(60vw_-_64px),20rem)] -translate-y-1/2 ${
                   stop.side === "right" ? "left-full ml-[clamp(0.5rem,1.5vw,0.9rem)]" : "right-full mr-[clamp(0.5rem,1.5vw,0.9rem)]"
                 }`}
               >
