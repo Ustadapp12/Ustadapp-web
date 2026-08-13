@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { WaitlistCelebration } from "@/components/waitlist-celebration";
+import { useWaitlistResult } from "@/components/waitlist-context";
 
 const WAITLIST_URL = "https://ustad-app-backend-git-main-ustadapp.vercel.app/api/v1/waitlist";
 
@@ -67,10 +68,24 @@ function PlatformChip({
   );
 }
 
-export function WaitlistForm() {
+export function WaitlistForm({
+  celebrateInline = true,
+  align = "center",
+}: {
+  // The final-CTA instance shows the confetti/medal celebration in place.
+  // Other instances (e.g. the hero) hand the "done" signal to that instance
+  // via WaitlistContext and scroll the page down to it instead.
+  celebrateInline?: boolean;
+  // Row alignment for the chip/email/button rows — "left" centers on mobile
+  // and left-aligns at the lg breakpoint, matching hero copy alignment.
+  align?: "center" | "left";
+} = {}) {
   const [email, setEmail] = useState("");
   const [platform, setPlatform] = useState<Platform>(null);
   const [status, setStatus] = useState<Status>("idle");
+  const { result, complete } = useWaitlistResult();
+  const displayStatus: Status = celebrateInline && result !== "idle" ? result : status;
+  const rowJustify = align === "left" ? "justify-center lg:justify-start" : "justify-center";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -93,7 +108,17 @@ export function WaitlistForm() {
     }
 
     // Optimistic: show success immediately, reconcile with the server in the background.
-    setStatus("success");
+    if (celebrateInline) {
+      setStatus("success");
+    } else {
+      // The hero instance never shows the celebration itself — reset back to
+      // a blank form and send the visitor down to where it's shown instead.
+      setStatus("idle");
+      setEmail("");
+      setPlatform(null);
+      document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    complete("success");
 
     fetch(WAITLIST_URL, {
       method: "POST",
@@ -101,7 +126,10 @@ export function WaitlistForm() {
       body: JSON.stringify({ email, app_type: platform }),
     })
       .then((res) => {
-        if (res.status === 409) setStatus("duplicate");
+        if (res.status === 409) {
+          if (celebrateInline) setStatus("duplicate");
+          complete("duplicate");
+        }
       })
       .catch(() => {
         // Swallow network errors — the user already sees success and the
@@ -110,7 +138,7 @@ export function WaitlistForm() {
   }
 
   // ── Success ──────────────────────────────────────────
-  if (status === "success") {
+  if (displayStatus === "success") {
     return (
       <div className="reveal-split mt-7 flex w-full flex-col items-center gap-1 py-2">
         <WaitlistCelebration />
@@ -121,7 +149,7 @@ export function WaitlistForm() {
   }
 
   // ── Already registered ───────────────────────────────
-  if (status === "duplicate") {
+  if (displayStatus === "duplicate") {
     return (
       <div className="mt-7 flex flex-col items-center gap-3 py-2">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-400/20 ring-1 ring-amber-400/30">
@@ -140,7 +168,7 @@ export function WaitlistForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       {/* Platform Selection */}
-      <div className="mt-7 flex flex-wrap items-center justify-center gap-3 px-2">
+      <div className={`mt-7 flex flex-wrap items-center gap-3 px-2 ${rowJustify}`}>
         <PlatformChip
           selected={platform === "ios"}
           onClick={() => {
@@ -162,8 +190,8 @@ export function WaitlistForm() {
       </div>
 
       {/* Email Input */}
-      <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <div className="w-full max-w-xs">
+      <div className={`mt-6 flex flex-wrap items-center gap-3 ${rowJustify}`}>
+        <div className="min-w-[220px] max-w-xs flex-1">
           <input
             type="email"
             value={email}
@@ -189,7 +217,7 @@ export function WaitlistForm() {
         <button
           type="submit"
           suppressHydrationWarning
-          className="gradient-btn cta-sheen flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold text-white active:scale-[0.97] transition-all"
+          className="gradient-btn cta-sheen flex shrink-0 items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold text-white active:scale-[0.97] transition-all"
         >
           Join the waitlist
         </button>
@@ -197,7 +225,7 @@ export function WaitlistForm() {
       {status === "missing_platform" && (
         <p className="mt-2 text-xs text-amber-300">Select your type of phone.</p>
       )}
-      <p className="mt-4 text-xs text-white/50">No spam, ever. Unsubscribe at any time.</p>
+      <p className="mt-4 text-xs text-white/50">Start your learning journey today</p>
     </form>
   );
 }

@@ -1,17 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import appstore from "@/assets/circles/appstore.svg";
-import dp from "@/assets/dp.png";
+import logo from "@/assets/logo.png";
 import playstore from "@/assets/circles/playstore.svg";
 import faceIcon from "@/assets/circles/socials/face.png";
 import instaIcon from "@/assets/circles/socials/insta.png";
 import linkIcon from "@/assets/circles/socials/link.png";
 import xIcon from "@/assets/circles/socials/x.png";
+import { ComingSoonLink } from "@/components/coming-soon-link";
 import { IslamicStar } from "@/components/islamic-star";
 import { StoreButton } from "@/components/store-button";
 import { siteConfig } from "@/lib/site";
 
-const columns = [
+type FooterLink = { label: string; href?: string; comingSoon?: boolean };
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Socials",
     links: [
@@ -33,10 +36,10 @@ const columns = [
   {
     title: "Company",
     links: [
-      { href: "#", label: "About" },
-      { href: "#", label: "Contact" },
-      { href: "#", label: "Privacy" },
-      { href: "#", label: "Terms" },
+      { href: siteConfig.whatsappCommunityUrl, label: "About" },
+      { href: `mailto:${siteConfig.contactEmail}`, label: "Contact" },
+      { label: "Privacy", comingSoon: true },
+      { label: "Terms", comingSoon: true },
     ],
   },
 ];
@@ -65,17 +68,14 @@ export function Footer() {
         <div className="mb-6 flex flex-col items-center gap-10 text-center sm:flex-row sm:flex-wrap sm:items-stretch sm:justify-between sm:text-left">
           <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#2fd88f]/30 px-3 py-1.5">
-                <Image src={dp} alt={siteConfig.name} className="h-6 w-6 rounded-full" />
-                <span className="text-sm font-bold text-white">{siteConfig.name}</span>
-              </div>
+              <Image src={logo} alt={siteConfig.name} className="h-10 w-auto sm:h-12" />
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/50">
                 Making Quran learning accessible, engaging, and effective for every learner.
               </p>
 
               <div className="mt-5 flex flex-row justify-center gap-2 sm:justify-start">
                 <StoreButton icon={playstore} store="Google Play" />
-                <StoreButton icon={appstore} store="App store" />
+                <StoreButton icon={appstore} store="Apple Store" />
               </div>
             </div>
 
@@ -88,17 +88,21 @@ export function Footer() {
               {columns.map((column) => (
                 <div key={column.title} className="space-y-2 text-center text-xs sm:space-y-3 sm:text-left sm:text-sm">
                   <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/40 sm:text-xs">{column.title}</p>
-                  {column.links.map((link) => (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                      className="interactive-link block text-white/70 hover:text-[#2fd88f]"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  {column.links.map((link) =>
+                    link.comingSoon ? (
+                      <ComingSoonLink key={link.label} label={link.label} />
+                    ) : (
+                      <Link
+                        key={link.label}
+                        href={link.href ?? "#"}
+                        target={link.href?.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
+                        className="interactive-link block text-white/70 hover:text-[#2fd88f]"
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  )}
                 </div>
               ))}
             </div>

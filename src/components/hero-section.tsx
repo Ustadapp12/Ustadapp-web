@@ -1,21 +1,29 @@
 import Image from "next/image";
-import Link from "next/link";
 import bell from "@/assets/circles/bell.svg";
 import bell2 from "@/assets/circles/bell2.svg";
 import bell3 from "@/assets/circles/bell3.svg";
 import ellipseBlob from "@/assets/circles/Ellipse (1).svg";
 import ellipseRing from "@/assets/circles/Ellipse (2).svg";
 import ellipseRingBottom from "@/assets/circles/Ellipse(2) bott.svg";
-import { PulseRing } from "@/components/animations";
 import { AppMockupCard } from "@/components/app-mockup-card";
 import { Mascot } from "@/components/mascot";
+import { WaitlistForm } from "@/components/waitlist-form";
 
 const MASCOT_SIZE = 260;
 const BADGE_RING = 80; // % radius of the anchor box the badges sit on — mascot art fills ~85-100% of the box, so this must clear 100%
 
+function AiUstadIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0">
+      <rect width="16" height="16" rx="5" fill="#2fd88f" />
+      <path d="M8 3.1 9.05 6.55 12.4 7.6 9.05 8.65 8 12.1 6.95 8.65 3.6 7.6 6.95 6.55 8 3.1Z" fill="#06251c" />
+    </svg>
+  );
+}
+
 const floatingBadges = [
   { key: "xp", icon: "⭐", title: "+50 XP", subtitle: "Earned today", angle: 165 },
-  { key: "ai", icon: "☕", title: "Your AI Ustad", subtitle: null, angle: 35 },
+  { key: "ai", icon: <AiUstadIcon />, title: "Your AI Ustad", subtitle: null, angle: 35 },
   { key: "correct", icon: "✓", title: "Correct", subtitle: "AI feedback", angle: -12 },
 ].map((badge) => {
   const rad = (badge.angle * Math.PI) / 180;
@@ -49,19 +57,8 @@ export function HeroSection() {
             We&apos;re building the smartest way to memorize Quran: AI recitation feedback, daily streaks, and
             lessons that take just 5 minutes a day.
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <span className="relative inline-flex overflow-visible">
-              <PulseRing />
-              <Link href="#waitlist" className="gradient-btn cta-sheen relative z-[1] rounded-full px-6 py-3 text-sm font-bold text-white">
-                Get Early Access
-              </Link>
-            </span>
-            <Link
-              href="#journey"
-              className="rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/20 active:scale-[0.97]"
-            >
-              See how it works
-            </Link>
+          <div className="mt-10 w-full">
+            <WaitlistForm celebrateInline={false} align="left" />
           </div>
         </div>
 
@@ -78,7 +75,11 @@ export function HeroSection() {
                   className="glass-panel absolute z-20 hidden items-center gap-2 whitespace-nowrap rounded-2xl px-3.5 py-2.5 text-white lg:flex"
                   style={{ left: `${badge.left}%`, top: `${badge.top}%`, transform: "translate(-50%, -50%)" }}
                 >
-                  <span aria-hidden className="text-base">{badge.icon}</span>
+                  {typeof badge.icon === "string" ? (
+                    <span aria-hidden className="text-base">{badge.icon}</span>
+                  ) : (
+                    badge.icon
+                  )}
                   <span className="text-left leading-tight">
                     <span className="block text-xs font-bold">{badge.title}</span>
                     {badge.subtitle ? <span className="block text-[10px] text-white/60">{badge.subtitle}</span> : null}
@@ -91,7 +92,11 @@ export function HeroSection() {
             <div className="mt-4 flex flex-wrap justify-center gap-2 lg:hidden">
               {floatingBadges.map((badge) => (
                 <div key={badge.key} className="glass-panel flex items-center gap-2 rounded-2xl px-3.5 py-2.5 text-white">
-                  <span aria-hidden className="text-base">{badge.icon}</span>
+                  {typeof badge.icon === "string" ? (
+                    <span aria-hidden className="text-base">{badge.icon}</span>
+                  ) : (
+                    badge.icon
+                  )}
                   <span className="text-left leading-tight">
                     <span className="block text-xs font-bold">{badge.title}</span>
                     {badge.subtitle ? <span className="block text-[10px] text-white/60">{badge.subtitle}</span> : null}
