@@ -3,6 +3,7 @@ import { FeatureOrbit } from "@/components/feature-orbit";
 import { FinalCta } from "@/components/final-cta";
 import { HeroSection } from "@/components/hero-section";
 import { LearningJourney } from "@/components/learning-journey";
+import { WaitlistProvider } from "@/components/waitlist-context";
 import { createPageMetadata, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = createPageMetadata({
@@ -56,12 +57,14 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="overflow-hidden bg-gradient-to-b from-[#05966A] via-[#0F1B2A] via-45% to-[#0F1B2A]">
-        <HeroSection />
-        <FeatureOrbit />
-      </div>
-      <LearningJourney />
-      <FinalCta />
+      <WaitlistProvider>
+        <div className="overflow-hidden bg-gradient-to-b from-[#05966A] via-[#0F1B2A] via-45% to-[#0F1B2A]">
+          <HeroSection />
+          <FeatureOrbit />
+        </div>
+        <LearningJourney />
+        <FinalCta />
+      </WaitlistProvider>
     </>
   );
 }

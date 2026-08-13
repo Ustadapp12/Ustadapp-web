@@ -6,6 +6,8 @@ export const siteConfig = {
   description:
     "Gamified Quranic learning from Alif to full Surahs. Learn, recite, and remember with daily lessons, streaks, and AI-powered pronunciation coaching.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ustadapp.com",
+  whatsappCommunityUrl: "https://chat.whatsapp.com/FM4p2nZu94XJ5NGg9qKXd2",
+  contactEmail: "sana@ustadapp.com",
   keywords: [
     "learn quran online free",
     "quran memorisation app",
