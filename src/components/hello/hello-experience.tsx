@@ -61,15 +61,37 @@ export function HelloExperience() {
   // request URL from), so both are resolved here rather than causing a
   // hydration mismatch by reading them during render.
   useEffect(() => {
+    const resolvedMood = resolveMood(new URLSearchParams(window.location.search).get("mood") ?? undefined);
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMood(resolveMood(new URLSearchParams(window.location.search).get("mood") ?? undefined));
+    setMood(resolvedMood);
     setSparkles(createSparkles(STAR_COUNT));
-    // Mascot/bubble/button launch immediately, same time as the confetti burst.
-    setRevealed(true);
+
     // The confetti burst itself still gets a moment to read as "huge" before
-    // it fades out on its own timer, independent of the reveal above.
+    // it fades out on its own timer, independent of the reveal below.
     const confettiTimer = setTimeout(() => setConfettiHidden(true), CONFETTI_HOLD_MS);
-    return () => clearTimeout(confettiTimer);
+
+    // Preload the mascot image and only reveal the card once it's actually
+    // in the browser cache. Without this, the bubble/button (no asset
+    // dependency) popped in immediately while the mascot PNG kept streaming
+    // in visibly afterward on slow mobile connections — everything appeared
+    // "in turns" instead of together. A fallback timer reveals anyway if the
+    // load event never fires, so a bad network never leaves the page blank.
+    let settled = false;
+    const reveal = () => {
+      if (settled) return;
+      settled = true;
+      setRevealed(true);
+    };
+    const img = new window.Image();
+    img.onload = reveal;
+    img.onerror = reveal;
+    img.src = MOODS[resolvedMood].image;
+    const fallbackTimer = setTimeout(reveal, 1500);
+
+    return () => {
+      clearTimeout(confettiTimer);
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   const router = useRouter();

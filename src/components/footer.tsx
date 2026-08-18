@@ -7,12 +7,11 @@ import faceIcon from "@/assets/circles/socials/face.png";
 import instaIcon from "@/assets/circles/socials/insta.png";
 import linkIcon from "@/assets/circles/socials/link.png";
 import xIcon from "@/assets/circles/socials/x.png";
-import { ComingSoonLink } from "@/components/coming-soon-link";
 import { IslamicStar } from "@/components/islamic-star";
 import { StoreButton } from "@/components/store-button";
 import { siteConfig } from "@/lib/site";
 
-type FooterLink = { label: string; href?: string; comingSoon?: boolean };
+type FooterLink = { label: string; href?: string };
 
 const columns: { title: string; links: FooterLink[] }[] = [
   {
@@ -38,8 +37,8 @@ const columns: { title: string; links: FooterLink[] }[] = [
     links: [
       { href: siteConfig.whatsappCommunityUrl, label: "About" },
       { href: `mailto:${siteConfig.contactEmail}`, label: "Contact" },
-      { label: "Privacy", comingSoon: true },
-      { label: "Terms", comingSoon: true },
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" },
     ],
   },
 ];
@@ -88,21 +87,17 @@ export function Footer() {
               {columns.map((column) => (
                 <div key={column.title} className="space-y-2 text-center text-xs sm:space-y-3 sm:text-left sm:text-sm">
                   <p className="text-[0.65rem] font-black uppercase tracking-widest text-white/40 sm:text-xs">{column.title}</p>
-                  {column.links.map((link) =>
-                    link.comingSoon ? (
-                      <ComingSoonLink key={link.label} label={link.label} />
-                    ) : (
-                      <Link
-                        key={link.label}
-                        href={link.href ?? "#"}
-                        target={link.href?.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
-                        className="interactive-link block text-white/70 hover:text-[#2fd88f]"
-                      >
-                        {link.label}
-                      </Link>
-                    )
-                  )}
+                  {column.links.map((link) => (
+                    <Link
+                      key={link.label}
+                      href={link.href ?? "#"}
+                      target={link.href?.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href?.startsWith("http") ? "noreferrer" : undefined}
+                      className="interactive-link block text-white/70 hover:text-[#2fd88f]"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
               ))}
             </div>
