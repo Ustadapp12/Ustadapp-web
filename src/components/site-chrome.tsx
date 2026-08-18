@@ -11,9 +11,16 @@ import { SectionDots } from "@/components/section-dots";
 // welcome page).
 const BARE_ROUTES = ["/hello"];
 
+// Routes that keep the normal header/footer but drop the scroll-progress
+// dots: SectionDots tracks the landing page's #hero/#features/#journey/
+// #waitlist anchors, none of which exist on a plain reading page, so the
+// dots would render but never reflect real scroll position.
+const NO_DOTS_ROUTES = ["/privacy", "/terms"];
+
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isBare = BARE_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
+  const showDots = !NO_DOTS_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
 
   if (isBare) {
     return <main className="flex flex-1 flex-col">{children}</main>;
@@ -23,7 +30,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     <>
       <CursorFollower />
       <Navbar />
-      <SectionDots />
+      {showDots && <SectionDots />}
       <main className="flex flex-1 flex-col">{children}</main>
       <Footer />
     </>
