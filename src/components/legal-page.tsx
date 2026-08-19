@@ -26,16 +26,19 @@ export function LegalPage({
       />
 
       <div className="relative z-10 mx-auto w-full max-w-3xl text-center">
-        <p className="text-xs font-black uppercase tracking-widest text-[#2fd88f]">UstadApp</p>
+        <p className="text-xs font-black tracking-widest text-[#2fd88f]">UstadApp</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">{title}</h1>
         <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white/60">
           Effective {effectiveDate}
         </div>
       </div>
 
-      <div className="glass-panel relative z-10 mx-auto mt-12 w-full max-w-3xl rounded-3xl px-6 py-10 text-left sm:px-10 sm:py-12">
-        {intro && <div className="text-base leading-relaxed text-white/70">{intro}</div>}
-        <div className={`divide-y divide-white/10 ${intro ? "mt-10" : ""}`}>{children}</div>
+      <div
+        className="relative z-10 mx-auto mt-12 w-full max-w-3xl rounded-3xl border border-white/15 px-6 py-10 text-left shadow-[0_40px_100px_rgba(0,0,0,0.5)] sm:px-10 sm:py-12"
+        style={{ backgroundColor: "#F5F7FA" }}
+      >
+        {intro && <div className="text-base leading-relaxed text-[#5A5D68]">{intro}</div>}
+        <div className={`divide-y divide-[#5A5D68]/20 ${intro ? "mt-10" : ""}`}>{children}</div>
       </div>
     </div>
   );
@@ -50,8 +53,8 @@ export function LegalSection({
 }) {
   return (
     <section className="py-8 first:pt-0 last:pb-0">
-      <h2 className="text-lg font-black tracking-tight text-[#2fd88f] md:text-xl">{heading}</h2>
-      <div className="mt-3 space-y-4 text-base leading-relaxed text-white/70 [&_a]:text-[#2fd88f] [&_a]:underline [&_a]:underline-offset-2 [&_li]:ml-5 [&_li]:list-disc [&_strong]:text-white">
+      <h2 className="text-lg font-black tracking-tight text-[#5A5D68] md:text-xl">{heading}</h2>
+      <div className="mt-3 space-y-4 text-base leading-relaxed text-[#5A5D68] [&_a]:text-[#5A5D68] [&_a]:underline [&_a]:underline-offset-2 [&_li]:ml-5 [&_li]:list-disc [&_strong]:text-[#5A5D68]">
         {children}
       </div>
     </section>
