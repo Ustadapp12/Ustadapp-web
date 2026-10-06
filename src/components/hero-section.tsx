@@ -76,9 +76,12 @@ export function HeroSection() {
                 <span className="mt-1 text-base font-bold text-white">Google Play</span>
               </span>
             </a>
+            {/* h-[51px] + the 5px shadow below = 56px total, matching the Google
+                Play badge's flat 56px (h-14) — box-shadow paints outside the
+                element's own box, so equal heights alone weren't equal footprints. */}
             <Link
               href="#waitlist"
-              className="inline-flex h-14 w-[13rem] items-center justify-center rounded-[10px] bg-[#047A56] text-base font-bold text-white shadow-[0_5px_0_#006949] transition-colors hover:bg-[#05966A] active:translate-y-[3px] active:shadow-[0_2px_0_#006949]"
+              className="inline-flex h-[51px] w-[13rem] items-center justify-center rounded-[10px] bg-[#047A56] text-base font-bold text-white shadow-[0_5px_0_#006949] transition-colors hover:bg-[#05966A] active:translate-y-[3px] active:shadow-[0_2px_0_#006949]"
             >
               Join Waitlist for iOS
             </Link>
