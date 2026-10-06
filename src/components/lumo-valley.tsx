@@ -152,7 +152,6 @@ export function LumoValley() {
     if (!root) return;
 
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isPaused = () => root.classList.contains("paused");
     const q = <T extends Element>(sel: string) => root.querySelector(sel) as T;
     const img = (k: string, alt = "") =>
       `<img src="${A[k].src}" width="${A[k].width}" height="${A[k].height}" alt="${alt}" draggable="false">`;
@@ -475,7 +474,7 @@ export function LumoValley() {
 
     let stFlame: LottieAnim | null = null;
     function playStreak() {
-      if (stFlame && !isPaused()) stFlame.play();
+      if (stFlame) stFlame.play();
       if (reduce) return;
       (streak.querySelector(".st-lumo-img") as HTMLElement).animate(
         [{ transform: "scale(0)" }, { transform: "scale(1.12)", offset: 0.7 }, { transform: "scale(1)" }],
@@ -570,7 +569,7 @@ export function LumoValley() {
       const hold = screens[cur].streak ? 5200 : 4200;
       cycleTimer = setTimeout(() => {
         if (disposed) return;
-        if (!isPaused()) showScreen((cur + 1) % screens.length);
+        showScreen((cur + 1) % screens.length);
         scheduleCycle();
       }, reduce ? 6500 : hold);
     }
@@ -617,7 +616,6 @@ export function LumoValley() {
         if (!played && es.some((e) => e.isIntersecting)) {
           played = true;
           burstIn();
-          loadLotties();
           io.disconnect();
         }
       },
@@ -626,7 +624,12 @@ export function LumoValley() {
     io.observe(stage);
     observers.push(io);
 
-    // ---------- lottie: loaded only once the scene scrolls into view ----------
+    // ---------- lottie: starts loading as soon as this section mounts, not when
+    // it scrolls into view — otherwise the first burst-in animation flies in
+    // blank placeholders for the flame/mic/wave items, which then visibly pop to
+    // life a moment later once lottie-web + the JSON finish fetching. Loading it
+    // eagerly means it's almost always ready before the user actually scrolls
+    // this far, at the cost of ~90KB fetched a little earlier than strictly needed.
     let lottieLib: typeof import("lottie-web").default | null = null;
     let celebrationData: object | null = null;
     async function loadLotties() {
@@ -671,8 +674,8 @@ export function LumoValley() {
       }) as unknown as LottieAnim;
       lotties.push(stFlame);
       if (screens[cur].streak) stFlame.play();
-      if (isPaused()) lotties.forEach((an) => an.pause());
     }
+    loadLotties();
 
     // ---------- taps: badges sparkle, and the Lumo hunt ----------
     let found = new Set<string>();
@@ -807,28 +810,12 @@ export function LumoValley() {
           duration: act === "collect" ? 650 : 560,
           easing: "cubic-bezier(.3,.7,.3,1.2)",
         });
-      if (item._anim && !isPaused()) {
+      if (item._anim) {
         item._anim.setSpeed(2.2);
         timers.push(setTimeout(() => item._anim?.setSpeed(1), 900));
       }
       if (act === "collect") sparkle(item, "+10 XP");
       else sparkle(item, "");
-    });
-
-    q<HTMLElement>(".replay").addEventListener("click", () => {
-      resetHunt();
-      burstIn();
-    });
-
-    // ---------- pause / play everything that moves ----------
-    const pauseBtn = q<HTMLElement>(".pause");
-    pauseBtn.addEventListener("click", () => {
-      const paused = root.classList.toggle("paused");
-      const label = paused ? "Play motion" : "Pause motion";
-      (pauseBtn.querySelector(".lbl") as HTMLElement).textContent = label;
-      pauseBtn.setAttribute("aria-label", label);
-      pauseBtn.setAttribute("aria-pressed", String(paused));
-      lotties.forEach((an) => (paused ? an.pause() : an.play()));
     });
 
     return () => {
@@ -845,7 +832,6 @@ export function LumoValley() {
         el.innerHTML = "";
       });
       root.querySelectorAll(".burst, .plus, .surprise, .celebrate").forEach((n) => n.remove());
-      root.classList.remove("paused");
     };
   }, []);
 
@@ -929,24 +915,6 @@ export function LumoValley() {
             <span className="xp">0</span> / 4 Lumos
           </span>
           <span className="hint">Find all four Lumos for a surprise</span>
-        </div>
-
-        <div className="controls">
-          <button className="ctrl replay" type="button" aria-label="Replay" suppressHydrationWarning>
-            <svg viewBox="0 0 24 24" aria-hidden>
-              <path d="M12 5a7 7 0 1 1-6.6 4.7" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-              <path d="M4 4v6h6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="lbl">Replay</span>
-          </button>
-          <button className="ctrl pause" type="button" aria-pressed="false" aria-label="Pause motion" suppressHydrationWarning>
-            <svg viewBox="0 0 24 24" aria-hidden>
-              <rect className="ic-pause" x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-              <rect className="ic-pause" x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-              <path className="ic-play" d="M8 5l11 7-11 7z" fill="currentColor" />
-            </svg>
-            <span className="lbl">Pause motion</span>
-          </button>
         </div>
       </div>
     </section>
