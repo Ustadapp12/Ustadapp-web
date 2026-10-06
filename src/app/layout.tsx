@@ -1,25 +1,40 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito, Amiri, Baloo_2 } from "next/font/google";
+import localFont from "next/font/local";
 import { SiteChrome } from "@/components/site-chrome";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const nunito = Nunito({
+// Self-hosted instead of next/font/google: the Google Fonts build-time fetch
+// intermittently fails inside Vercel's Turbopack build sandbox ("next/font/google
+// queries have exactly one entry"), which blocked a production deploy. These
+// files are the exact same woff2s Google serves, just checked into the repo so
+// the build never depends on reaching fonts.gstatic.com.
+const nunito = localFont({
+  src: "../assets/fonts/nunito/nunito-variable.woff2",
+  // Nunito ships as a single variable file on Google Fonts (one wght axis,
+  // 200-1000) — this range covers every weight class actually used on the site.
+  weight: "400 900",
   variable: "--font-nunito",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
-const amiri = Amiri({
+const amiri = localFont({
+  src: [
+    { path: "../assets/fonts/amiri/amiri-400.woff2", weight: "400", style: "normal" },
+    { path: "../assets/fonts/amiri/amiri-700.woff2", weight: "700", style: "normal" },
+  ],
+  // Arabic subset only: Amiri here renders Quran verses and the Arabic
+  // wordmark, never Latin text — Nunito already covers Latin everywhere else.
   variable: "--font-amiri",
-  subsets: ["arabic", "latin"],
-  weight: ["400", "700"],
+  display: "swap",
 });
 
-const baloo2 = Baloo_2({
+const baloo2 = localFont({
+  src: "../assets/fonts/baloo2/baloo2-variable.woff2",
+  // Also a single variable file (wght axis); 500-800 covers the weights used.
+  weight: "500 800",
   variable: "--font-baloo",
-  subsets: ["latin"],
-  weight: ["500", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
