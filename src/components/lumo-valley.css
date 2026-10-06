@@ -1,0 +1,702 @@
+/* Lumo's Reward Valley — the closing scene that sits under the learning-journey
+   roadmap. Ported from the approved prototype (artifact UxfDQSGNPMrYZdY7s9zNu2).
+   Everything is scoped under .lumo-valley so the generic names here (.item,
+   .phone, .stage, .hud) can never collide with the rest of globals.css.
+
+   One deliberate change from the prototype: it ended on the #0B1E18 footer, but
+   on the site FinalCta comes next and opens on #0F1B2A, so the gradient and the
+   hill fades settle on navy instead of forest. */
+
+.lumo-valley {
+  --lv-navy: #0f1b2a;
+  --lv-emerald: #05966a;
+  --lv-emerald-bright: #0fb989;
+  --lv-mint: #2fd88f;
+  --lv-gold: #e9c468;
+  --lv-gold-a: #d8b565;
+  --lv-gold-b: #c6a153;
+  --lv-ink-dark: #0d1b2a;
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: clamp(48px, 6.4vw, 80px);
+  background: linear-gradient(180deg, var(--lv-navy) 0%, var(--lv-navy) 18%, var(--lv-emerald) 64%, var(--lv-navy) 100%);
+  /* globals.css sets a dark body colour for the light pages, so the scene has
+     to claim white for itself the way every other dark section does */
+  color: #fff;
+}
+
+/* the site's soft "bell" glows, as radial gradients rather than the SVG assets */
+.lumo-valley .bell {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 150, 106, 0.22), transparent 68%);
+  pointer-events: none;
+  z-index: -1;
+}
+.lumo-valley .bell.a { width: 460px; height: 460px; right: -120px; top: -60px; }
+.lumo-valley .bell.b { width: 360px; height: 360px; left: -110px; top: 120px; }
+.lumo-valley .bell.c {
+  width: 520px; height: 520px; left: 50%; top: 30%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(15, 185, 137, 0.25), transparent 66%);
+}
+
+.lumo-valley .site-star {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  object-fit: fill;
+  animation: icon-bounce 2.8s ease-in-out infinite;
+}
+.lumo-valley .moon {
+  position: absolute;
+  left: clamp(16px, 7vw, 110px);
+  top: clamp(20px, 5vw, 64px);
+  width: clamp(40px, 4.6vw, 70px);
+  height: auto;
+  pointer-events: none;
+  z-index: -1;
+  filter: drop-shadow(0 0 28px rgba(255, 255, 255, 0.4));
+  animation: lv-moon 9s ease-in-out infinite;
+}
+@keyframes lv-moon {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-8px) rotate(-4deg); }
+}
+.lumo-valley .cloud {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.13;
+  z-index: 0;
+  animation: lv-drift var(--t, 90s) linear var(--d, 0s) infinite;
+}
+@keyframes lv-drift {
+  from { transform: translateX(-30vw); }
+  to { transform: translateX(130vw); }
+}
+.lumo-valley .birds {
+  position: absolute;
+  right: 9%;
+  top: 6%;
+  width: clamp(90px, 12vw, 170px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  animation: lv-birds 14s ease-in-out infinite;
+}
+@keyframes lv-birds {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-28px, -10px); }
+}
+
+/* ---------- copy ---------- */
+.lumo-valley .copy {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-inline: 16px;
+  text-align: center;
+}
+.lumo-valley .eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.lumo-valley .eyebrow [lang="ar"] {
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  color: var(--lv-gold);
+  line-height: 1;
+}
+.lumo-valley .eyebrow::before,
+.lumo-valley .eyebrow::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: rgba(233, 196, 104, 0.5);
+}
+.lumo-valley h2 {
+  margin: 0;
+  max-width: 16ch;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.2vw, 2.85rem);
+  line-height: 1.12;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+.lumo-valley .lede {
+  margin: 0;
+  max-width: 44ch;
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+}
+.lumo-valley .cta-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+.lumo-valley .cta-wrap {
+  position: relative;
+  display: inline-flex;
+  border-radius: 999px;
+}
+.lumo-valley .cta-wrap .pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.lumo-valley .cta-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.lumo-valley .cta-btn:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 4px; }
+.lumo-valley .cta-btn svg { width: 20px; height: 20px; flex: none; }
+.lumo-valley .cta-note { margin: 0; font-size: 0.85rem; font-weight: 700; color: rgba(255, 255, 255, 0.55); }
+
+/* ---------- stage ---------- */
+.lumo-valley .stage {
+  position: relative;
+  height: clamp(410px, 43vw, 590px);
+  margin-top: clamp(4px, 1.4vw, 16px);
+}
+.lumo-valley .fog {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  height: 16%;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(167, 243, 208, 0) 0%, rgba(167, 243, 208, 0.16) 55%, rgba(15, 185, 137, 0.22) 100%);
+  filter: blur(6px);
+}
+.lumo-valley .mountains {
+  position: absolute;
+  left: 50%;
+  bottom: 39%;
+  width: min(1100px, 122vw);
+  max-width: none;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  filter: saturate(0.7) brightness(1.02) contrast(1.05);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 35%, rgba(0, 0, 0, 0.55) 62%, transparent 88%);
+  mask-image: linear-gradient(180deg, #000 35%, rgba(0, 0, 0, 0.55) 62%, transparent 88%);
+}
+.lumo-valley .hills { position: absolute; left: 0; right: 0; bottom: 0; height: 58%; }
+.lumo-valley .hills canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.lumo-valley .hill-layer { position: absolute; inset: 0; pointer-events: none; }
+
+.lumo-valley .on-edge {
+  position: absolute;
+  left: var(--l);
+  top: var(--t);
+  transform: translate(-50%, -100%);
+}
+.lumo-valley .on-edge img { display: block; width: 100%; height: auto; }
+.lumo-valley .clump { transform-origin: 50% 100%; }
+.lumo-valley .clump img {
+  filter: hue-rotate(16deg) saturate(0.9) brightness(0.92);
+  transform-origin: 50% 100%;
+  animation: lv-sway var(--t, 4s) ease-in-out var(--d, 0s) infinite;
+}
+.lumo-valley .clump.flip img { scale: -1 1; }
+@keyframes lv-sway {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.8deg); }
+}
+.lumo-valley .palm img { transform-origin: 50% 100%; animation: lv-palm 7s ease-in-out infinite; }
+.lumo-valley .palm.r img { scale: -1 1; animation-delay: -3s; }
+@keyframes lv-palm {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1.4deg); }
+}
+.lumo-valley .person img { filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.25)); }
+.lumo-valley .flower-bush img { filter: hue-rotate(10deg) brightness(1.05); }
+
+/* ---------- hidden Lumos: they all hop in and out together ---------- */
+.lumo-valley .hunt {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+.lumo-valley .hunt img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: lv-hop 5.2s cubic-bezier(0.45, 0, 0.3, 1) infinite;
+  transform: translate(var(--hx0, 0), var(--hy0, 60%));
+}
+.lumo-valley .hunt:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 4px; border-radius: 12px; }
+.lumo-valley .hunt.found img { filter: drop-shadow(0 0 10px rgba(233, 196, 104, 0.9)); }
+@keyframes lv-hop {
+  0%, 26% { transform: translate(var(--hx0, 0), var(--hy0, 60%)) rotate(0); }
+  36% { transform: translate(var(--hx1, 0), calc(var(--hy1, 0%) - 8%)) rotate(-4deg); }
+  42%, 70% { transform: translate(var(--hx1, 0), var(--hy1, 0%)) rotate(3deg); }
+  56% { transform: translate(var(--hx1, 0), calc(var(--hy1, 0%) - 5%)) rotate(-2deg); }
+  82%, 100% { transform: translate(var(--hx0, 0), var(--hy0, 60%)) rotate(0); }
+}
+.lumo-valley .hill-peek { width: 100%; --hy0: 70%; --hy1: -78%; }
+
+.lumo-valley .stage-inner {
+  position: absolute;
+  inset: 0;
+  max-width: 1180px;
+  margin-inline: auto;
+  pointer-events: none;
+}
+.lumo-valley .stage-inner .item { pointer-events: auto; }
+
+/* ---------- phone (real Play Store screens in a CSS iPhone silhouette) ---------- */
+.lumo-valley .phone {
+  --pw: clamp(220px, 20vw, 300px);
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  bottom: calc(3% - var(--pw) * 0.04);
+  width: var(--pw);
+  aspect-ratio: 1183 / 1586;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+/* sized to the Play Store mockup's frame so the pop-out cards line up */
+.lumo-valley .iphone {
+  position: absolute;
+  left: 22.105%;
+  top: 0.63%;
+  width: 55.79%;
+  height: 81.4%;
+  z-index: 1;
+  border-radius: calc(var(--pw) * 0.0693);
+  background: linear-gradient(145deg, #3a3a3d, #1b1b1d 40%, #2a2a2d);
+  box-shadow: inset 0 0 0 1.5px #55555a, inset 0 0 0 3px #111113, 0 28px 40px rgba(0, 0, 0, 0.38);
+}
+.lumo-valley .iphone::before,
+.lumo-valley .iphone::after {
+  content: "";
+  position: absolute;
+  width: 1.1%;
+  border-radius: 2px;
+  background: #2c2c2f;
+}
+.lumo-valley .iphone::before {
+  left: -1%;
+  top: 18%;
+  height: 6%;
+  box-shadow: 0 calc(var(--pw) * 0.06) 0 #2c2c2f, 0 calc(var(--pw) * 0.115) 0 #2c2c2f;
+}
+.lumo-valley .iphone::after { right: -1%; top: 24%; height: 9%; }
+.lumo-valley .scr {
+  position: absolute;
+  left: 2.58%;
+  right: 2.58%;
+  top: 1.32%;
+  bottom: 1.32%;
+  border-radius: calc(var(--pw) * 0.055);
+  overflow: hidden;
+  background: #0d2a1d;
+  isolation: isolate;
+}
+.lumo-valley .island {
+  position: absolute;
+  left: 50%;
+  top: 1.7%;
+  width: 26%;
+  height: 2.6%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050505;
+  z-index: 5;
+}
+.lumo-valley .shot { position: absolute; inset: 0; }
+.lumo-valley .shot > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.lumo-valley .fronts { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.lumo-valley .fronts img {
+  position: absolute;
+  display: block;
+  height: auto;
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.3));
+  transform-origin: 50% 60%;
+  visibility: hidden;
+}
+.lumo-valley .phone-hit {
+  position: absolute;
+  left: 22.1%;
+  width: 55.8%;
+  top: 0.6%;
+  height: 81.4%;
+  z-index: 3;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: calc(var(--pw) * 0.0693);
+  -webkit-tap-highlight-color: transparent;
+}
+.lumo-valley .phone-hit:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 6px; }
+.lumo-valley .phone .phone-lumo {
+  left: 73%;
+  top: 20%;
+  width: 14%;
+  z-index: 0;
+  --hx0: -90%;
+  --hy0: 0%;
+  --hx1: 62%;
+  --hy1: 0%;
+}
+
+/* ---------- streak screen, rebuilt from StreakScreen.tsx + StreakCalendar.tsx ---------- */
+.lumo-valley .streak-app {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  transform-origin: 0 0;
+  background: #eef7f0;
+  color: #0f1c2e;
+  height: 780px;
+  overflow: hidden;
+}
+.lumo-valley .st-status {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 30px 0;
+  font-weight: 800;
+  font-size: 15px;
+}
+.lumo-valley .st-status i {
+  display: inline-block;
+  width: 24px;
+  height: 11px;
+  border: 1.5px solid #0f1c2e;
+  border-radius: 3px;
+  position: relative;
+}
+.lumo-valley .st-status i::after {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  right: 5px;
+  background: #0f1c2e;
+  border-radius: 1px;
+}
+.lumo-valley .st-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+.lumo-valley .st-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  background: #e5e7eb;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: #374151;
+}
+.lumo-valley .st-title { font-weight: 700; font-size: 17px; }
+.lumo-valley .st-scroll { display: flex; flex-direction: column; align-items: center; padding: 0 22px; }
+.lumo-valley .st-lumo { width: 105px; height: 105px; margin-bottom: 4px; position: relative; }
+.lumo-valley .st-lumo img { width: 100%; height: 100%; object-fit: contain; display: block; transform-origin: 50% 80%; }
+.lumo-valley .st-lumo::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  bottom: -2px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(15, 28, 46, 0.14);
+  z-index: -1;
+}
+.lumo-valley .st-hero {
+  width: 100%;
+  border-radius: 22px;
+  padding: 18px;
+  margin-bottom: 12px;
+  background: linear-gradient(180deg, #fff3e8, #fdba74, #f97316);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lumo-valley .st-num {
+  font-weight: 800;
+  font-size: 62px;
+  line-height: 66px;
+  letter-spacing: -1px;
+  color: #ea580c;
+  text-shadow: 0 3px 10px rgba(234, 88, 12, 0.5);
+  display: inline-block;
+}
+.lumo-valley .st-label { font-weight: 700; font-size: 20px; letter-spacing: 0.2px; }
+.lumo-valley .st-flame { width: 160px; height: 160px; margin-top: -36px; margin-bottom: 16px; animation: lv-st-float 2.4s ease-in-out infinite; }
+@keyframes lv-st-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.lumo-valley .st-sub { font-size: 13px; color: #6b7280; text-align: center; line-height: 19px; margin: 0 0 14px; padding: 0 16px; }
+.lumo-valley .st-cal { width: 100%; background: #f5f7fa; border-radius: 18px; padding: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); }
+.lumo-valley .st-cal h4 { margin: 0 0 14px; font-weight: 700; font-size: 14px; }
+.lumo-valley .st-month { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
+.lumo-valley .st-nav {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: #f2f4f8;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #374151;
+}
+.lumo-valley .st-nav.off { opacity: 0.35; }
+.lumo-valley .st-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 4px; text-align: center; }
+.lumo-valley .st-wd { font-weight: 700; font-size: 11px; color: #6b7280; }
+.lumo-valley .st-day { display: flex; flex-direction: column; align-items: center; font-weight: 700; font-size: 11px; }
+.lumo-valley .st-day img { width: 22px; height: 22px; margin-bottom: 2px; display: block; }
+.lumo-valley .st-day b { font-weight: 700; }
+
+/* ---------- floating rewards ---------- */
+.lumo-valley .item {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+.lumo-valley .item.front { z-index: 4; }
+.lumo-valley .item:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 6px; border-radius: 16px; }
+.lumo-valley .item .enter,
+.lumo-valley .item .par,
+.lumo-valley .item .bob,
+.lumo-valley .item .art { display: block; }
+.lumo-valley .item .bob { animation: lv-bob var(--dur, 4s) ease-in-out var(--del, 0s) infinite; will-change: transform; }
+.lumo-valley .item img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.28)); }
+.lumo-valley .item .lottie { width: 100%; aspect-ratio: 1; }
+@keyframes lv-bob {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--ra, 0deg)); }
+  50% { transform: translate3d(0, var(--dy, -14px), 0) rotate(var(--rb, 0deg)); }
+}
+.lumo-valley .bubble {
+  position: relative;
+  display: block;
+  padding: 6px 10px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 6px 0 rgba(5, 150, 106, 0.35), 0 14px 22px rgba(0, 0, 0, 0.22);
+}
+.lumo-valley .bubble::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  bottom: -10px;
+  border: 10px solid transparent;
+  border-top-color: #fff;
+  border-bottom: 0;
+}
+.lumo-valley .bubble .lottie { aspect-ratio: 250 / 80; }
+.lumo-valley .bubble small {
+  display: block;
+  text-align: left;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lv-emerald);
+  padding: 2px 2px 0;
+}
+
+.lumo-valley .burst { position: absolute; width: 16px; height: 16px; pointer-events: none; z-index: 8; object-fit: fill; }
+.lumo-valley .plus {
+  position: absolute;
+  z-index: 8;
+  pointer-events: none;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--lv-gold);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -50%);
+}
+.lumo-valley .celebrate { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
+.lumo-valley .surprise {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  z-index: 9;
+  width: min(360px, calc(100% - 32px));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 18px 20px 20px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(15, 27, 42, 0.95), rgba(11, 30, 24, 0.97));
+  border: 1px solid rgba(233, 196, 104, 0.55);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 6px rgba(233, 196, 104, 0.08);
+}
+.lumo-valley .surprise img { width: 104px; height: auto; margin-top: -64px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4)); }
+.lumo-valley .surprise h3 { margin: 0; font-size: 1.35rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em; }
+.lumo-valley .surprise p { margin: 0; color: rgba(255, 255, 255, 0.75); font-size: 0.92rem; line-height: 1.45; }
+.lumo-valley .surprise .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; }
+.lumo-valley .surprise .ghost {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.lumo-valley .surprise .ghost:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 3px; }
+.lumo-valley .surprise .cta-btn { padding: 12px 20px; font-size: 0.9rem; }
+
+/* ---------- hud + controls ---------- */
+/* The HUD and the controls line up with the scene's 1180px content box, not the
+   raw viewport edge — otherwise on a wide screen they drift out to the margins,
+   far left and right of everything else on the page. */
+.lumo-valley .hud {
+  position: absolute;
+  z-index: 6;
+  left: max(16px, calc(50% - 590px));
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px 7px 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--lv-gold-a), var(--lv-gold-b));
+  color: var(--lv-ink-dark);
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+.lumo-valley .hud .lumo-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--lv-ink-dark);
+  overflow: hidden;
+}
+.lumo-valley .hud .lumo-badge img { width: 78%; height: auto; display: block; }
+.lumo-valley .hud .xp { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; display: inline-block; }
+.lumo-valley .hud .hint { font-weight: 700; opacity: 0.8; }
+.lumo-valley .hud.bump .xp { animation: lv-bump 0.35s ease; }
+@keyframes lv-bump { 50% { transform: scale(1.35); } }
+
+.lumo-valley .controls {
+  position: absolute;
+  z-index: 6;
+  right: max(16px, calc(50% - 590px));
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+/* The hint has to go well before the 640px layout switch: with it, the pill is
+   ~362px and the controls ~250px, so the two run into each other around 680px. */
+@media (max-width: 860px) {
+  .lumo-valley .hud .hint { display: none; }
+}
+.lumo-valley .ctrl {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(11, 30, 24, 0.6);
+  color: #fff;
+  border-radius: 999px;
+  padding: 9px 14px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  font-weight: 800;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lumo-valley .ctrl:hover { border-color: var(--lv-mint); }
+.lumo-valley .ctrl:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 3px; }
+.lumo-valley .ctrl svg { width: 14px; height: 14px; flex: none; }
+.lumo-valley .ctrl .ic-play { display: none; }
+.lumo-valley.paused .ctrl .ic-play { display: inline; }
+.lumo-valley.paused .ctrl .ic-pause { display: none; }
+
+/* ---------- motion prefs ---------- */
+.lumo-valley.paused *,
+.lumo-valley.paused *::before,
+.lumo-valley.paused *::after { animation-play-state: paused !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lumo-valley *,
+  .lumo-valley *::before,
+  .lumo-valley *::after { animation: none !important; }
+  /* without the hop the hidden Lumos would rest at --hy0, i.e. underground, so
+     the "find all four" game could never be completed — park them popped up */
+  .lumo-valley .hunt img { transform: translate(var(--hx1, 0), var(--hy1, 0%)); }
+}
+
+/* ---------- phone width ---------- */
+@media (max-width: 640px) {
+  .lumo-valley .item { left: var(--mx, var(--x)); top: var(--my, var(--y)); width: var(--mw, var(--w)); }
+  .lumo-valley .on-edge { left: var(--ml, var(--l)); top: var(--mt, var(--t)); }
+  .lumo-valley .stage { margin-bottom: 66px; }
+  .lumo-valley .hud,
+  .lumo-valley .controls { bottom: -56px; }
+  .lumo-valley .phone { --pw: 200px; }
+  .lumo-valley .item.m-hide,
+  .lumo-valley .on-edge.m-hide { display: none; }
+  .lumo-valley .ctrl .lbl { display: none; }
+  .lumo-valley .ctrl { padding: 9px; }
+}

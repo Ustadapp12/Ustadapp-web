@@ -3,6 +3,7 @@ import { FeatureOrbit } from "@/components/feature-orbit";
 import { FinalCta } from "@/components/final-cta";
 import { HeroSection } from "@/components/hero-section";
 import { LearningJourney } from "@/components/learning-journey";
+import { LumoValley } from "@/components/lumo-valley";
 import { WaitlistProvider } from "@/components/waitlist-context";
 import { createPageMetadata, siteConfig } from "@/lib/site";
 
@@ -25,6 +26,12 @@ const jsonLd = [
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
+    logo: `${siteConfig.url}/favicon.png`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: siteConfig.contactEmail,
+      contactType: "customer support",
+    },
     sameAs: [
       "https://www.instagram.com/ustadapp_official/",
       "https://x.com/ustadappHQ",
@@ -63,6 +70,7 @@ export default function HomePage() {
           <FeatureOrbit />
         </div>
         <LearningJourney />
+        <LumoValley />
         <FinalCta />
       </WaitlistProvider>
     </>

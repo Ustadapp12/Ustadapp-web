@@ -4,13 +4,14 @@ import { siteConfig } from "@/lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [""];
+  // Trailing slashes match next.config.ts's trailingSlash: true output.
+  const routes = ["", "/privacy/", "/terms/", "/delete-account/"];
 
   const now = new Date();
   return routes.map((route, index) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: now,
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: index === 0 ? 1 : 0.7,
+    priority: index === 0 ? 1 : 0.5,
   }));
 }

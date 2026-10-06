@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import bell from "@/assets/circles/bell.svg";
 import bell2 from "@/assets/circles/bell2.svg";
 import bell3 from "@/assets/circles/bell3.svg";
@@ -6,8 +7,9 @@ import ellipseBlob from "@/assets/circles/Ellipse (1).svg";
 import ellipseRing from "@/assets/circles/Ellipse (2).svg";
 import ellipseRingBottom from "@/assets/circles/Ellipse(2) bott.svg";
 import { AppMockupCard } from "@/components/app-mockup-card";
+import playstore from "@/assets/circles/playstore.svg";
 import { Mascot } from "@/components/mascot";
-import { WaitlistForm } from "@/components/waitlist-form";
+import { siteConfig } from "@/lib/site";
 
 const MASCOT_SIZE = 260;
 const BADGE_RING = 80; // % radius of the anchor box the badges sit on — mascot art fills ~85-100% of the box, so this must clear 100%
@@ -54,11 +56,32 @@ export function HeroSection() {
             Fun and effective way to memorise Quran
           </h1>
           <p className="mx-auto mt-6 max-w-md text-base font-normal leading-[1.3] tracking-normal text-white/75 lg:mx-0">
-            We&apos;re building the smartest way to memorize Quran: AI recitation feedback, daily streaks, and
+            We&apos;re building the smartest way to memorize Quran. AI recitation feedback, daily streaks, and
             lessons that take just 5 minutes a day.
           </p>
-          <div className="mt-10 w-full">
-            <WaitlistForm celebrateInline={false} align="left" />
+          {/* Figma "Landing Page (3)": a single row of two buttons — the black Play
+              store badge and a solid green iOS waitlist button with a hard bottom
+              edge. The helper line that used to sit above each button is gone. */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+            <a
+              href={siteConfig.playStoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download UstadApp on Google Play"
+              className="inline-flex h-14 items-center gap-3 rounded-[10px] border border-[#42A46E] bg-black px-5 transition-transform active:translate-y-[2px]"
+            >
+              <Image src={playstore} alt="" aria-hidden className="h-7 w-7 shrink-0" />
+              <span className="flex flex-col text-left leading-none">
+                <span className="text-[11px] font-medium text-white/80">Download on</span>
+                <span className="mt-1 text-base font-bold text-white">Google Play</span>
+              </span>
+            </a>
+            <Link
+              href="#waitlist"
+              className="inline-flex h-14 items-center rounded-[10px] bg-[#047A56] px-7 text-base font-bold text-white shadow-[0_5px_0_#006949] transition-colors hover:bg-[#05966A] active:translate-y-[3px] active:shadow-[0_2px_0_#006949]"
+            >
+              Join Waitlist for iOS
+            </Link>
           </div>
         </div>
 
