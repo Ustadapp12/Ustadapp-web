@@ -68,7 +68,7 @@ export function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download UstadApp on Google Play"
-              className="inline-flex h-14 items-center gap-3 rounded-[10px] border border-[#42A46E] bg-black px-5 transition-transform active:translate-y-[2px]"
+              className="inline-flex h-14 w-[13rem] items-center justify-center gap-3 rounded-[10px] border border-[#42A46E] bg-black transition-transform active:translate-y-[2px]"
             >
               <Image src={playstore} alt="" aria-hidden className="h-7 w-7 shrink-0" />
               <span className="flex flex-col text-left leading-none">
@@ -78,7 +78,7 @@ export function HeroSection() {
             </a>
             <Link
               href="#waitlist"
-              className="inline-flex h-14 items-center rounded-[10px] bg-[#047A56] px-7 text-base font-bold text-white shadow-[0_5px_0_#006949] transition-colors hover:bg-[#05966A] active:translate-y-[3px] active:shadow-[0_2px_0_#006949]"
+              className="inline-flex h-14 w-[13rem] items-center justify-center rounded-[10px] bg-[#047A56] text-base font-bold text-white shadow-[0_5px_0_#006949] transition-colors hover:bg-[#05966A] active:translate-y-[3px] active:shadow-[0_2px_0_#006949]"
             >
               Join Waitlist for iOS
             </Link>
