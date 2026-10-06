@@ -37,11 +37,11 @@ export function Navbar() {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2 md:hidden">
-            <StoreButton icon={playstore} store="Google Play" compact />
+            <StoreButton icon={playstore} store="Google Play" href={siteConfig.playStoreUrl} compact />
             <StoreButton icon={appstore} store="Apple Store" compact />
           </div>
           <div className="hidden items-center gap-3 md:flex">
-            <StoreButton icon={playstore} store="Google Play" />
+            <StoreButton icon={playstore} store="Google Play" href={siteConfig.playStoreUrl} />
             <StoreButton icon={appstore} store="Apple Store" />
           </div>
           <a
@@ -50,7 +50,7 @@ export function Navbar() {
             rel="noreferrer"
             className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-[#D8B565] to-[#C6A153] px-[clamp(0.65rem,3vw,1rem)] py-[clamp(0.45rem,1.6vw,0.625rem)] text-[clamp(0.68rem,2.6vw,0.875rem)] font-bold text-[#0d1b2a] active:scale-[0.97]"
           >
-            <Image src={whatsappIcon} alt="" aria-hidden className="h-[1.15em] w-[1.15em] shrink-0" />
+            <Image src={whatsappIcon} alt="" aria-hidden className="h-[1.55em] w-[1.55em] shrink-0" />
             Join Community
           </a>
         </div>

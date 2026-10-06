@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito, Amiri, Baloo_2 } from "next/font/google";
 import { SiteChrome } from "@/components/site-chrome";
 import { siteConfig } from "@/lib/site";
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   applicationName: siteConfig.name,
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: "/favicon.png",
     apple: "/favicon.png",
@@ -54,6 +55,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0F1B2A",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -65,7 +71,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${nunito.variable} ${amiri.variable} ${baloo2.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-[#0F1B2A] text-white">
+      <body className="min-h-full bg-[#0F1B2A] text-white" suppressHydrationWarning>
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

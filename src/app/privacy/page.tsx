@@ -8,7 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const EFFECTIVE_DATE = "August 18, 2026";
+const EFFECTIVE_DATE = "October 6, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -34,6 +34,15 @@ export default function PrivacyPolicyPage() {
           We do not store your Google account password. If you create an account using an email and
           password instead, that authentication information is handled through our authentication
           infrastructure and protected using appropriate security measures.
+        </p>
+        <p>
+          <strong>Sign in with Apple.</strong> If you sign in using Apple, we receive a secure identity
+          token from Apple that lets us verify your identity, together with the name and email address you
+          choose to share during the Apple sign-in process. We do not store your Apple account password.
+          Apple lets you hide your email address when you sign in. If you choose to do so, we receive a
+          private relay address provided by Apple (ending in <em>privaterelay.appleid.com</em>) rather than
+          your personal email address, and we use that relay address to contact you about your account.
+          Apple&rsquo;s own handling of your information is governed by Apple&rsquo;s privacy policy.
         </p>
         <p>
           <strong>Guest accounts.</strong> You may be able to begin using UstadApp without creating a full
@@ -121,6 +130,11 @@ export default function PrivacyPolicyPage() {
           <li>
             <strong>Google Firebase</strong>, which provides authentication, analytics, application
             infrastructure, and related services.
+          </li>
+          <li>
+            <strong>Apple</strong>, which provides Sign in with Apple authentication and, if you choose to
+            hide your email address, the private email relay service that forwards our account emails to
+            you.
           </li>
           <li>
             <strong>Deepgram</strong>, which performs speech recognition and processes recitation audio to

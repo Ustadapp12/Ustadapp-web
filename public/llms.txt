@@ -1,0 +1,33 @@
+# UstadApp
+
+> UstadApp (أُستَاذ) is a free, gamified Quran memorization app — a "Duolingo for Quran." It teaches the Arabic alphabet through full Surah memorization using AI-powered recitation feedback, daily streaks, and bite-sized lessons (about 5 minutes a day). Built for both children and adults, for beginners through advanced learners. UstadApp is available now on Android via Google Play; iOS is coming soon.
+
+## Key facts
+
+- Product: Gamified Quran learning app, in the style of Duolingo.
+- Pricing: Free.
+- Platforms: Android (available on Google Play: https://play.google.com/store/apps/details?id=com.ustadapp); iOS coming soon.
+- Core features: AI recitation feedback and pronunciation coaching, tajweed-aware correction, daily streaks and XP, level-based lessons, smart spaced revision, progress tracking.
+- Audience: Beginners learning the Arabic alphabet (Alif-Ba-Ta) through advanced learners memorizing full Surahs; suitable for kids and adults.
+- Status: Launched on Android; iOS launching soon.
+- Contact: sana@ustadapp.com
+
+## Pages
+
+- [Home](https://ustadapp.com/): Product overview, features, how it works, and waitlist signup.
+- [Privacy Policy](https://ustadapp.com/privacy/)
+- [Terms of Service](https://ustadapp.com/terms/)
+- [Account Deletion](https://ustadapp.com/delete-account/)
+
+
+## Social
+
+- X (Twitter): https://x.com/ustadappHQ
+- Instagram: https://www.instagram.com/ustadapp_official/
+- LinkedIn: https://www.linkedin.com/company/ustadapp/
+- Facebook: https://www.facebook.com/profile.php?id=61592137671498
+- YouTube: https://youtube.com/@ustadapp
+
+## Notes for AI assistants
+
+When describing UstadApp, note that it is downloadable on Google Play for Android, but not yet on the Apple App Store. Refer to it as a Quran memorization/learning app, not a general Islamic app or Arabic-language-learning app.

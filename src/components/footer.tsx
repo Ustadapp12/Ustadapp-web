@@ -73,7 +73,7 @@ export function Footer() {
               </p>
 
               <div className="mt-5 flex flex-row justify-center gap-2 sm:justify-start">
-                <StoreButton icon={playstore} store="Google Play" />
+                <StoreButton icon={playstore} store="Google Play" href={siteConfig.playStoreUrl} />
                 <StoreButton icon={appstore} store="Apple Store" />
               </div>
             </div>
