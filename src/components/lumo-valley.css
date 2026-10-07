@@ -166,19 +166,27 @@
   /* shorter than before: the mountain sits at bottom:39% and everything else
      is positioned as a % of this height, so shrinking it pulls every asset
      (mountain, hills, phone, floating rewards) up together and closes the
-     empty-sky gap under the CTA, without re-tuning each item's own position */
+     empty-sky gap under the CTA, without re-tuning each item's own position.
+     margin-top is back to a small gap — 0 let the mountain peak overlap the
+     "Coming soon" text directly. */
   height: clamp(340px, 36vw, 500px);
-  margin-top: 0;
+  margin-top: clamp(14px, 2.2vw, 28px);
 }
 .lumo-valley .fog {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 50%;
-  height: 16%;
+  /* was bottom:50%/height:16% (a band floating mid-sky, above the mountain's
+     own 39% base) — read fine against the old taller stage but became an
+     obvious stripe cutting across the sky near the CTA once the stage got
+     shorter. Moved down to sit at the mountain/hill junction where misty
+     ground fog actually belongs, and toned way down so it blends instead of
+     reading as a line. */
+  bottom: 22%;
+  height: 22%;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(167, 243, 208, 0) 0%, rgba(167, 243, 208, 0.16) 55%, rgba(15, 185, 137, 0.22) 100%);
-  filter: blur(6px);
+  background: linear-gradient(180deg, rgba(167, 243, 208, 0) 0%, rgba(167, 243, 208, 0.07) 55%, rgba(15, 185, 137, 0.1) 100%);
+  filter: blur(10px);
 }
 .lumo-valley .mountains {
   position: absolute;
