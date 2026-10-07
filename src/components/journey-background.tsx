@@ -17,14 +17,16 @@ const stars = Array.from({ length: STAR_COUNT }, (_, i) => {
   };
 });
 
+// duration/delay vary per cloud so they drift at different paces instead of
+// moving in lockstep — same drift the Lumo valley scene's sky clouds use.
 const clouds = [
-  { left: "2%", top: "14%", width: 240, opacity: 0.26 },
-  { left: "74%", top: "8%", width: 280, opacity: 0.24 },
-  { left: "8%", top: "40%", width: 220, opacity: 0.22 },
-  { left: "78%", top: "34%", width: 260, opacity: 0.24 },
-  { left: "6%", top: "64%", width: 230, opacity: 0.2 },
-  { left: "76%", top: "60%", width: 250, opacity: 0.22 },
-  { left: "45%", top: "84%", width: 270, opacity: 0.2 },
+  { left: "2%", top: "14%", width: 240, opacity: 0.26, duration: 115, delay: -10 },
+  { left: "74%", top: "8%", width: 280, opacity: 0.24, duration: 140, delay: -70 },
+  { left: "8%", top: "40%", width: 220, opacity: 0.22, duration: 100, delay: -40 },
+  { left: "78%", top: "34%", width: 260, opacity: 0.24, duration: 130, delay: -95 },
+  { left: "6%", top: "64%", width: 230, opacity: 0.2, duration: 120, delay: -20 },
+  { left: "76%", top: "60%", width: 250, opacity: 0.22, duration: 105, delay: -60 },
+  { left: "45%", top: "84%", width: 270, opacity: 0.2, duration: 135, delay: -5 },
 ];
 
 export function JourneyBackground() {
@@ -35,8 +37,19 @@ export function JourneyBackground() {
         return (
           <div
             key={i}
-            className="absolute overflow-hidden rounded-full blur-[2px]"
-            style={{ left: cloud.left, top: cloud.top, width, height: `calc(${width} * 0.5)`, opacity: cloud.opacity, mixBlendMode: "screen" }}
+            className="journey-cloud absolute overflow-hidden rounded-full blur-[2px]"
+            style={
+              {
+                left: cloud.left,
+                top: cloud.top,
+                width,
+                height: `calc(${width} * 0.5)`,
+                opacity: cloud.opacity,
+                mixBlendMode: "screen",
+                "--cloud-duration": `${cloud.duration}s`,
+                "--cloud-delay": `${cloud.delay}s`,
+              } as React.CSSProperties
+            }
           >
             <Image src={cloudsImg} alt="" fill className="scale-150 object-cover" style={{ objectPosition: "30% 60%" }} />
           </div>

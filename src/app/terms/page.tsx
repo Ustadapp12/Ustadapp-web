@@ -8,7 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/terms",
 });
 
-const EFFECTIVE_DATE = "August 18, 2026";
+const EFFECTIVE_DATE = "October 6, 2026";
 
 export default function TermsOfServicePage() {
   return (
@@ -51,9 +51,17 @@ export default function TermsOfServicePage() {
       <LegalSection heading="3. Accounts">
         <p>
           UstadApp may allow you to use certain features as a guest or to create an account using an email
-          address and password or through a supported third-party sign-in service such as Google. Guest
-          progress may be stored temporarily and may not be permanently recoverable unless you create an
-          account and link that progress to it.
+          address and password or through a supported third-party sign-in service such as Google or Sign in
+          with Apple. Guest progress may be stored temporarily and may not be permanently recoverable unless
+          you create an account and link that progress to it.
+        </p>
+        <p>
+          Where you sign in through a third-party service, your use of that service is also subject to that
+          provider&rsquo;s own terms, and keeping access to your UstadApp account depends on keeping access
+          to the third-party account you signed in with. If you use Sign in with Apple and choose to hide
+          your email address, account-related emails are delivered to you through Apple&rsquo;s private
+          email relay; if you later disable that relay for UstadApp, we may be unable to reach you about
+          your account.
         </p>
         <p>
           You&rsquo;re responsible for maintaining the security of your account credentials and for activity

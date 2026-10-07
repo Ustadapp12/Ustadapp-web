@@ -6,7 +6,6 @@ import type { StaticImageData } from "next/image";
 import ayesha from "@/assets/lumo-scene/app/ayesha.png";
 import fireBlank from "@/assets/lumo-scene/app/blank_fire.png";
 import fireBlue from "@/assets/lumo-scene/app/blue_fire_30.png";
-import lumoKufi from "@/assets/lumo-scene/app/lumo_kufi.png";
 import lumoRead from "@/assets/lumo-scene/app/lumo_read.png";
 import muhammad from "@/assets/lumo-scene/app/muhammad.png";
 import fire30 from "@/assets/lumo-scene/app/orange_fire_30.png";
@@ -24,10 +23,6 @@ import grassTex from "@/assets/lumo-scene/scenery/grass.jpg";
 import mountainsArt from "@/assets/lumo-scene/scenery/mountains_crop.png";
 import palm from "@/assets/lumo-scene/scenery/tree1.png";
 import cloud from "@/assets/clouds.png";
-import lumoGiggle from "@/assets/hello/giggle.png";
-import lumoPeek from "@/assets/hello/peekaboo.png";
-import lumoTongue from "@/assets/hello/sticking out tongue.png";
-import lumoSus from "@/assets/hello/suspicious.png";
 import lumoPlain from "@/assets/lumo_transparent.png";
 import moonArt from "@/assets/moon1.png";
 import siteStar from "@/assets/star.png";
@@ -40,7 +35,6 @@ import "./lumo-valley.css";
 // numbers below still mean the same thing.
 const A: Record<string, StaticImageData> = {
   lumoRead,
-  lumoKufi,
   heart,
   nodeStar,
   nodeGreen,
@@ -52,10 +46,6 @@ const A: Record<string, StaticImageData> = {
   muhammad,
   ayesha,
   siteStar,
-  lumoSus,
-  lumoTongue,
-  lumoPeek,
-  lumoGiggle,
   moon: moonArt,
   flowerBush,
   fire30,
@@ -120,13 +110,6 @@ const BACK_HILLS = [
   "M1440,18 C1280,-2 1110,38 1010,128 C970,166 920,220 840,300 L840,360 L1440,360 Z",
 ];
 
-const LUMO_KEY: Record<string, string> = {
-  hill: "lumoKufi",
-  tree: "lumoSus",
-  grass: "lumoTongue",
-  phone: "lumoPeek",
-};
-
 const REACT_ANIM: Record<string, Keyframe[]> = {
   collect: [{ transform: "scale(1) rotateY(0)" }, { transform: "scale(1.25) rotateY(180deg)" }, { transform: "scale(1) rotateY(360deg)" }],
   beat: [{ transform: "scale(1)" }, { transform: "scale(1.22)" }, { transform: "scale(.94)" }, { transform: "scale(1.1)" }, { transform: "scale(1)" }],
@@ -152,7 +135,6 @@ export function LumoValley() {
     if (!root) return;
 
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isPaused = () => root.classList.contains("paused");
     const q = <T extends Element>(sel: string) => root.querySelector(sel) as T;
     const img = (k: string, alt = "") =>
       `<img src="${A[k].src}" width="${A[k].width}" height="${A[k].height}" alt="${alt}" draggable="false">`;
@@ -163,7 +145,6 @@ export function LumoValley() {
     const lotties: LottieAnim[] = [];
     let disposed = false;
 
-    (q<HTMLImageElement>(".hud .lumo-badge img")).src = A.lumoKufi.src;
     (q<HTMLImageElement>(".mountains")).src = A.mountains.src;
 
     // ---------- sky: the website's own star field, drifting clouds, birds ----------
@@ -315,7 +296,6 @@ export function LumoValley() {
 
     // ---------- things standing on the hill line ----------
     const edgeLayer = q<HTMLElement>(".edge-layer");
-    const peekLayer = q<HTMLElement>(".peek-layer");
     function place(layer: HTMLElement, x: number, html: string, cls: string, w: string, extra = "", mx: number | null = null) {
       const el = document.createElement("span");
       el.className = "on-edge " + cls;
@@ -331,13 +311,6 @@ export function LumoValley() {
       layer.appendChild(el);
       return el;
     }
-    const huntBtn = (key: string, label: string, cls = "") =>
-      `<button class="hunt ${cls}" type="button" data-lumo="${key}" aria-label="${label}">${img(LUMO_KEY[key])}</button>`;
-
-    // Lumo peeking over the right hill, behind the front hill
-    place(peekLayer, 960, huntBtn("hill", "Hidden Lumo peeking over the hill", "hill-peek"), "", "clamp(46px, 4.8vw, 76px)", "transform:translate(-50%,-72%)", 1130);
-    // a Lumo hopping up out of the ground right next to the left palm
-    place(peekLayer, 250, huntBtn("tree", "Hidden Lumo in the ground by the palm tree", "hill-peek"), "", "clamp(40px, 4.2vw, 66px)", "transform:translate(-50%,-72%)", 330);
     // palms framing the scene, kept inside the frame
     place(edgeLayer, 125, img("palm"), "palm", "clamp(92px, 11vw, 170px)", "transform:translate(-50%,-96%)", 150);
     place(edgeLayer, 1325, img("palm"), "palm r m-hide", "clamp(86px, 10vw, 156px)", "transform:translate(-50%,-96%)");
@@ -362,10 +335,7 @@ export function LumoValley() {
       ci.style.setProperty("--t", 3.4 + (gi % 4) * 0.6 + "s");
       ci.style.setProperty("--d", -gi * 0.41 + "s");
     }
-    // a Lumo hiding in the grass on the right hill
-    place(peekLayer, 1215, huntBtn("grass", "Hidden Lumo popping out of the ground", "hill-peek"), "", "clamp(42px, 4.4vw, 70px)", "transform:translate(-50%,-72%)", 1250);
     place(edgeLayer, 470, img("flowerBush"), "flower-bush m-hide", "clamp(56px, 5.4vw, 86px)", "transform:translate(-50%,-80%)");
-    (q<HTMLElement>(".phone-lumo")).innerHTML = img("lumoPeek");
 
     // ---------- floating rewards ----------
     const inner = q<HTMLElement>(".stage-inner");
@@ -475,7 +445,7 @@ export function LumoValley() {
 
     let stFlame: LottieAnim | null = null;
     function playStreak() {
-      if (stFlame && !isPaused()) stFlame.play();
+      if (stFlame) stFlame.play();
       if (reduce) return;
       (streak.querySelector(".st-lumo-img") as HTMLElement).animate(
         [{ transform: "scale(0)" }, { transform: "scale(1.12)", offset: 0.7 }, { transform: "scale(1)" }],
@@ -570,7 +540,7 @@ export function LumoValley() {
       const hold = screens[cur].streak ? 5200 : 4200;
       cycleTimer = setTimeout(() => {
         if (disposed) return;
-        if (!isPaused()) showScreen((cur + 1) % screens.length);
+        showScreen((cur + 1) % screens.length);
         scheduleCycle();
       }, reduce ? 6500 : hold);
     }
@@ -617,7 +587,6 @@ export function LumoValley() {
         if (!played && es.some((e) => e.isIntersecting)) {
           played = true;
           burstIn();
-          loadLotties();
           io.disconnect();
         }
       },
@@ -626,9 +595,13 @@ export function LumoValley() {
     io.observe(stage);
     observers.push(io);
 
-    // ---------- lottie: loaded only once the scene scrolls into view ----------
+    // ---------- lottie: starts loading as soon as this section mounts, not when
+    // it scrolls into view — otherwise the first burst-in animation flies in
+    // blank placeholders for the flame/mic/wave items, which then visibly pop to
+    // life a moment later once lottie-web + the JSON finish fetching. Loading it
+    // eagerly means it's almost always ready before the user actually scrolls
+    // this far, at the cost of ~90KB fetched a little earlier than strictly needed.
     let lottieLib: typeof import("lottie-web").default | null = null;
-    let celebrationData: object | null = null;
     async function loadLotties() {
       const [lib, allday, listen, wave, streakJson] = await Promise.all([
         import("lottie-web"),
@@ -671,22 +644,10 @@ export function LumoValley() {
       }) as unknown as LottieAnim;
       lotties.push(stFlame);
       if (screens[cur].streak) stFlame.play();
-      if (isPaused()) lotties.forEach((an) => an.pause());
     }
+    loadLotties();
 
-    // ---------- taps: badges sparkle, and the Lumo hunt ----------
-    let found = new Set<string>();
-    const xpEl = q<HTMLElement>(".xp");
-    const hud = q<HTMLElement>(".hud");
-    function resetHunt() {
-      found = new Set();
-      xpEl.textContent = "0";
-      root!.querySelectorAll<HTMLElement>(".hunt").forEach((h) => {
-        h.classList.remove("found");
-        (h.querySelector("img") as HTMLImageElement).src = A[LUMO_KEY[h.dataset.lumo!]].src;
-      });
-      root!.querySelectorAll(".surprise").forEach((n) => n.remove());
-    }
+    // ---------- taps: reward badges sparkle on tap ----------
     function sparkle(el: HTMLElement, text: string) {
       const sr = stage.getBoundingClientRect();
       const r = el.getBoundingClientRect();
@@ -728,76 +689,6 @@ export function LumoValley() {
         ).onfinish = () => p.remove();
       }
     }
-    async function celebrate() {
-      if (reduce) return;
-      if (!celebrationData) {
-        const mod = await import("@/assets/lumo-scene/lottie/celebration.json");
-        celebrationData = mod.default;
-      }
-      if (disposed || !lottieLib) return;
-      const box = document.createElement("div");
-      box.className = "celebrate";
-      stage.appendChild(box);
-      const an = lottieLib.loadAnimation({
-        container: box,
-        renderer: "svg",
-        loop: false,
-        autoplay: true,
-        animationData: celebrationData,
-        rendererSettings: { preserveAspectRatio: "xMidYMid slice" },
-      });
-      an.addEventListener("complete", () => {
-        an.destroy();
-        box.remove();
-      });
-    }
-    function surprise() {
-      celebrate();
-      const card = document.createElement("div");
-      card.className = "surprise";
-      card.setAttribute("role", "dialog");
-      card.setAttribute("aria-label", "You found all four Lumos");
-      card.innerHTML = `<img src="${A.lumoGiggle.src}" alt="Lumo giggling">
-      <h3>You found all 4 Lumos!</h3>
-      <p>MashaAllah, sharp eyes. Lumo hides in every lesson too. Keep your streak going and he will cheer you on all the way to Surah An-Nas.</p>
-      <div class="row">
-        <a class="cta-btn gradient-btn cta-sheen" href="${siteConfig.playStoreUrl}" target="_blank" rel="noopener noreferrer">Play with Lumo</a>
-        <button class="ghost" type="button" data-again>Hide them again</button>
-      </div>`;
-      stage.appendChild(card);
-      if (!reduce)
-        card.animate(
-          [
-            { transform: "translateX(-50%) translateY(30px) scale(.8)", opacity: 0 },
-            { transform: "translateX(-50%) translateY(-6px) scale(1.03)", opacity: 1, offset: 0.7 },
-            { transform: "translateX(-50%)", opacity: 1 },
-          ],
-          { duration: 650, easing: "cubic-bezier(.2,.8,.3,1)" },
-        );
-      const again = card.querySelector("[data-again]") as HTMLElement;
-      again.addEventListener("click", resetHunt);
-      again.focus({ preventScroll: true });
-    }
-    stage.addEventListener("click", (e) => {
-      const h = (e.target as HTMLElement).closest(".hunt") as HTMLElement | null;
-      if (!h) return;
-      e.stopPropagation();
-      const key = h.dataset.lumo!;
-      (h.querySelector("img") as HTMLImageElement).src = A.lumoGiggle.src;
-      if (found.has(key)) {
-        sparkle(h, "");
-        return;
-      }
-      found.add(key);
-      h.classList.add("found");
-      xpEl.textContent = String(found.size);
-      hud.classList.remove("bump");
-      void hud.offsetWidth;
-      hud.classList.add("bump");
-      sparkle(h, found.size === 4 ? "All found!" : `Lumo ${found.size} of 4`);
-      if (found.size === 4) timers.push(setTimeout(surprise, 400));
-    });
-
     inner.addEventListener("click", (e) => {
       const item = (e.target as HTMLElement).closest("button.item") as (HTMLElement & { _anim?: LottieAnim }) | null;
       if (!item) return;
@@ -807,28 +698,12 @@ export function LumoValley() {
           duration: act === "collect" ? 650 : 560,
           easing: "cubic-bezier(.3,.7,.3,1.2)",
         });
-      if (item._anim && !isPaused()) {
+      if (item._anim) {
         item._anim.setSpeed(2.2);
         timers.push(setTimeout(() => item._anim?.setSpeed(1), 900));
       }
       if (act === "collect") sparkle(item, "+10 XP");
       else sparkle(item, "");
-    });
-
-    q<HTMLElement>(".replay").addEventListener("click", () => {
-      resetHunt();
-      burstIn();
-    });
-
-    // ---------- pause / play everything that moves ----------
-    const pauseBtn = q<HTMLElement>(".pause");
-    pauseBtn.addEventListener("click", () => {
-      const paused = root.classList.toggle("paused");
-      const label = paused ? "Play motion" : "Pause motion";
-      (pauseBtn.querySelector(".lbl") as HTMLElement).textContent = label;
-      pauseBtn.setAttribute("aria-label", label);
-      pauseBtn.setAttribute("aria-pressed", String(paused));
-      lotties.forEach((an) => (paused ? an.pause() : an.play()));
     });
 
     return () => {
@@ -841,11 +716,10 @@ export function LumoValley() {
       probeSvg.remove();
       // everything above was appended imperatively, so clear the containers the
       // effect filled and leave the JSX shell as React rendered it
-      [sky, edgeLayer, peekLayer, inner, scr, frontsEl].forEach((el) => {
+      [sky, edgeLayer, inner, scr, frontsEl].forEach((el) => {
         el.innerHTML = "";
       });
-      root.querySelectorAll(".burst, .plus, .surprise, .celebrate").forEach((n) => n.remove());
-      root.classList.remove("paused");
+      root.querySelectorAll(".burst, .plus").forEach((n) => n.remove());
     };
   }, []);
 
@@ -858,11 +732,6 @@ export function LumoValley() {
       <div aria-hidden className="sky-deco" />
 
       <div className="copy">
-        <p className="eyebrow">
-          <span lang="ar" className="arabic">
-            {siteConfig.arabicName}
-          </span>
-        </p>
         <h2 id="lumo-valley-title">
           Memorize the Quran with <span className="hero-gradient-text">Lumo</span>
         </h2>
@@ -892,23 +761,18 @@ export function LumoValley() {
         </div>
       </div>
 
-      <div
-        className="stage"
-        aria-label="UstadApp screens on a phone, surrounded by the rewards you earn. Four Lumos are hiding in the scene."
-      >
+      <div className="stage" aria-label="UstadApp screens on a phone, surrounded by the rewards you earn">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="mountains" alt="" aria-hidden />
         <div className="fog" aria-hidden />
         <div className="hills" aria-hidden>
           <canvas className="back-hill" />
-          <div className="hill-layer peek-layer" />
           <canvas className="front-hill" />
           <div className="hill-layer edge-layer" />
         </div>
 
         <div className="stage-inner">
           <div className="phone">
-            <button className="hunt phone-lumo" type="button" data-lumo="phone" aria-label="Hidden Lumo behind the phone" />
             <div className="iphone" aria-hidden>
               <div className="scr">
                 <span className="island" />
@@ -918,35 +782,6 @@ export function LumoValley() {
             <button className="phone-hit" type="button" aria-label="Show the next app screen" suppressHydrationWarning />
             <p className="phone-live sr-only" aria-live="polite" />
           </div>
-        </div>
-
-        <div className="hud" aria-live="polite">
-          <span className="lumo-badge" aria-hidden>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" />
-          </span>
-          <span>
-            <span className="xp">0</span> / 4 Lumos
-          </span>
-          <span className="hint">Find all four Lumos for a surprise</span>
-        </div>
-
-        <div className="controls">
-          <button className="ctrl replay" type="button" aria-label="Replay" suppressHydrationWarning>
-            <svg viewBox="0 0 24 24" aria-hidden>
-              <path d="M12 5a7 7 0 1 1-6.6 4.7" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-              <path d="M4 4v6h6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="lbl">Replay</span>
-          </button>
-          <button className="ctrl pause" type="button" aria-pressed="false" aria-label="Pause motion" suppressHydrationWarning>
-            <svg viewBox="0 0 24 24" aria-hidden>
-              <rect className="ic-pause" x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-              <rect className="ic-pause" x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" />
-              <path className="ic-play" d="M8 5l11 7-11 7z" fill="currentColor" />
-            </svg>
-            <span className="lbl">Pause motion</span>
-          </button>
         </div>
       </div>
     </section>
