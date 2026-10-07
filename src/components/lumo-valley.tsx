@@ -757,7 +757,7 @@ export function LumoValley() {
               Download on Google Play
             </a>
           </span>
-          <p className="cta-note">Coming to iPhone soon</p>
+          <p className="cta-note">Coming soon to iPhone</p>
         </div>
       </div>
 

@@ -7,7 +7,10 @@ import { WaitlistForm } from "@/components/waitlist-form";
 
 export function FinalCta() {
   return (
-    <section id="waitlist" className="relative overflow-hidden bg-gradient-to-b from-[#0F1B2A] via-[#05966A] to-[#0B1E18] px-6 py-14 text-center md:px-16 md:py-20">
+    // Reaches green sooner (25% instead of 45%) so this section isn't also
+    // lingering in navy right where the Lumo valley scene above hands off —
+    // that double navy ramp was reading as a hard dividing line.
+    <section id="waitlist" className="relative overflow-hidden bg-gradient-to-b from-[#0F1B2A] via-[#05966A] via-25% to-[#0B1E18] px-6 py-14 text-center md:px-16 md:py-20">
       <Image src={bell2} alt="" aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2" />
       <Image src={bell} alt="" aria-hidden className="pointer-events-none absolute -right-16 bottom-0 h-[420px] w-[420px]" />
       <Image src={bell3} alt="" aria-hidden className="pointer-events-none absolute -left-16 top-0 h-72 w-72" />

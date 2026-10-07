@@ -21,7 +21,11 @@
   overflow: hidden;
   isolation: isolate;
   padding-top: clamp(48px, 6.4vw, 80px);
-  background: linear-gradient(180deg, var(--lv-navy) 0%, var(--lv-navy) 18%, var(--lv-emerald) 64%, var(--lv-navy) 100%);
+  /* emerald now holds all the way to 90% instead of fading back to navy from
+     64% — FinalCta right below also starts navy, so the old stops stacked two
+     navy ramps into one wide dark band at the handoff; this keeps that seam
+     short, pushed down, and mostly green instead. */
+  background: linear-gradient(180deg, var(--lv-navy) 0%, var(--lv-navy) 18%, var(--lv-emerald) 55%, var(--lv-emerald) 90%, var(--lv-navy) 100%);
   /* globals.css sets a dark body colour for the light pages, so the scene has
      to claim white for itself the way every other dark section does */
   color: #fff;
@@ -158,8 +162,12 @@
 /* ---------- stage ---------- */
 .lumo-valley .stage {
   position: relative;
-  height: clamp(410px, 43vw, 590px);
-  margin-top: clamp(4px, 1.4vw, 16px);
+  /* shorter than before: the mountain sits at bottom:39% and everything else
+     is positioned as a % of this height, so shrinking it pulls every asset
+     (mountain, hills, phone, floating rewards) up together and closes the
+     empty-sky gap under the CTA, without re-tuning each item's own position */
+  height: clamp(340px, 36vw, 500px);
+  margin-top: 0;
 }
 .lumo-valley .fog {
   position: absolute;
