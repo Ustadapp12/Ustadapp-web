@@ -134,6 +134,17 @@ h3 {
   animation: pulse-ring 2.4s ease-out infinite;
 }
 
+/* ── Glow, for the hero's Google Play button ───────────── */
+/* A soft, steady halo that breathes slowly — no hard-edged ring expanding
+   outward, just an ambient glow. Shimmer/"flash" is the existing .cta-sheen
+   sweep shared with the other buttons, not a separate effect. Mint-green
+   (the site's own accent, already the button's own border colour) instead
+   of the gold tried first, which read oddly against the black badge. */
+.btn-glow-mint {
+  box-shadow: 0 0 16px 2px rgba(47, 216, 143, 0.35), 0 0 32px 8px rgba(47, 216, 143, 0.18);
+  animation: btn-glow-mint-breathe 3.2s ease-in-out infinite;
+}
+
 .nav-mobile-drawer {
   animation: nav-drawer-in 0.28s ease both;
 }
@@ -338,6 +349,16 @@ h3 {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(5, 150, 106, 0);
+  }
+}
+
+@keyframes btn-glow-mint-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 16px 2px rgba(47, 216, 143, 0.35), 0 0 32px 8px rgba(47, 216, 143, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 20px 3px rgba(47, 216, 143, 0.5), 0 0 38px 10px rgba(47, 216, 143, 0.26);
   }
 }
 
@@ -636,7 +657,8 @@ h3 {
     animation: none;
   }
 
-  .pulse-ring {
+  .pulse-ring,
+  .btn-glow-mint {
     animation: none;
     box-shadow: none;
   }

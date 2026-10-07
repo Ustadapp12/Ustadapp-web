@@ -1,6 +1,6 @@
 import Image from "next/image";
 import cloudsImg from "@/assets/clouds.png";
-import moonImg from "@/assets/moon1.png";
+import planetImg from "@/assets/planet.png";
 import starImg from "@/assets/star.png";
 
 const STAR_COUNT = 65;
@@ -66,12 +66,14 @@ export function JourneyBackground() {
           style={{ left: star.left, top: star.top, width: star.size, height: star.size, opacity: star.opacity, animationDelay: star.delay }}
         />
       ))}
+      {/* The valley scene below (lumo-valley.tsx) keeps the actual moon — this
+          is the roadmap's own sky, swapped to a planet per the asset drop. */}
       <Image
-        src={moonImg}
+        src={planetImg}
         alt=""
         width={120}
         height={120}
-        className="absolute right-6 top-6 h-20 w-20 drop-shadow-[0_0_28px_rgba(255,255,255,0.4)] sm:right-10 sm:top-8 sm:h-28 sm:w-28 md:right-16"
+        className="absolute right-6 top-6 h-20 w-20 drop-shadow-[0_0_28px_rgba(180,130,230,0.45)] sm:right-10 sm:top-8 sm:h-28 sm:w-28 md:right-16"
       />
     </div>
   );

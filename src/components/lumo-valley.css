@@ -32,6 +32,19 @@
   color: #fff;
 }
 
+/* A long press on an <img> in iOS/Android Safari & Chrome pops up a native
+   "Save/Copy Image" callout box floating over the page — exactly the "boxes"
+   around assets, and the "copied" question. This scene is decorative and
+   entirely mouse/touch-driven already (tap-to-advance, tap-to-sparkle), so
+   none of its images need that native handling. */
+.lumo-valley img,
+.lumo-valley canvas {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 /* the site's soft "bell" glows, as radial gradients rather than the SVG assets */
 .lumo-valley .bell {
   position: absolute;
@@ -163,13 +176,12 @@
 /* ---------- stage ---------- */
 .lumo-valley .stage {
   position: relative;
-  /* shorter than before: the mountain sits at bottom:39% and everything else
-     is positioned as a % of this height, so shrinking it pulls every asset
-     (mountain, hills, phone, floating rewards) up together and closes the
-     empty-sky gap under the CTA, without re-tuning each item's own position.
-     margin-top is back to a small gap — 0 let the mountain peak overlap the
-     "Coming soon" text directly. */
-  height: clamp(340px, 36vw, 500px);
+  /* Grown back taller — the phone's pop-out cards (the streak/calendar
+     screen especially) are a fixed height driven by --pw, not by this box,
+     so a too-short stage left them overflowing past the grass at the
+     bottom. Mountain's own bottom% was lowered to compensate so the peak
+     doesn't drift back down into the CTA text as this box grows. */
+  height: clamp(440px, 48vw, 640px);
   margin-top: clamp(14px, 2.2vw, 28px);
 }
 .lumo-valley .fog {
@@ -191,7 +203,7 @@
 .lumo-valley .mountains {
   position: absolute;
   left: 50%;
-  bottom: 39%;
+  bottom: 32%;
   width: min(1100px, 122vw);
   max-width: none;
   transform: translateX(-50%);
@@ -206,14 +218,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 58%;
-  /* The hill canvases paint matched colours all the way to their own bottom
-     edge, but that's still a textured grass pattern meeting the perfectly
-     flat section background below — same colour, different detail, so it
-     still reads as a hard line. Fading the whole layer's opacity out over
-     its last 14% blends the texture itself away instead of just the colour. */
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
+  /* taller than before (was 58%, then 70%) — the pop-out cards on the phone
+     (the streak/calendar screen runs long) need to sit clearly on grass,
+     not spill past it into flat background */
+  height: 85%;
 }
 .lumo-valley .hills canvas {
   position: absolute;
@@ -222,6 +230,17 @@
   height: 100%;
   display: block;
   pointer-events: none;
+  /* The hill canvases paint matched colours all the way to their own bottom
+     edge, but that's still a textured grass pattern meeting the perfectly
+     flat section background below — same colour, different detail, so it
+     still reads as a hard line. Fading the canvases' own opacity out over
+     their last 14% blends the texture itself away instead of just the
+     colour. This has to live on the canvases specifically, not on .hills —
+     masking .hills also masked its children (the palm trees, figures,
+     anchored near the hills' top edge via a large negative transform),
+     clipping them instead of just softening the grass underneath them. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 86%, transparent 100%);
 }
 .lumo-valley .hill-layer { position: absolute; inset: 0; pointer-events: none; }
 

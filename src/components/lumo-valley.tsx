@@ -248,14 +248,32 @@ export function LumoValley() {
       ctx.fillRect(0, 0, W, H);
       ctx.restore();
       if (opts.lip) {
+        // The ridge dips down through x:575-865 (the valley floor, where the
+        // phone stands), so this stroke needs to not be visible there - but
+        // two earlier attempts got this wrong in opposite directions: a hard
+        // clip cut the stroke off mid-line (two stray stroke-ends beside the
+        // phone), and removing the clip let the full-strength line run right
+        // across the open valley floor on either side of the phone (only the
+        // bit directly behind the phone was ever actually hidden by it).
+        // A horizontal alpha gradient fades it out approaching the gap and
+        // back in past it, instead of either hard-cutting or leaving it at
+        // full strength.
         const top = new Path2D();
         top.addPath(new Path2D(FRONT_HILL.split(" L1440,360")[0]), m);
         ctx.save();
-        const gap = new Path2D(); // no highlight on the valley floor, where the phone stands
-        gap.rect(0, 0, (W * 575) / 1440, H);
-        gap.rect((W * 865) / 1440, 0, W, H);
-        ctx.clip(gap);
-        ctx.strokeStyle = opts.lip;
+        const [r, g, b, a] = opts.lip.match(/[\d.]+/g)!.map(Number);
+        const gapL = (575 / 1440) * W;
+        const gapR = (865 / 1440) * W;
+        const feather = 0.05 * W;
+        const lipGrad = ctx.createLinearGradient(0, 0, W, 0);
+        const stop = (x: number, alpha: number) => lipGrad.addColorStop(Math.min(1, Math.max(0, x / W)), `rgba(${r},${g},${b},${alpha})`);
+        stop(0, a);
+        stop(gapL - feather, a);
+        stop(gapL, 0);
+        stop(gapR, 0);
+        stop(gapR + feather, a);
+        stop(W, a);
+        ctx.strokeStyle = lipGrad;
         ctx.lineWidth = 2.2 * dpr;
         ctx.stroke(top);
         ctx.restore();
@@ -545,12 +563,16 @@ export function LumoValley() {
     }
     function scheduleCycle() {
       clearTimeout(cycleTimer);
-      const hold = screens[cur].streak ? 5200 : 4200;
+      // The streak screen is the cycle's natural destination (rewards ->
+      // correct -> streak) — auto-advancing away from it after a few seconds
+      // just reads as it popping up and then disappearing. Let it be the
+      // resting state instead; a tap on the phone still cycles manually.
+      if (screens[cur].streak) return;
       cycleTimer = setTimeout(() => {
         if (disposed) return;
         showScreen((cur + 1) % screens.length);
         scheduleCycle();
-      }, reduce ? 6500 : hold);
+      }, reduce ? 6500 : 4200);
     }
     scheduleCycle();
     q<HTMLElement>(".phone-hit").addEventListener("click", () => {
