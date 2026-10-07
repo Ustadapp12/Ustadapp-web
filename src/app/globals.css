@@ -134,6 +134,16 @@ h3 {
   animation: pulse-ring 2.4s ease-out infinite;
 }
 
+/* ── Gold glow ring + flash, for the hero's Google Play button ── */
+.gold-pulse-ring {
+  box-shadow: 0 0 0 0 rgba(233, 196, 104, 0.55);
+  animation: gold-ring-pulse 2.2s ease-out infinite;
+}
+
+.gold-flash-btn {
+  animation: gold-flash 1.8s ease-in-out infinite;
+}
+
 .nav-mobile-drawer {
   animation: nav-drawer-in 0.28s ease both;
 }
@@ -338,6 +348,28 @@ h3 {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(5, 150, 106, 0);
+  }
+}
+
+@keyframes gold-ring-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(233, 196, 104, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(233, 196, 104, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(233, 196, 104, 0);
+  }
+}
+
+@keyframes gold-flash {
+  0%,
+  100% {
+    box-shadow: 0 0 10px 0 rgba(233, 196, 104, 0);
+  }
+  50% {
+    box-shadow: 0 0 22px 4px rgba(233, 196, 104, 0.85);
   }
 }
 
@@ -636,7 +668,9 @@ h3 {
     animation: none;
   }
 
-  .pulse-ring {
+  .pulse-ring,
+  .gold-pulse-ring,
+  .gold-flash-btn {
     animation: none;
     box-shadow: none;
   }

@@ -63,19 +63,22 @@ export function HeroSection() {
               store badge and a solid green iOS waitlist button with a hard bottom
               edge. The helper line that used to sit above each button is gone. */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-            <a
-              href={siteConfig.playStoreUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Download UstadApp on Google Play"
-              className="inline-flex h-14 w-[13rem] items-center justify-center gap-3 rounded-[10px] border border-[#42A46E] bg-black transition-transform active:translate-y-[2px]"
-            >
-              <Image src={playstore} alt="" aria-hidden className="h-7 w-7 shrink-0" />
-              <span className="flex flex-col text-left leading-none">
-                <span className="text-[11px] font-medium text-white/80">Download on</span>
-                <span className="mt-1 text-base font-bold text-white">Google Play</span>
-              </span>
-            </a>
+            <span className="relative inline-flex rounded-[10px]">
+              <span aria-hidden className="gold-pulse-ring pointer-events-none absolute inset-0 rounded-[10px]" />
+              <a
+                href={siteConfig.playStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download UstadApp on Google Play"
+                className="gold-flash-btn relative z-[1] inline-flex h-14 w-[13rem] items-center justify-center gap-3 rounded-[10px] border border-[#42A46E] bg-black transition-transform active:translate-y-[2px]"
+              >
+                <Image src={playstore} alt="" aria-hidden className="h-7 w-7 shrink-0" />
+                <span className="flex flex-col text-left leading-none">
+                  <span className="text-[11px] font-medium text-white/80">Download on</span>
+                  <span className="mt-1 text-base font-bold text-white">Google Play</span>
+                </span>
+              </a>
+            </span>
             {/* h-[51px] + the 5px shadow below = 56px total, matching the Google
                 Play badge's flat 56px (h-14) — box-shadow paints outside the
                 element's own box, so equal heights alone weren't equal footprints. */}
