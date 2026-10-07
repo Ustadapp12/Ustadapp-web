@@ -248,17 +248,32 @@ export function LumoValley() {
       ctx.fillRect(0, 0, W, H);
       ctx.restore();
       if (opts.lip) {
-        // Used to clip this stroke out of the x:575-865 valley floor (where the
-        // phone stands) so the highlight wouldn't run behind it. But the ridge
-        // dips down through that span, so the stroke was getting cut off
-        // mid-line at each clip boundary — two short vertical stroke-ends
-        // right beside the phone. Drawing it continuously instead: the part
-        // that falls behind the phone is simply covered by it (this canvas
-        // sits underneath), same result without the hard cutoff.
+        // The ridge dips down through x:575-865 (the valley floor, where the
+        // phone stands), so this stroke needs to not be visible there - but
+        // two earlier attempts got this wrong in opposite directions: a hard
+        // clip cut the stroke off mid-line (two stray stroke-ends beside the
+        // phone), and removing the clip let the full-strength line run right
+        // across the open valley floor on either side of the phone (only the
+        // bit directly behind the phone was ever actually hidden by it).
+        // A horizontal alpha gradient fades it out approaching the gap and
+        // back in past it, instead of either hard-cutting or leaving it at
+        // full strength.
         const top = new Path2D();
         top.addPath(new Path2D(FRONT_HILL.split(" L1440,360")[0]), m);
         ctx.save();
-        ctx.strokeStyle = opts.lip;
+        const [r, g, b, a] = opts.lip.match(/[\d.]+/g)!.map(Number);
+        const gapL = (575 / 1440) * W;
+        const gapR = (865 / 1440) * W;
+        const feather = 0.05 * W;
+        const lipGrad = ctx.createLinearGradient(0, 0, W, 0);
+        const stop = (x: number, alpha: number) => lipGrad.addColorStop(Math.min(1, Math.max(0, x / W)), `rgba(${r},${g},${b},${alpha})`);
+        stop(0, a);
+        stop(gapL - feather, a);
+        stop(gapL, 0);
+        stop(gapR, 0);
+        stop(gapR + feather, a);
+        stop(W, a);
+        ctx.strokeStyle = lipGrad;
         ctx.lineWidth = 2.2 * dpr;
         ctx.stroke(top);
         ctx.restore();
