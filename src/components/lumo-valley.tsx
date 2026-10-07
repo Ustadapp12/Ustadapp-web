@@ -248,13 +248,16 @@ export function LumoValley() {
       ctx.fillRect(0, 0, W, H);
       ctx.restore();
       if (opts.lip) {
+        // Used to clip this stroke out of the x:575-865 valley floor (where the
+        // phone stands) so the highlight wouldn't run behind it. But the ridge
+        // dips down through that span, so the stroke was getting cut off
+        // mid-line at each clip boundary — two short vertical stroke-ends
+        // right beside the phone. Drawing it continuously instead: the part
+        // that falls behind the phone is simply covered by it (this canvas
+        // sits underneath), same result without the hard cutoff.
         const top = new Path2D();
         top.addPath(new Path2D(FRONT_HILL.split(" L1440,360")[0]), m);
         ctx.save();
-        const gap = new Path2D(); // no highlight on the valley floor, where the phone stands
-        gap.rect(0, 0, (W * 575) / 1440, H);
-        gap.rect((W * 865) / 1440, 0, W, H);
-        ctx.clip(gap);
         ctx.strokeStyle = opts.lip;
         ctx.lineWidth = 2.2 * dpr;
         ctx.stroke(top);
@@ -545,12 +548,16 @@ export function LumoValley() {
     }
     function scheduleCycle() {
       clearTimeout(cycleTimer);
-      const hold = screens[cur].streak ? 5200 : 4200;
+      // The streak screen is the cycle's natural destination (rewards ->
+      // correct -> streak) — auto-advancing away from it after a few seconds
+      // just reads as it popping up and then disappearing. Let it be the
+      // resting state instead; a tap on the phone still cycles manually.
+      if (screens[cur].streak) return;
       cycleTimer = setTimeout(() => {
         if (disposed) return;
         showScreen((cur + 1) % screens.length);
         scheduleCycle();
-      }, reduce ? 6500 : hold);
+      }, reduce ? 6500 : 4200);
     }
     scheduleCycle();
     q<HTMLElement>(".phone-hit").addEventListener("click", () => {
