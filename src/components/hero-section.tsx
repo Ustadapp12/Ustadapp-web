@@ -68,7 +68,7 @@ export function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download UstadApp on Google Play"
-              className="gold-glow-btn cta-sheen inline-flex h-14 w-[13rem] items-center justify-center gap-3 rounded-[10px] border border-[#42A46E] bg-black transition-transform active:translate-y-[2px]"
+              className="btn-glow-mint cta-sheen inline-flex h-14 w-[13rem] items-center justify-center gap-3 rounded-[10px] border border-[#42A46E] bg-black transition-transform active:translate-y-[2px]"
             >
               <Image src={playstore} alt="" aria-hidden className="h-7 w-7 shrink-0" />
               <span className="flex flex-col text-left leading-none">
