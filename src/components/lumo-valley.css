@@ -21,11 +21,12 @@
   overflow: hidden;
   isolation: isolate;
   padding-top: clamp(48px, 6.4vw, 80px);
-  /* emerald now holds all the way to 90% instead of fading back to navy from
-     64% — FinalCta right below also starts navy, so the old stops stacked two
-     navy ramps into one wide dark band at the handoff; this keeps that seam
-     short, pushed down, and mostly green instead. */
-  background: linear-gradient(180deg, var(--lv-navy) 0%, var(--lv-navy) 18%, var(--lv-emerald) 55%, var(--lv-emerald) 90%, var(--lv-navy) 100%);
+  /* Ends on emerald, not navy. It used to fade back to navy by 100% right as
+     FinalCta started navy too — two independent navy anchors sitting next to
+     each other at the section boundary, which is a hard colour jump no matter
+     how gradual either ramp is on its own side. Ending green here and having
+     FinalCta start green (see final-cta.tsx) removes that boundary entirely. */
+  background: linear-gradient(180deg, var(--lv-navy) 0%, var(--lv-navy) 18%, var(--lv-emerald) 55%, var(--lv-emerald) 100%);
   /* globals.css sets a dark body colour for the light pages, so the scene has
      to claim white for itself the way every other dark section does */
   color: #fff;
