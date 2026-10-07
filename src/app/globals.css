@@ -497,6 +497,15 @@ h3 {
 }
 .icon-bounce { animation: icon-bounce 2.8s ease-in-out infinite; }
 
+/* ── Drifting cloud, same motion as the Lumo valley scene's sky ── */
+@keyframes journey-cloud-drift {
+  from { transform: translateX(-30vw); }
+  to   { transform: translateX(130vw); }
+}
+.journey-cloud {
+  animation: journey-cloud-drift var(--cloud-duration, 110s) linear var(--cloud-delay, 0s) infinite;
+}
+
 /* ── Orbit icon glow ──────────────────────────────────── */
 @keyframes orbit-glow {
   0%, 100% { box-shadow: 0 0 4px 0 var(--glow-color, rgba(47, 216, 143, 0.5)); }
@@ -669,6 +678,7 @@ h3 {
   .beam-sweep,
   .glow-text,
   .icon-bounce,
+  .journey-cloud,
   .orbit-glow {
     animation: none;
     box-shadow: none;

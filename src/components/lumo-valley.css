@@ -1,7 +1,7 @@
 /* Lumo's Reward Valley — the closing scene that sits under the learning-journey
    roadmap. Ported from the approved prototype (artifact UxfDQSGNPMrYZdY7s9zNu2).
    Everything is scoped under .lumo-valley so the generic names here (.item,
-   .phone, .stage, .hud) can never collide with the rest of globals.css.
+   .phone, .stage) can never collide with the rest of globals.css.
 
    One deliberate change from the prototype: it ended on the #0B1E18 footer, but
    on the site FinalCta comes next and opens on #0F1B2A, so the gradient and the
@@ -101,30 +101,6 @@
   gap: 18px;
   padding-inline: 16px;
   text-align: center;
-}
-.lumo-valley .eyebrow {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-}
-.lumo-valley .eyebrow [lang="ar"] {
-  font-size: 1.6rem;
-  letter-spacing: 0;
-  color: var(--lv-gold);
-  line-height: 1;
-}
-.lumo-valley .eyebrow::before,
-.lumo-valley .eyebrow::after {
-  content: "";
-  width: 28px;
-  height: 1px;
-  background: rgba(233, 196, 104, 0.5);
 }
 .lumo-valley h2 {
   margin: 0;
@@ -245,35 +221,6 @@
 }
 .lumo-valley .person img { filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.25)); }
 .lumo-valley .flower-bush img { filter: hue-rotate(10deg) brightness(1.05); }
-
-/* ---------- hidden Lumos: they all hop in and out together ---------- */
-.lumo-valley .hunt {
-  position: absolute;
-  display: block;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
-}
-.lumo-valley .hunt img {
-  display: block;
-  width: 100%;
-  height: auto;
-  animation: lv-hop 5.2s cubic-bezier(0.45, 0, 0.3, 1) infinite;
-  transform: translate(var(--hx0, 0), var(--hy0, 60%));
-}
-.lumo-valley .hunt:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 4px; border-radius: 12px; }
-.lumo-valley .hunt.found img { filter: drop-shadow(0 0 10px rgba(233, 196, 104, 0.9)); }
-@keyframes lv-hop {
-  0%, 26% { transform: translate(var(--hx0, 0), var(--hy0, 60%)) rotate(0); }
-  36% { transform: translate(var(--hx1, 0), calc(var(--hy1, 0%) - 8%)) rotate(-4deg); }
-  42%, 70% { transform: translate(var(--hx1, 0), var(--hy1, 0%)) rotate(3deg); }
-  56% { transform: translate(var(--hx1, 0), calc(var(--hy1, 0%) - 5%)) rotate(-2deg); }
-  82%, 100% { transform: translate(var(--hx0, 0), var(--hy0, 60%)) rotate(0); }
-}
-.lumo-valley .hill-peek { width: 100%; --hy0: 70%; --hy1: -78%; }
 
 .lumo-valley .stage-inner {
   position: absolute;
@@ -562,86 +509,11 @@
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
   transform: translate(-50%, -50%);
 }
-.lumo-valley .celebrate { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
-.lumo-valley .surprise {
-  position: absolute;
-  left: 50%;
-  top: 12%;
-  z-index: 9;
-  width: min(360px, calc(100% - 32px));
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-  padding: 18px 20px 20px;
-  border-radius: 28px;
-  background: linear-gradient(180deg, rgba(15, 27, 42, 0.95), rgba(11, 30, 24, 0.97));
-  border: 1px solid rgba(233, 196, 104, 0.55);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 6px rgba(233, 196, 104, 0.08);
-}
-.lumo-valley .surprise img { width: 104px; height: auto; margin-top: -64px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4)); }
-.lumo-valley .surprise h3 { margin: 0; font-size: 1.35rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em; }
-.lumo-valley .surprise p { margin: 0; color: rgba(255, 255, 255, 0.75); font-size: 0.92rem; line-height: 1.45; }
-.lumo-valley .surprise .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 6px; }
-.lumo-valley .surprise .ghost {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: none;
-  color: #fff;
-  border-radius: 999px;
-  padding: 12px 18px;
-  font-weight: 800;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-.lumo-valley .surprise .ghost:focus-visible { outline: 3px solid var(--lv-gold); outline-offset: 3px; }
-.lumo-valley .surprise .cta-btn { padding: 12px 20px; font-size: 0.9rem; }
-
-/* ---------- hud ---------- */
-/* Lines up with the scene's 1180px content box, not the raw viewport edge —
-   otherwise on a wide screen it drifts out to the margin, far from everything
-   else on the page. */
-.lumo-valley .hud {
-  position: absolute;
-  z-index: 6;
-  left: max(16px, calc(50% - 590px));
-  bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 16px 7px 7px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--lv-gold-a), var(--lv-gold-b));
-  color: var(--lv-ink-dark);
-  font-weight: 800;
-  font-size: 0.85rem;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-}
-.lumo-valley .hud .lumo-badge {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--lv-ink-dark);
-  overflow: hidden;
-}
-.lumo-valley .hud .lumo-badge img { width: 78%; height: auto; display: block; }
-.lumo-valley .hud .xp { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; display: inline-block; }
-.lumo-valley .hud .hint { font-weight: 700; opacity: 0.8; }
-.lumo-valley .hud.bump .xp { animation: lv-bump 0.35s ease; }
-@keyframes lv-bump { 50% { transform: scale(1.35); } }
-
 /* ---------- motion prefs ---------- */
 @media (prefers-reduced-motion: reduce) {
   .lumo-valley *,
   .lumo-valley *::before,
   .lumo-valley *::after { animation: none !important; }
-  /* without the hop the hidden Lumos would rest at --hy0, i.e. underground, so
-     the "find all four" game could never be completed — park them popped up */
-  .lumo-valley .hunt img { transform: translate(var(--hx1, 0), var(--hy1, 0%)); }
 }
 
 /* ---------- phone width ---------- */
@@ -649,7 +521,6 @@
   .lumo-valley .item { left: var(--mx, var(--x)); top: var(--my, var(--y)); width: var(--mw, var(--w)); }
   .lumo-valley .on-edge { left: var(--ml, var(--l)); top: var(--mt, var(--t)); }
   .lumo-valley .stage { margin-bottom: 66px; }
-  .lumo-valley .hud { bottom: -56px; }
   .lumo-valley .phone { --pw: 200px; }
   .lumo-valley .item.m-hide,
   .lumo-valley .on-edge.m-hide { display: none; }
