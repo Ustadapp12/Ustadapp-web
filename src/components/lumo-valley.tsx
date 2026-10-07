@@ -266,21 +266,29 @@ export function LumoValley() {
         tex: 0.42,
         hue: "#05966A",
         deepen: "rgba(4, 107, 76, .85)",
+        // pushed later and lighter — this hill was going nearly opaque navy
+        // well before its own bottom edge, which is right where FinalCta
+        // starts navy too, so the two stacked into one hard dark band
         fade: [
-          [0, "rgba(15,27,42,.38)"],
-          [0.6, "rgba(15,27,42,.55)"],
-          [1, "rgba(15,27,42,.9)"],
+          [0, "rgba(15,27,42,.15)"],
+          [0.85, "rgba(15,27,42,.25)"],
+          [1, "rgba(15,27,42,.45)"],
         ],
       });
       paintHill(frontCv, [FRONT_HILL], {
         tex: 0.55,
         hue: "#0FB989",
         deepen: "rgba(5, 150, 106, .55)",
+        // same fix on the front hill, which was the bigger offender: solid
+        // opaque #0F1B2A by 72% left a wide flat-navy strip along its own
+        // bottom before FinalCta's navy even starts. Stays vividly green
+        // until 95% now, with only a light vignette at the very edge —
+        // never gets close to full navy.
         fade: [
           [0, "rgba(15,27,42,0)"],
-          [0.3, "rgba(15,27,42,.05)"],
-          [0.72, "rgba(15,27,42,.6)"],
-          [1, "#0F1B2A"],
+          [0.6, "rgba(15,27,42,.05)"],
+          [0.95, "rgba(15,27,42,.15)"],
+          [1, "rgba(15,27,42,.4)"],
         ],
         lip: "rgba(167, 243, 208, .55)",
       });
@@ -757,7 +765,7 @@ export function LumoValley() {
               Download on Google Play
             </a>
           </span>
-          <p className="cta-note">Coming to iPhone soon</p>
+          <p className="cta-note">Coming soon to iPhone</p>
         </div>
       </div>
 
