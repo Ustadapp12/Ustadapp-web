@@ -8,7 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const EFFECTIVE_DATE = "October 6, 2026";
+const EFFECTIVE_DATE = "October 20, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -77,6 +77,16 @@ export default function PrivacyPolicyPage() {
           the retention exceptions described in Data Retention below.
         </p>
         <p>
+          <strong>Precise location (prayer times).</strong> UstadApp&rsquo;s prayer-time feature asks for your
+          device&rsquo;s precise (GPS) location so we can calculate accurate prayer times for where you are.
+          If you grant this permission, we store your location in association with your account and with
+          your individual usage sessions, so we can keep prayer times accurate as you travel and understand,
+          in aggregate, where UstadApp is being used. You can decline this permission at any time; the
+          prayer-time feature will then be unavailable until you grant it, and every other part of UstadApp
+          continues to work normally. Location information is deleted or anonymized when you delete your
+          account, subject to the retention exceptions described in Data Retention below.
+        </p>
+        <p>
           <strong>Device and usage information.</strong> We may collect technical and usage information such
           as:
         </p>
@@ -110,6 +120,8 @@ export default function PrivacyPolicyPage() {
           <li>Save and display your Quran memorization progress.</li>
           <li>Provide lessons, revision, XP, streaks, and other learning features.</li>
           <li>Analyze recitation and provide AI-powered feedback.</li>
+          <li>Calculate accurate prayer times based on your location, where you&rsquo;ve granted permission.</li>
+          <li>Understand, in aggregate, who is using UstadApp and where, for analytics purposes.</li>
           <li>Send account-related emails and notifications where applicable.</li>
           <li>Maintain application security.</li>
           <li>Detect and fix crashes and technical problems.</li>
