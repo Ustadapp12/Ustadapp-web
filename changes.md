@@ -1,5 +1,14 @@
 # Changes
 
+## 2026-10-20 — Privacy Policy: qibla compass added to the location clause
+
+The Pray tab's qibla compass reuses the same GPS permission/coordinate as
+prayer times, plus reads the device's live compass/orientation sensor
+(not stored, used only in real time on-device). Extended the "Precise
+location" clause and its How We Use bullet in `src/app/privacy/page.tsx`
+to name qibla direction alongside prayer times, and to disclose the
+live sensor read.
+
 ## 2026-10-20 — Privacy Policy: precise location disclosure
 
 The mobile app's new Pray tab asks for the device's precise (GPS) location
