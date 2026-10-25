@@ -8,7 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/privacy",
 });
 
-const EFFECTIVE_DATE = "October 20, 2026";
+const EFFECTIVE_DATE = "October 26, 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -71,10 +71,9 @@ export default function PrivacyPolicyPage() {
           audio you choose to submit. That audio is transmitted to our systems and may be processed by our
           speech-recognition provider, Deepgram, to analyze the recitation and generate feedback. We use
           recitation audio only to provide the relevant recitation and learning features, and we do not use
-          it for advertising or sell it to third parties. We retain recitation audio only for as long as
-          necessary to provide and improve recitation feedback; when you delete your account, any recitation
-          audio associated with it is deleted or anonymized along with your other account data, subject to
-          the retention exceptions described in Data Retention below.
+          it for advertising or sell it to third parties. Recitation audio is processed only to generate
+          feedback and is not stored by UstadApp after that processing is complete. The feedback results
+          (such as scores and accuracy) are kept as part of your learning activity.
         </p>
         <p>
           <strong>Precise location (prayer times and qibla direction).</strong> UstadApp&rsquo;s prayer-time
@@ -88,6 +87,15 @@ export default function PrivacyPolicyPage() {
           prayer-time and qibla features will then be unavailable until you grant it, and every other part of
           UstadApp continues to work normally. Location information is deleted or anonymized when you delete
           your account, subject to the retention exceptions described in Data Retention below.
+        </p>
+        <p>
+          <strong>Approximate location (from your IP address).</strong> Separately from the precise location
+          above, each time you use UstadApp our servers record the IP address of your connection and the
+          approximate city, region, and country associated with it, as provided by our hosting provider.
+          This happens whether or not you grant the location permission, and it is not your exact position.
+          We use it to understand, in aggregate, where UstadApp is being used, and to help keep the service
+          secure. It is stored with your usage sessions and is deleted or anonymized when you delete your
+          account, subject to the retention exceptions described in Data Retention below.
         </p>
         <p>
           <strong>Device and usage information.</strong> We may collect technical and usage information such
