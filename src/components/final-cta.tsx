@@ -17,7 +17,7 @@ export function FinalCta() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-xl flex-col items-center">
         <Mascot size={140} />
-        <h2 className="mt-6 text-3xl font-black text-white md:text-4xl">Ready to Start Your Quran Journey?</h2>
+        <h2 className="mt-6 text-3xl font-black text-white md:text-4xl">Don’t feel left out &amp; Join us now!</h2>
         <p className="mt-3 text-sm text-white/70">
           Be the first to experience it. Join the waitlist and get early access.
         </p>
